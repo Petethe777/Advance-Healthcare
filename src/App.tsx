@@ -151,7 +151,7 @@ export default function App() {
                 <img
                   src={logo}
                   alt="Advance Health Logo"
-                  className="h-10 w-auto object-contain"
+                  className="h-24 md:h-26 w-auto object-contain"
                   referrerPolicy="no-referrer"
                 />
               </div>

@@ -1,0 +1,6 @@
+{
+  "name": "Advance Health",
+  "description": "A modern medical website with a clean, minimalist design, interactive services, doctor profiles, and an intuitive appointment booking flow.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

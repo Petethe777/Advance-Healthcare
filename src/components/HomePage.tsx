@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight, ShieldCheck, HeartPulse, Activity, Calendar, Award, Heart, Baby, Bone, Stethoscope, Sparkles } from 'lucide-react';
 import HeroCarousel from './HeroCarousel';
+import EditableText from './EditableText';
 
 // Import generated images
 import lobbyImage from '../assets/images/medical_center_lobby_1782959169482.jpg';
@@ -112,18 +113,18 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
             variants={revealVariants}
             className="lg:col-span-6 space-y-6"
           >
-            <span className="text-[11px] font-mono font-bold tracking-widest text-teal-600 uppercase bg-teal-50 px-3 py-1 rounded-full">
-              Clinical Integrity & Compassion
+            <span className="text-[11px] font-mono font-bold tracking-widest text-teal-600 uppercase bg-teal-50 px-3 py-1 rounded-full inline-block">
+              <EditableText id="home.intro.tagline" defaultText="Clinical Integrity & Compassion" label="Homepage Tagline" />
             </span>
             <h2 className="text-3xl md:text-4xl font-extrabold font-sans tracking-tight text-slate-900 leading-tight">
-              A Higher Standard of Outpatient Medicine & Diagnostics
+              <EditableText id="home.intro.heading" defaultText="A Higher Standard of Outpatient Medicine & Diagnostics" label="Homepage Heading" />
             </h2>
-            <p className="text-slate-500 font-light text-sm md:text-base leading-relaxed">
-              At Advance Health, we believe that modern medicine is not about handling numbers, but about tailoring preventative pathways. Our clinic acts as a high-performance diagnostics hub, gathering leading board-certified specialists and advanced medical scanning under one master roof in Hillcrest, KwaZulu-Natal.
-            </p>
-            <p className="text-slate-500 font-light text-xs md:text-sm leading-relaxed">
-              We operate completely offline-first on local browser storage during your scheduled visits to ensure zero friction, quick triage registrations, and complete transparency in clinical care tracking.
-            </p>
+            <div className="text-slate-500 font-light text-sm md:text-base leading-relaxed">
+              <EditableText id="home.intro.p1" defaultText="At Advance Health, we believe that modern medicine is not about handling numbers, but about tailoring preventative pathways. Our clinic acts as a high-performance diagnostics hub, gathering leading board-certified specialists and advanced medical scanning under one master roof in Hillcrest, KwaZulu-Natal." label="Homepage Paragraph 1" as="p" />
+            </div>
+            <div className="text-slate-500 font-light text-xs md:text-sm leading-relaxed">
+              <EditableText id="home.intro.p2" defaultText="We operate completely offline-first on local browser storage during your scheduled visits to ensure zero friction, quick triage registrations, and complete transparency in clinical care tracking." label="Homepage Paragraph 2" as="p" />
+            </div>
 
             <div className="pt-4 grid grid-cols-2 gap-4">
               <div className="p-4 bg-white border border-slate-100 rounded-2xl">

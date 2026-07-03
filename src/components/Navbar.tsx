@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, HeartPulse, CalendarCheck } from 'lucide-react';
 import logo from '../assets/images/advance_logo.png';
+import EditableText from './EditableText';
 
 interface NavbarProps {
   onOpenBooking: () => void;
@@ -78,7 +79,7 @@ export default function Navbar({
               }`}
               id={`nav-link-${link.id}`}
             >
-              {link.name}
+              <EditableText id={`nav.menu.${link.id}`} defaultText={link.name} label={`Menu Link: ${link.name}`} />
               {activeSection === link.id && (
                 <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-teal-600 rounded-full" />
               )}
@@ -106,7 +107,7 @@ export default function Navbar({
             className="px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs tracking-wide uppercase shadow-xs hover:shadow-md transition-all cursor-pointer"
             id="navbar-book-cta"
           >
-            Book Appointment
+            <EditableText id="nav.cta" defaultText="Book Appointment" label="Nav Book CTA Button" />
           </button>
         </div>
 
@@ -147,7 +148,7 @@ export default function Navbar({
               }`}
               id={`nav-link-mobile-${link.id}`}
             >
-              {link.name}
+              <EditableText id={`nav.menu.mobile.${link.id}`} defaultText={link.name} label={`Mobile Menu Link: ${link.name}`} />
             </button>
           ))}
           <div className="pt-2 flex flex-col gap-3">
@@ -159,7 +160,7 @@ export default function Navbar({
               className="w-full py-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-semibold text-center text-sm shadow-xs transition-colors cursor-pointer"
               id="navbar-mobile-book-cta"
             >
-              Book Appointment
+              <EditableText id="nav.cta.mobile" defaultText="Book Appointment" label="Mobile Nav Book CTA Button" />
             </button>
           </div>
         </div>

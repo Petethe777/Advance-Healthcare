@@ -1,0 +1,68 @@
+{
+  "entities": {
+    "TextOverride": {
+      "title": "TextOverride",
+      "description": "Overrides for website copy",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The custom text value"
+        },
+        "fieldLabel": {
+          "type": "string",
+          "description": "A friendly label describing the field"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this override was last saved"
+        }
+      },
+      "required": ["value", "fieldLabel", "lastUpdated"]
+    },
+    "EditHistoryItem": {
+      "title": "EditHistoryItem",
+      "description": "Audit log item of a copy change",
+      "type": "object",
+      "properties": {
+        "fieldId": {
+          "type": "string",
+          "description": "The unique identifier of the field"
+        },
+        "fieldLabel": {
+          "type": "string",
+          "description": "Friendly label of the field"
+        },
+        "oldValue": {
+          "type": "string",
+          "description": "The text before modification"
+        },
+        "newValue": {
+          "type": "string",
+          "description": "The text after modification"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the edit occurred"
+        },
+        "author": {
+          "type": "string",
+          "description": "The editor who made the change"
+        }
+      },
+      "required": ["fieldId", "fieldLabel", "oldValue", "newValue", "timestamp", "author"]
+    }
+  },
+  "firestore": {
+    "text_overrides/{overrideId}": {
+      "schema": "TextOverride",
+      "description": "Collection of active website text overrides"
+    },
+    "edit_history/{historyId}": {
+      "schema": "EditHistoryItem",
+      "description": "Collection of edit history/version logs"
+    }
+  }
+}

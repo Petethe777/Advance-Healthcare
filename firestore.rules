@@ -1,0 +1,59 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-\\.]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    // Validation for TextOverride
+    function isValidTextOverride(data) {
+      return data.keys().hasAll(['value', 'fieldLabel', 'lastUpdated'])
+        && data.keys().size() == 3
+        && data.value is string
+        && data.value.size() <= 10000
+        && data.fieldLabel is string
+        && data.fieldLabel.size() <= 100;
+    }
+
+    // Validation for EditHistoryItem
+    function isValidEditHistoryItem(data) {
+      return data.keys().hasAll(['fieldId', 'fieldLabel', 'oldValue', 'newValue', 'author', 'timestamp'])
+        && data.keys().size() == 6
+        && data.fieldId is string
+        && data.fieldId.size() <= 100
+        && data.fieldLabel is string
+        && data.fieldLabel.size() <= 100
+        && data.oldValue is string
+        && data.oldValue.size() <= 10000
+        && data.newValue is string
+        && data.newValue.size() <= 10000
+        && data.author is string
+        && data.author.size() <= 100;
+    }
+
+    // Rules for text_overrides collection
+    match /text_overrides/{overrideId} {
+      allow read: if true;
+      allow create, update: if isValidId(overrideId) && isValidTextOverride(incoming());
+      allow delete: if false;
+    }
+
+    // Rules for edit_history collection
+    match /edit_history/{historyId} {
+      allow read: if true;
+      allow create: if isValidId(historyId) && isValidEditHistoryItem(incoming());
+      allow update, delete: if false;
+    }
+  }
+}

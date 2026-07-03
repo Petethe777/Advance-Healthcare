@@ -52,3 +52,20 @@ export interface ContactMessage {
   message: string;
   createdAt: string;
 }
+
+export interface TextOverride {
+  id: string;
+  value: string;
+  lastUpdated: any;
+  fieldLabel: string;
+}
+
+export interface EditHistoryItem {
+  id: string;
+  fieldId: string;
+  fieldLabel: string;
+  oldValue: string;
+  newValue: string;
+  timestamp: any;
+  author: string;
+}

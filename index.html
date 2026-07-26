@@ -4,6 +4,77 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <!-- Safety script to prevent Chrome Extensions or devtools scripts from throwing in sandboxed environments -->
+    <script>
+      (function() {
+        try {
+          if (typeof window !== 'undefined') {
+            var createSafeMock = function() {
+              var mockFn = function() {
+                return createSafeMock();
+              };
+              return new Proxy(mockFn, {
+                get: function(target, prop) {
+                  if (prop === 'then') return undefined;
+                  if (prop === 'id') return 'mock-id';
+                  if (prop === 'addListener' || prop === 'removeListener') {
+                    return function() {};
+                  }
+                  if (prop === 'hasListener') {
+                    return function() { return false; };
+                  }
+                  if (prop === 'emit') {
+                    return function() {};
+                  }
+                  return createSafeMock();
+                }
+              });
+            };
+
+            // If window.chrome is not defined, use the safe mock
+            if (!window.chrome) {
+              window.chrome = createSafeMock();
+            } else {
+              // Wrap existing window.chrome in a safe Proxy to gracefully handle any missing sub-properties
+              var rawChrome = window.chrome;
+              window.chrome = new Proxy(rawChrome, {
+                get: function(target, prop) {
+                  if (prop in target) {
+                    var value = target[prop];
+                    if (typeof value === 'object' && value !== null) {
+                      return new Proxy(value, {
+                        get: function(t, p) {
+                          if (p in t) return t[p];
+                          if (p === 'then') return undefined;
+                          if (p === 'addListener' || p === 'removeListener' || p === 'emit') {
+                            return function() {};
+                          }
+                          if (p === 'hasListener') {
+                            return function() { return false; };
+                          }
+                          return createSafeMock();
+                        }
+                      });
+                    }
+                    return value;
+                  }
+                  if (prop === 'then') return undefined;
+                  return createSafeMock();
+                }
+              });
+            }
+          }
+        } catch (e) {
+          console.warn("Sandboxed environment setup warning:", e);
+        }
+      })();
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
     <!-- Primary SEO Meta Tags -->
     <title>Advance Health | Outpatient Medical Clinic & Diagnostics Centre, Hillcrest KZN</title>
     <meta name="description" content="Advance Health is a leading outpatient clinic & advanced diagnostics center in Hillcrest, KZN, South Africa. Discover premier medical specialists, healthcare diagnostic scanning, and personal wellness programs." />

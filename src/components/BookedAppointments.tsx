@@ -77,7 +77,7 @@ export default function BookedAppointments({
         {/* Header */}
         <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50">
           <div className="flex items-center gap-2">
-            <div className="p-2 bg-teal-50 text-teal-600 rounded-xl">
+            <div className="p-2 bg-blue-50 text-blue-900 rounded-xl">
               <CalendarCheck className="w-5 h-5" />
             </div>
             <div>
@@ -127,7 +127,7 @@ export default function BookedAppointments({
                   className="bg-slate-50/50 border border-slate-200/80 rounded-2xl p-4 space-y-3 relative overflow-hidden"
                   id={`patient-booking-ticket-${booking.id}`}
                 >
-                  <div className="absolute top-0 left-0 bottom-0 w-1 bg-teal-600" />
+                  <div className="absolute top-0 left-0 bottom-0 w-1 bg-blue-900" />
 
                   {/* Top info row */}
                   <div className="flex justify-between items-start pl-2">

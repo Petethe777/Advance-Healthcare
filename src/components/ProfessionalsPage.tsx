@@ -19,19 +19,19 @@ import {
 import { PROFESSIONALS } from '../data';
 import { Professional } from '../types';
 
-// Import generated doctors team image
-import doctorsImage from '../assets/images/doctors_team_1782959185361.jpg';
+// Import generated wellness lifestyle image
+import wellnessImage from '../assets/images/wellness_lifestyle_1783946675009.jpg';
 
 interface ProfessionalsPageProps {
   onBookProfessional: (profId: string) => void;
 }
 
 const revealVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 50 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' }
+    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
   }
 };
 
@@ -94,9 +94,6 @@ export default function ProfessionalsPage({ onBookProfessional }: ProfessionalsP
             variants={revealVariants}
             className="lg:col-span-6 space-y-4"
           >
-            <span className="text-[11px] font-mono font-bold tracking-widest text-teal-600 bg-teal-50 px-3.5 py-1.5 rounded-full uppercase">
-              MEET OUR CLINICAL DIRECTORS & FACULTY
-            </span>
             <h1 className="text-3xl md:text-5xl font-extrabold font-sans tracking-tight text-slate-900 leading-[1.1]">
               Highly Accomplished Medical Professionals Dedicated to Your Care
             </h1>
@@ -116,13 +113,13 @@ export default function ProfessionalsPage({ onBookProfessional }: ProfessionalsP
             <div className="rounded-3xl overflow-hidden border border-slate-200/80 p-1.5 bg-white shadow-xl relative">
               <div className="rounded-2xl overflow-hidden aspect-[16/9]">
                 <img
-                  src={doctorsImage}
-                  alt="Advance Health Clinical Medical Faculty"
+                  src={wellnessImage}
+                  alt="Wellness and specialist care"
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>
-              <div className="absolute top-4 right-4 bg-teal-600/90 text-white font-mono text-[9px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-md">
+              <div className="absolute top-4 right-4 bg-blue-900/90 text-white font-mono text-[9px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-md">
                 Hillcrest KZN Faculty
               </div>
             </div>
@@ -133,9 +130,6 @@ export default function ProfessionalsPage({ onBookProfessional }: ProfessionalsP
       {/* 2. Swiper / Carousel Section */}
       <div className="max-w-7xl mx-auto px-6 space-y-12">
         <div className="text-center max-w-xl mx-auto space-y-3">
-          <span className="text-[10px] font-mono tracking-widest text-teal-600 font-bold uppercase">
-            ACTIVE SPECIALIST CAROUSEL
-          </span>
           <h2 className="text-2xl md:text-3xl font-extrabold font-sans tracking-tight text-slate-900">
             Swipe to Explore Specialists
           </h2>
@@ -150,7 +144,7 @@ export default function ProfessionalsPage({ onBookProfessional }: ProfessionalsP
           {/* Navigation Arrows - Left Arrow (Visible on md screens, hidden on small screens) */}
           <button
             onClick={handlePrev}
-            className="absolute -left-12 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white border border-slate-200 shadow-md flex items-center justify-center text-slate-700 hover:text-teal-600 hover:border-teal-500 hover:shadow-lg transition-all active:scale-90 hidden md:flex cursor-pointer"
+            className="absolute -left-12 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white border border-slate-200 shadow-md flex items-center justify-center text-slate-700 hover:text-blue-900 hover:border-blue-900 hover:shadow-lg transition-all active:scale-90 hidden md:flex cursor-pointer"
             aria-label="Previous specialist"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -169,7 +163,7 @@ export default function ProfessionalsPage({ onBookProfessional }: ProfessionalsP
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -80 }}
                 transition={{ duration: 0.35, ease: 'easeInOut' }}
-                className="w-full bg-white rounded-[2.5rem] border border-slate-150 p-6 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 space-y-6 relative select-none cursor-grab active:cursor-grabbing"
+                className="w-full bg-[#FAF9F5] rounded-[2.5rem] border border-slate-200/80 p-6 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 space-y-6 relative select-none cursor-grab active:cursor-grabbing"
               >
                 {/* Visual Top Decorative Accent Bar */}
                 <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-teal-500 via-indigo-500 to-emerald-500 rounded-t-[2.5rem]" />
@@ -201,7 +195,7 @@ export default function ProfessionalsPage({ onBookProfessional }: ProfessionalsP
                     <h3 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight font-sans">
                       {activeProf.name}
                     </h3>
-                    <p className="text-xs font-mono font-bold text-teal-600 uppercase tracking-widest">
+                    <p className="text-xs font-mono font-bold text-blue-900 uppercase tracking-widest">
                       {activeProf.role}
                     </p>
                     <span className="inline-block text-[10px] font-mono font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-full uppercase tracking-wider mt-1.5">
@@ -239,7 +233,7 @@ export default function ProfessionalsPage({ onBookProfessional }: ProfessionalsP
                 <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row gap-3">
                   <button
                     onClick={() => openModal(activeProf)}
-                    className="flex-1 py-2.5 px-4 rounded-xl border border-teal-600 hover:bg-teal-50 text-teal-700 font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-3xs"
+                    className="flex-1 py-2 px-3 rounded-lg border border-blue-900 hover:bg-blue-50 text-blue-900 font-extrabold text-[11px] uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-3xs"
                   >
                     <Info className="w-4 h-4" />
                     <span>View Full Profile</span>
@@ -247,10 +241,10 @@ export default function ProfessionalsPage({ onBookProfessional }: ProfessionalsP
 
                   <button
                     onClick={() => onBookProfessional(activeProf.id)}
-                    className="flex-1 py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-teal-600 text-white font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer hover:shadow-md hover:shadow-teal-600/20 active:scale-98"
+                    className="flex-1 py-2 px-3 rounded-lg bg-slate-900 hover:bg-blue-900 text-white font-extrabold text-[11px] uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer hover:shadow-md hover:shadow-blue-900/20 active:scale-98"
                   >
                     <CalendarCheck className="w-4 h-4" />
-                    <span>Book Appointment</span>
+                    <span>Schedule Consultation</span>
                   </button>
                 </div>
               </motion.div>
@@ -260,7 +254,7 @@ export default function ProfessionalsPage({ onBookProfessional }: ProfessionalsP
           {/* Navigation Arrows - Right Arrow (Visible on md screens, hidden on small screens) */}
           <button
             onClick={handleNext}
-            className="absolute -right-12 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white border border-slate-200 shadow-md flex items-center justify-center text-slate-700 hover:text-teal-600 hover:border-teal-500 hover:shadow-lg transition-all active:scale-90 hidden md:flex cursor-pointer"
+            className="absolute -right-12 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white border border-slate-200 shadow-md flex items-center justify-center text-slate-700 hover:text-blue-900 hover:border-blue-900 hover:shadow-lg transition-all active:scale-90 hidden md:flex cursor-pointer"
             aria-label="Next specialist"
           >
             <ChevronRight className="w-5 h-5" />
@@ -289,7 +283,7 @@ export default function ProfessionalsPage({ onBookProfessional }: ProfessionalsP
                 key={idx}
                 onClick={() => setActiveIndex(idx)}
                 className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                  activeIndex === idx ? 'w-8 bg-teal-600' : 'w-2.5 bg-slate-200 hover:bg-slate-350'
+                  activeIndex === idx ? 'w-8 bg-blue-900' : 'w-2.5 bg-slate-200 hover:bg-slate-350'
                 }`}
                 aria-label={`Go to slide ${idx + 1}`}
               />
@@ -309,12 +303,6 @@ export default function ProfessionalsPage({ onBookProfessional }: ProfessionalsP
           className="p-8 md:p-12 bg-slate-50 rounded-3xl border border-slate-150 grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
         >
           <div className="md:col-span-8 space-y-4">
-            <div className="flex items-center gap-2 text-teal-600">
-              <ShieldCheck className="w-5 h-5" />
-              <span className="font-mono text-[10px] font-bold uppercase tracking-wider">
-                COMMITTED TO PATIENT RIGHTS & CONFIDENTIALITY
-              </span>
-            </div>
             <h3 className="text-2xl font-extrabold font-sans tracking-tight text-slate-900">
               HPCSA Regulatory Standards
             </h3>
@@ -351,7 +339,7 @@ export default function ProfessionalsPage({ onBookProfessional }: ProfessionalsP
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 30 }}
                 transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-                className="w-full max-w-2xl bg-white rounded-[2rem] border border-slate-200/50 shadow-2xl overflow-hidden flex flex-col relative"
+                className="w-full max-w-2xl bg-[#FAF9F5] rounded-[2rem] border border-slate-200/80 shadow-2xl overflow-hidden flex flex-col relative"
               >
                 {/* Close Button top-right */}
                 <button

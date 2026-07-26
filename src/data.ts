@@ -2,7 +2,7 @@ import { Professional, Service, FAQItem } from './types';
 import lobbyImage from './assets/images/medical_center_lobby_1782959169482.jpg';
 import drNaidooImage from './assets/images/dr_naidoo.png';
 import oceanNaidooImage from './assets/images/ocean_naidoo.png';
-import doctorsImage from './assets/images/doctors_team_1782959185361.jpg';
+import wellnessImage from './assets/images/wellness_lifestyle_1783946675009.jpg';
 import neurologyImage from './assets/images/neurology_brain_health_1782959199623.jpg';
 import pediatricianImage from './assets/images/pediatrician_caring_1782959211815.jpg';
 
@@ -16,10 +16,10 @@ export const HERO_SLIDES = [
   },
   {
     id: 'slide-2',
-    image: doctorsImage,
-    title: 'Empathetic Professionals You Can Trust',
-    subtitle: 'Our world-class specialists are dedicated to your long-term health and preventive wellness.',
-    tagline: 'EXPERT CLINICAL TEAM'
+    image: wellnessImage,
+    title: 'Nurturing Longevity & Preventative Health',
+    subtitle: 'Tailored physiological guidance and evidence-based therapeutic care to optimize your vitality.',
+    tagline: 'PROACTIVE WELLNESS PATHWAYS'
   },
   {
     id: 'slide-3',
@@ -233,7 +233,7 @@ export const FAQS: FAQItem[] = [
   {
     id: 'faq-1',
     question: 'How do I schedule an appointment with a specialist?',
-    answer: 'You can easily book online using our live Appointment Flow by clicking the "Book Appointment" button on our menu or on specific services/professionals. Alternatively, call our clinical desk at +27 (0) 31 765 1234.',
+    answer: 'You can easily book online using our live Appointment Flow by selecting "Schedule Consultation" on specific services/professionals. Alternatively, call our clinical desk at +27 (0) 31 765 1234.',
     category: 'Appointments'
   },
   {

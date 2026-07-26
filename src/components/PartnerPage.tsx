@@ -38,11 +38,11 @@ interface Inquiry {
 }
 
 const revealVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 50 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' }
+    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
   }
 };
 
@@ -183,7 +183,7 @@ export default function PartnerPage() {
             className="lg:col-span-7 space-y-6"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold font-sans tracking-tight leading-[1.08]">
-              Elevate Your Private Practice with <span className="text-teal-400">Advance Health.</span>
+              Elevate Your Private Practice with <span className="text-blue-300">Advance Health.</span>
             </h1>
             <p className="text-slate-300 font-light text-sm md:text-base leading-relaxed max-w-2xl">
               We empower medical specialists with world-class facilities, clinical technology, automated front-desks, and a dynamic multi-specialty internal referral network. Join a community focusing strictly on evidence-based diagnostics, longevity, and superior patient outcomes.
@@ -192,7 +192,7 @@ export default function PartnerPage() {
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <a 
                 href="#calculator" 
-                className="px-6 py-3.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-teal-500/10"
+                className="px-6 py-3.5 rounded-xl bg-blue-900 hover:bg-blue-950 text-white font-bold text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-blue-900/10"
               >
                 <span>Calculate Practice Value</span>
                 <ArrowRight className="w-4 h-4" />
@@ -247,9 +247,6 @@ export default function PartnerPage() {
             variants={revealVariants}
             className="text-center max-w-3xl mx-auto space-y-4"
           >
-            <span className="px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-600 text-[10px] font-mono font-bold tracking-widest uppercase">
-              PRACTICE BENEFITS & GROWTH
-            </span>
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
               Why Partner with Us?
             </h2>
@@ -261,7 +258,7 @@ export default function PartnerPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
             
             {/* Bento Grid Item 1: Prime Locations */}
-            <div className="lg:col-span-5 bg-white border border-slate-150 rounded-3xl p-8 hover:border-slate-300 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <div className="lg:col-span-5 bg-[#FAF9F5] border border-slate-200/80 rounded-3xl p-8 hover:border-slate-300 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
               <div className="space-y-6">
                 <div className="p-3 bg-teal-500/10 text-teal-600 w-fit rounded-2xl group-hover:scale-110 transition-transform">
                   <MapPin className="w-6 h-6" />
@@ -282,7 +279,7 @@ export default function PartnerPage() {
             </div>
 
             {/* Bento Grid Item 2: Modern Shared Equipment */}
-            <div className="lg:col-span-7 bg-white border border-slate-150 rounded-3xl p-8 hover:border-slate-300 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <div className="lg:col-span-7 bg-[#FAF9F5] border border-slate-200/80 rounded-3xl p-8 hover:border-slate-300 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
               <div className="space-y-6">
                 <div className="p-3 bg-violet-500/10 text-violet-600 w-fit rounded-2xl group-hover:scale-110 transition-transform">
                   <Building2 className="w-6 h-6" />
@@ -303,7 +300,7 @@ export default function PartnerPage() {
             </div>
 
             {/* Bento Grid Item 3: Admin & Billing Suite */}
-            <div className="lg:col-span-7 bg-white border border-slate-150 rounded-3xl p-8 hover:border-slate-300 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <div className="lg:col-span-7 bg-[#FAF9F5] border border-slate-200/80 rounded-3xl p-8 hover:border-slate-300 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
               <div className="space-y-6">
                 <div className="p-3 bg-emerald-500/10 text-emerald-600 w-fit rounded-2xl group-hover:scale-110 transition-transform">
                   <Clock className="w-6 h-6" />
@@ -324,7 +321,7 @@ export default function PartnerPage() {
             </div>
 
             {/* Bento Grid Item 4: Cross Referral Network */}
-            <div className="lg:col-span-5 bg-white border border-slate-150 rounded-3xl p-8 hover:border-slate-300 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <div className="lg:col-span-5 bg-[#FAF9F5] border border-slate-200/80 rounded-3xl p-8 hover:border-slate-300 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
               <div className="space-y-6">
                 <div className="p-3 bg-teal-500/10 text-teal-600 w-fit rounded-2xl group-hover:scale-110 transition-transform">
                   <Users className="w-6 h-6" />
@@ -358,9 +355,6 @@ export default function PartnerPage() {
             {/* Calculator Controls */}
             <div className="max-w-3xl mx-auto w-full space-y-8">
               <div className="space-y-2">
-                <span className="text-[10px] font-mono text-teal-400 uppercase tracking-widest font-bold">
-                  LIVE REVENUE & TIME CALCULATOR
-                </span>
                 <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight font-sans text-white">
                   Estimate Your Partnership Potential
                 </h2>
@@ -490,9 +484,6 @@ export default function PartnerPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           <div className="lg:col-span-5 space-y-6">
-            <span className="px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-600 text-[10px] font-mono font-bold tracking-widest uppercase">
-              INTERACTIVE SUITE CONFIGURATOR
-            </span>
             <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
               Build Your Custom Practice Suite Style
             </h2>
@@ -523,7 +514,7 @@ export default function PartnerPage() {
             </div>
           </div>
 
-          <div className="lg:col-span-7 bg-white border border-slate-150 rounded-3xl p-6 md:p-8 shadow-xs space-y-6">
+          <div className="lg:col-span-7 bg-[#FAF9F5] border border-slate-200/80 rounded-3xl p-6 md:p-8 shadow-xs space-y-6">
             <div className="space-y-5">
               
               {/* Option 1: Consulting Suite Type */}
@@ -618,7 +609,7 @@ export default function PartnerPage() {
 
               <a
                 href="#apply"
-                className="px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer self-stretch sm:self-auto text-center"
+                className="px-5 py-2.5 rounded-xl bg-blue-900 hover:bg-blue-950 text-white font-bold text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer self-stretch sm:self-auto text-center"
               >
                 <span>Select & Apply</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -634,12 +625,8 @@ export default function PartnerPage() {
       <div id="apply" className="max-w-7xl mx-auto px-6 scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 gap-12">
         
         {/* Partnership form panel */}
-        <div className="lg:col-span-7 bg-white border border-slate-150 rounded-[2rem] p-8 shadow-xs space-y-6">
+        <div className="lg:col-span-7 bg-[#FAF9F5] border border-slate-200/80 rounded-[2rem] p-8 shadow-xs space-y-6">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-50 border border-teal-100 text-teal-600 text-[10px] font-mono font-bold tracking-widest uppercase">
-              <FileCheck className="w-3.5 h-3.5" />
-              <span>REGISTRY REGISTRATION</span>
-            </div>
             <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
               Practice Partnership Inquiry
             </h2>
@@ -798,7 +785,7 @@ export default function PartnerPage() {
 
             <button
               type="submit"
-              className="w-full py-4 bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs tracking-wider uppercase rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg hover:shadow-teal-600/10"
+              className="w-full py-4 bg-blue-900 hover:bg-blue-950 text-white font-bold text-xs tracking-wider uppercase rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg hover:shadow-blue-900/10"
               id="submit-partnership-inquiry-btn"
             >
               <Send className="w-4 h-4" />

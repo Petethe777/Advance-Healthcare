@@ -186,17 +186,17 @@ export default function BookingModal({
 
       {/* Modal Container */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 15 }}
+        initial={{ opacity: 0, scale: 0.95, y: 50 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95, y: 15 }}
-        transition={{ duration: 0.3 }}
+        exit={{ opacity: 0, scale: 0.95, y: 50 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] border border-slate-100"
       >
         {/* Header */}
         <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50">
           <div>
             <h3 className="text-xl font-semibold text-slate-900 font-sans tracking-tight">
-              Book Appointment
+              Schedule Consultation
             </h3>
             <p className="text-xs text-slate-500 font-mono mt-1">
               ADVANCE HEALTH PORTAL
@@ -220,9 +220,9 @@ export default function BookingModal({
                   <span
                     className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold ${
                       step === s
-                        ? 'bg-teal-600 text-white shadow-sm ring-4 ring-teal-50'
+                        ? 'bg-blue-900 text-white shadow-sm ring-4 ring-blue-50'
                         : step > s
-                        ? 'bg-teal-50 text-teal-600 border border-teal-200'
+                        ? 'bg-blue-50 text-blue-900 border border-blue-200'
                         : 'bg-slate-100 text-slate-400'
                     }`}
                   >
@@ -261,9 +261,10 @@ export default function BookingModal({
             {step === 1 && (
               <motion.div
                 key="step-1"
-                initial={{ opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="space-y-4"
               >
                 <div className="mb-2">
@@ -280,13 +281,13 @@ export default function BookingModal({
                       }}
                       className={`text-left p-4 rounded-xl border-2 transition-all flex gap-3 cursor-pointer ${
                         selectedService?.id === svc.id
-                          ? 'border-teal-600 bg-teal-50/40 text-slate-900 shadow-sm'
+                          ? 'border-blue-900 bg-blue-50/20 text-slate-900 shadow-sm'
                           : 'border-slate-100 hover:border-slate-300 bg-white text-slate-600'
                       }`}
                       id={`select-service-${svc.id}`}
                     >
                       <div className={`p-2 rounded-lg shrink-0 ${
-                        selectedService?.id === svc.id ? 'bg-teal-600 text-white' : 'bg-slate-50 text-slate-600'
+                        selectedService?.id === svc.id ? 'bg-blue-900 text-white' : 'bg-slate-50 text-slate-600'
                       }`}>
                         <MedicalIcon name={svc.iconName} className="w-5 h-5" />
                       </div>
@@ -303,9 +304,10 @@ export default function BookingModal({
             {step === 2 && (
               <motion.div
                 key="step-2"
-                initial={{ opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="space-y-4"
               >
                 <div className="mb-2">
@@ -324,7 +326,7 @@ export default function BookingModal({
                       }}
                       className={`text-left p-3 rounded-xl border-2 transition-all flex gap-3 items-center cursor-pointer ${
                         selectedProfessional?.id === prof.id
-                          ? 'border-teal-600 bg-teal-50/40 text-slate-900 shadow-sm'
+                          ? 'border-blue-900 bg-blue-50/20 text-slate-900 shadow-sm'
                           : 'border-slate-100 hover:border-slate-300 bg-white text-slate-600'
                       }`}
                       id={`select-professional-${prof.id}`}
@@ -349,9 +351,10 @@ export default function BookingModal({
             {step === 3 && (
               <motion.div
                 key="step-3"
-                initial={{ opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="space-y-4"
               >
                 <div>
@@ -376,14 +379,14 @@ export default function BookingModal({
                           setSelectedDate(e.target.value);
                           setErrors({});
                         }}
-                        className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent bg-white shadow-xs font-sans cursor-pointer"
+                        className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent bg-white shadow-xs font-sans cursor-pointer"
                         id="booking-date-input"
                       />
                     </div>
                     {selectedProfessional && (
                       <div className="mt-3 p-3 bg-slate-50 rounded-lg text-xs text-slate-600">
                         <span className="font-semibold text-slate-800 block mb-1">Professional Availability:</span>
-                        Weekly scheduled slots on <span className="font-medium text-teal-700">{selectedProfessional.availability.join(', ')}</span>. Please select a matching day if possible for faster approval.
+                        Weekly scheduled slots on <span className="font-medium text-blue-900">{selectedProfessional.availability.join(', ')}</span>. Please select a matching day if possible for faster approval.
                       </div>
                     )}
                   </div>
@@ -403,7 +406,7 @@ export default function BookingModal({
                           }}
                           className={`py-2 px-1 rounded-lg text-center font-mono text-xs transition-all cursor-pointer ${
                             selectedTime === slot
-                              ? 'bg-teal-600 text-white shadow-sm font-semibold'
+                              ? 'bg-blue-900 text-white shadow-sm font-semibold'
                               : 'bg-slate-50 hover:bg-slate-200/50 text-slate-700 hover:text-slate-900 border border-slate-100'
                           }`}
                           id={`select-time-${slot.replace(/[:\s]/g, '-')}`}
@@ -420,9 +423,10 @@ export default function BookingModal({
             {step === 4 && (
               <motion.div
                 key="step-4"
-                initial={{ opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="space-y-4"
               >
                 <div>
@@ -446,7 +450,7 @@ export default function BookingModal({
                             setPatientName(e.target.value);
                             setErrors({});
                           }}
-                          className={`w-full pl-9 pr-3 py-2 text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent ${
+                          className={`w-full pl-9 pr-3 py-2 text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent ${
                             errors.name ? 'border-red-300' : 'border-slate-200'
                           }`}
                           id="patient-name-field"
@@ -469,7 +473,7 @@ export default function BookingModal({
                             setPatientPhone(e.target.value);
                             setErrors({});
                           }}
-                          className={`w-full pl-9 pr-3 py-2 text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent ${
+                          className={`w-full pl-9 pr-3 py-2 text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent ${
                             errors.phone ? 'border-red-300' : 'border-slate-200'
                           }`}
                           id="patient-phone-field"
@@ -493,7 +497,7 @@ export default function BookingModal({
                           setPatientEmail(e.target.value);
                           setErrors({});
                         }}
-                        className={`w-full pl-9 pr-3 py-2 text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent ${
+                        className={`w-full pl-9 pr-3 py-2 text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent ${
                           errors.email ? 'border-red-300' : 'border-slate-200'
                         }`}
                         id="patient-email-field"
@@ -511,13 +515,13 @@ export default function BookingModal({
                       rows={3}
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
-                      className="w-full p-3 text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                      className="w-full p-3 text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent"
                       id="patient-notes-field"
                     />
                   </div>
 
                   <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-100 flex gap-3 text-xs text-slate-600 leading-relaxed">
-                    <CheckCircle2 className="w-5 h-5 text-teal-600 shrink-0" />
+                    <CheckCircle2 className="w-5 h-5 text-blue-900 shrink-0" />
                     <div>
                       <span className="font-semibold text-slate-800">Booking Summary:</span> {selectedService?.title} consultation with {selectedProfessional?.name} scheduled on {selectedDate} at {selectedTime}.
                     </div>
@@ -529,11 +533,12 @@ export default function BookingModal({
             {step === 5 && bookedReceipt && (
               <motion.div
                 key="step-5"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="text-center py-6 px-4 space-y-5"
               >
-                <div className="mx-auto w-16 h-16 bg-teal-50 rounded-full flex items-center justify-center text-teal-600 shadow-xs ring-8 ring-teal-50/50">
+                <div className="mx-auto w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center text-blue-900 shadow-xs ring-8 ring-blue-50/50">
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
 
@@ -548,7 +553,7 @@ export default function BookingModal({
 
                 {/* Ticket Receipt design */}
                 <div className="max-w-md mx-auto bg-slate-50 border border-slate-200 rounded-2xl p-5 text-left divide-y divide-slate-200/60 font-sans relative overflow-hidden">
-                  <div className="absolute top-0 left-0 right-0 h-1.5 bg-teal-600" />
+                  <div className="absolute top-0 left-0 right-0 h-1.5 bg-blue-900" />
                   
                   <div className="pb-3.5 flex justify-between items-start">
                     <div>
@@ -635,7 +640,7 @@ export default function BookingModal({
                 <button
                   type="button"
                   onClick={handleNextStep}
-                  className="px-5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold flex items-center gap-1.5 cursor-pointer shadow-xs hover:shadow-md transition-all"
+                  className="px-4 py-1.5 rounded-lg bg-blue-900 hover:bg-blue-950 text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer shadow-xs hover:shadow-md transition-all"
                   id="booking-next-btn"
                 >
                   Next Step <ArrowRight className="w-4 h-4" />
@@ -644,7 +649,7 @@ export default function BookingModal({
                 <button
                   type="button"
                   onClick={handleSubmitBooking}
-                  className="px-6 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold shadow-xs hover:shadow-md transition-all cursor-pointer"
+                  className="px-5 py-1.5 rounded-lg bg-blue-900 hover:bg-blue-950 text-white text-xs font-semibold shadow-xs hover:shadow-md transition-all cursor-pointer"
                   id="booking-submit-btn"
                 >
                   Confirm Appointment

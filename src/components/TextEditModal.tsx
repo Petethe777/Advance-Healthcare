@@ -131,7 +131,7 @@ export default function TextEditModal({
               </button>
               <button
                 type="submit"
-                className="px-5 py-2.5 bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md hover:shadow-teal-600/15 transition-all flex items-center gap-1.5 cursor-pointer"
+                className="px-5 py-2.5 bg-blue-900 hover:bg-blue-950 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md hover:shadow-blue-900/15 transition-all flex items-center gap-1.5 cursor-pointer"
               >
                 <Save className="w-3.5 h-3.5" />
                 <span>Save Live Edit</span>

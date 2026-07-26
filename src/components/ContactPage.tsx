@@ -3,11 +3,11 @@ import { motion } from 'motion/react';
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, ShieldCheck } from 'lucide-react';
 
 const revealVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 50 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' }
+    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
   }
 };
 
@@ -82,7 +82,7 @@ export default function ContactPage() {
   return (
     <div className="py-12 space-y-28 pb-28">
       {/* Page Header */}
-      <div className="bg-slate-50 py-16">
+      <div className="bg-[#FAF9F5] py-16 border-b border-slate-200/60">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial="hidden"
@@ -91,9 +91,6 @@ export default function ContactPage() {
             variants={revealVariants}
             className="max-w-3xl space-y-4"
           >
-            <span className="text-[11px] font-mono font-bold tracking-widest text-teal-600 uppercase">
-              CONNECT WITH ADVANCE HEALTH
-            </span>
             <h1 className="text-4xl md:text-5xl font-extrabold font-sans tracking-tight text-slate-900 leading-[1.1]">
               Reach Out to Our Care Coordination Team
             </h1>
@@ -164,7 +161,7 @@ export default function ContactPage() {
             whileInView="visible"
             viewport={{ once: true, margin: '-100px' }}
             variants={revealVariants}
-            className="lg:col-span-7 bg-white p-6 md:p-8 rounded-3xl border border-slate-150 relative h-fit shadow-2xs"
+            className="lg:col-span-7 bg-[#FAF9F5] p-6 md:p-8 rounded-3xl border border-slate-200/80 relative h-fit shadow-2xs"
           >
             <h3 className="text-base font-bold text-slate-900 mb-6 font-sans">
               Send a Secure General Inquiry
@@ -194,7 +191,7 @@ export default function ContactPage() {
                       setName(e.target.value);
                       setErrors({});
                     }}
-                    className={`w-full p-3 text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent ${
+                    className={`w-full p-3 text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent ${
                       errors.name ? 'border-red-300 bg-red-50/10' : 'border-slate-250 bg-slate-50/20'
                     }`}
                     id="contact-page-name-input"
@@ -214,7 +211,7 @@ export default function ContactPage() {
                       setEmail(e.target.value);
                       setErrors({});
                     }}
-                    className={`w-full p-3 text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent ${
+                    className={`w-full p-3 text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent ${
                       errors.email ? 'border-red-300 bg-red-50/10' : 'border-slate-250 bg-slate-50/20'
                     }`}
                     id="contact-page-email-input"
@@ -235,7 +232,7 @@ export default function ContactPage() {
                     setSubject(e.target.value);
                     setErrors({});
                   }}
-                  className={`w-full p-3 text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent ${
+                  className={`w-full p-3 text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent ${
                     errors.subject ? 'border-red-300 bg-red-50/10' : 'border-slate-250 bg-slate-50/20'
                   }`}
                   id="contact-page-subject-input"
@@ -255,7 +252,7 @@ export default function ContactPage() {
                     setMessage(e.target.value);
                     setErrors({});
                   }}
-                  className={`w-full p-3 text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent ${
+                  className={`w-full p-3 text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent ${
                     errors.message ? 'border-red-300 bg-red-50/10' : 'border-slate-250 bg-slate-50/20'
                   }`}
                   id="contact-page-message-input"
@@ -266,7 +263,7 @@ export default function ContactPage() {
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs tracking-wide uppercase rounded-xl transition-all shadow-xs hover:shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full sm:w-auto px-6 py-3 bg-blue-900 hover:bg-blue-950 text-white font-semibold text-xs tracking-wide uppercase rounded-xl transition-all shadow-xs hover:shadow-md flex items-center justify-center gap-2 cursor-pointer"
                   id="contact-page-submit-btn"
                 >
                   <Send className="w-3.5 h-3.5" />

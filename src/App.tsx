@@ -116,7 +116,7 @@ export default function App() {
 
   return (
     <TextEditorProvider onOpenEditModal={(id, label, value) => setEditingField({ id, label, value })}>
-      <div className="min-h-screen bg-slate-50/20 text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-teal-600 selection:text-white flex flex-col justify-between pt-[74px]">
+      <div className="min-h-screen bg-[#FAF9F5] text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-blue-900 selection:text-white flex flex-col justify-between pt-[74px]">
       {/* Navigation Header */}
       <Navbar
         onOpenBooking={handleOpenGeneralBooking}
@@ -131,10 +131,10 @@ export default function App() {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeSection}
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.35, ease: 'easeInOut' }}
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
           >
             {renderActivePage()}
           </motion.div>
@@ -251,7 +251,7 @@ export default function App() {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-30 p-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white shadow-lg hover:shadow-teal-600/30 hover:-translate-y-1 transition-all cursor-pointer"
+          className="fixed bottom-6 right-6 z-30 p-3 rounded-xl bg-blue-900 hover:bg-blue-950 text-white shadow-lg hover:shadow-blue-900/30 hover:-translate-y-1 transition-all cursor-pointer"
           title="Scroll to Top"
           id="scroll-to-top-btn"
         >

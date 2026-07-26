@@ -8,11 +8,11 @@ import aboutSlideThree from '../assets/images/about_slide_three_1783085841227.jp
 const ABOUT_SLIDES = [aboutSlideOne, aboutSlideThree];
 
 const revealVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 50 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' }
+    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
   }
 };
 
@@ -146,9 +146,6 @@ export default function AboutPage() {
             variants={revealVariants}
             className="max-w-3xl space-y-4"
           >
-            <span className="inline-block text-[11px] font-mono font-bold tracking-widest text-teal-300 uppercase bg-teal-950/60 border border-teal-800/30 px-3.5 py-1.5 rounded-full w-fit">
-              ABOUT ADVANCE HEALTH
-            </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold font-sans tracking-tight text-white leading-[1.1]">
               Our Vision & Mission
             </h1>
@@ -170,17 +167,13 @@ export default function AboutPage() {
             variants={revealVariants}
             className="lg:col-span-6 space-y-6"
           >
-            <div className="flex items-center gap-2 text-teal-600 font-mono text-[11px] font-bold tracking-wider uppercase bg-teal-50 px-3 py-1 rounded-full w-fit">
-              <Compass className="w-3.5 h-3.5" />
-              <span>Our Vision</span>
-            </div>
             
             <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 leading-tight">
               Building a fortress around your health through lifestyle and clinical foresight.
             </h2>
 
             {/* Innovation callout box */}
-            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100 flex items-start gap-4">
+            <div className="p-5 rounded-2xl bg-[#FAF9F5] border border-slate-200/80 flex items-start gap-4">
               <div className="p-2 rounded-xl bg-teal-50 text-teal-600 shrink-0">
                 <Sparkles className="w-5 h-5" />
               </div>
@@ -205,7 +198,7 @@ export default function AboutPage() {
             variants={revealVariants}
             className="lg:col-span-6"
           >
-            <div className="aspect-video sm:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-slate-100 bg-slate-50 relative p-1.5 bg-white">
+            <div className="aspect-video sm:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-slate-200/80 bg-[#FAF9F5] relative p-1.5">
               <div className="rounded-2xl overflow-hidden w-full h-full relative">
                 <img
                   src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80"
@@ -237,11 +230,6 @@ export default function AboutPage() {
             variants={revealVariants}
             className="max-w-3xl space-y-4 font-sans"
           >
-            <div className="flex items-center gap-2 text-indigo-600 font-mono text-[11px] font-bold tracking-wider uppercase bg-indigo-50 px-3 py-1 rounded-full w-fit">
-              <Eye className="w-3.5 h-3.5" />
-              <span>Our Mission</span>
-            </div>
-
             <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 leading-tight">
               Advance HealthCare promotes proactive medicine & wellbeing
             </h2>
@@ -265,7 +253,7 @@ export default function AboutPage() {
                   ? 'border-teal-500 bg-teal-50/20 shadow-md scale-[1.02]' 
                   : isAnyHovered 
                     ? 'border-slate-100 opacity-50' 
-                    : 'border-slate-150 bg-white';
+                    : 'border-slate-200/80 bg-[#FAF9F5]';
                 return (
                   <div
                     key={idx}
@@ -399,7 +387,7 @@ export default function AboutPage() {
                   ? 'border-indigo-500 bg-indigo-50/20 shadow-md scale-[1.02]' 
                   : isAnyHovered 
                     ? 'border-slate-100 opacity-50' 
-                    : 'border-slate-150 bg-white';
+                    : 'border-slate-200/80 bg-[#FAF9F5]';
                 return (
                   <div
                     key={realIdx}

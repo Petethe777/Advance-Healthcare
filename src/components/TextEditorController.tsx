@@ -156,7 +156,7 @@ export default function TextEditorController() {
 
               <button
                 onClick={() => setIsEditorMode(false)}
-                className="flex items-center gap-2 px-4 py-2.5 bg-teal-600 hover:bg-teal-500 text-white rounded-xl shadow-lg shadow-teal-600/10 transition-all font-bold text-xs uppercase tracking-wider cursor-pointer"
+                className="flex items-center gap-2 px-4 py-2.5 bg-blue-900 hover:bg-blue-950 text-white rounded-xl shadow-lg shadow-blue-900/10 transition-all font-bold text-xs uppercase tracking-wider cursor-pointer"
               >
                 <Eye className="w-4 h-4 shrink-0" />
                 <span>Exit Editor</span>

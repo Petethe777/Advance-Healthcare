@@ -1,15 +1,11 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { ArrowRight, ShieldCheck, HeartPulse, Activity, Calendar, Award, Heart, Baby, Bone, Stethoscope, Sparkles } from 'lucide-react';
-import HeroCarousel from './HeroCarousel';
+import { useState, SVGProps } from 'react';
+import { motion } from 'motion/react';
+import { Star } from 'lucide-react';
 import EditableText from './EditableText';
 
-// Import generated images
+// Import local images
 import lobbyImage from '../assets/images/medical_center_lobby_1782959169482.jpg';
-import a1Image from '../assets/images/A1.png';
-import doctorsImage from '../assets/images/doctors_team_1782959185361.jpg';
-import neurologyImage from '../assets/images/neurology_brain_health_1782959199623.jpg';
-import pediatricianImage from '../assets/images/pediatrician_caring_1782959211815.jpg';
+import wellnessImage from '../assets/images/wellness_lifestyle_1783946675009.jpg';
 
 interface HomePageProps {
   onNavigate: (pageId: string) => void;
@@ -17,532 +13,604 @@ interface HomePageProps {
 }
 
 const revealVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 35 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' }
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
   }
 };
 
-export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
-  const [activeSystemId, setActiveSystemId] = useState<keyof typeof anatomicalExplorerData>('neurophysiology');
+// Classical SVG Line Icons for Section 3 (Holistic Approach)
+function ClassicalUrnIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M22 10h20" />
+      <path d="M24 10v4c0 3-4 6-4 10 0 10 6 18 12 18s12-8 12-18c0-4-4-7-4-10v-4" />
+      <path d="M26 42v10" />
+      <path d="M38 42v10" />
+      <path d="M20 52h24" />
+      <path d="M18 20c-4 0-6 3-6 7 0 5 4 8 8 8" />
+      <path d="M46 20c4 0 6 3 6 7 0 5-4 8-8 8" />
+    </svg>
+  );
+}
 
-  // Core anatomical systems & clinical diagnostic services
-  const anatomicalExplorerData = {
-    'neurophysiology': {
-      title: 'Neurophysiology & Sleep Science',
-      specialty: 'Brain Wave Mapping & Sleep Diagnostics',
-      description: 'Non-invasive brainwave mapping and sleep disorder studies that analyze neurological pathway activity to improve restful sleep, track autonomic functions, and restore cognitive clarity.',
-      image: neurologyImage,
-      icon: <Activity className="w-5 h-5 text-violet-400" />,
-      services: [
-        'Polysomnography & Sleep Pattern Tracking (Continuous recording of brainwaves, respiration, and eye-movements to diagnose underlying sleep disorders and restore deep restorative sleep)',
-        'Electroencephalography (EEG) Diagnostics (Safe monitoring of neural electrical signals to identify sub-clinical seizures, cognitive variances, and functional pathway efficiency)',
-        'Nerve Velocity & Sensory Assessments (Evaluates neuro-pathway speeds to find sensory damage, diagnose neuropathies, and guide neuromuscular restoration)'
-      ],
-      ctaText: 'Schedule Sleep & Brain Scan'
+function ClassicalColumnIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M14 12h36" />
+      <path d="M18 16h28" />
+      <path d="M20 16v32" />
+      <path d="M28 16v32" />
+      <path d="M36 16v32" />
+      <path d="M44 16v32" />
+      <path d="M18 48h28" />
+      <path d="M14 52h36" />
+      <path d="M18 12c0-3 2-4 4-4s4 1 4 4" />
+      <path d="M38 12c0-3 2-4 4-4s4 1 4 4" />
+    </svg>
+  );
+}
+
+function ClassicalLyreIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M20 12c-4 0-8 6-8 14 0 10 8 18 20 18s20-8 20-18c0-8-4-14-8-14" />
+      <path d="M22 12h20" />
+      <path d="M26 12v30" />
+      <path d="M32 12v32" />
+      <path d="M38 12v30" />
+      <path d="M24 44v8" />
+      <path d="M40 44v8" />
+      <path d="M18 52h28" />
+    </svg>
+  );
+}
+
+function ClassicalAmphoraIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M24 8h16" />
+      <path d="M26 8v6c-4 4-8 10-8 18 0 8 6 16 14 16s14-8 14-16c0-8-4-14-8-18V8" />
+      <path d="M24 48v6" />
+      <path d="M40 48v6" />
+      <path d="M20 54h24" />
+      <path d="M18 18c-5 0-8 4-8 9 0 6 5 9 8 9" />
+      <path d="M46 18c5 0 8 4 8 9 0 6-5 9-8 9" />
+    </svg>
+  );
+}
+
+function GoogleLogo(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" width="24" height="24" {...props}>
+      <path
+        fill="#4285F4"
+        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+      />
+      <path
+        fill="#34A853"
+        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.62z"
+      />
+      <path
+        fill="#EA4335"
+        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+      />
+    </svg>
+  );
+}
+
+export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
+  const [selectedGoal, setSelectedGoal] = useState<string>('Popular');
+
+  const goalTabs = [
+    { id: 'Popular', label: 'Popular' },
+    { id: 'Look Your Best', label: 'Look Your Best' },
+    { id: 'Energize', label: 'Energize' },
+    { id: 'De-Stress', label: 'De-Stress' },
+    { id: 'Think Clearer', label: 'Think Clearer' },
+    { id: 'Better Sex', label: 'Better Sex' }
+  ];
+
+  const allTreatments = [
+    {
+      id: 'aging-assessment',
+      tag: 'Start Here',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'Aging Wellness Assessment',
+      image: wellnessImage,
+      goals: ['Popular', 'Energize', 'Think Clearer'],
+      actionText: 'LEARN MORE'
     },
-    'dental': {
-      title: 'Dental Care & Therapy',
-      specialty: 'Comprehensive Oral Health & Preventive Care',
-      description: 'Gentle dental therapy, oral health tracking, and modern enamel restoration designed to prevent active decay, treat gum disease, and build strong oral health foundations.',
-      image: a1Image,
-      icon: <Sparkles className="w-5 h-5 text-emerald-400" />,
-      services: [
-        'Clinical Dentistry & Enamel Therapies (Comprehensive fillings, gentle decay removal, and restorative treatments that preserve healthy tooth structures)',
-        'Preventive Cleanings & Tissue Profiling (Strategic hygiene treatments and clinical gum evaluations that eliminate plaque reservoirs and halt active decay)',
-        'Primary Oral Care & Reconstruction (Comprehensive bite alignment, custom smile protection planning, and advanced enamel sealants to prevent future cavities)'
-      ],
-      ctaText: 'Schedule Dental Care'
+    {
+      id: 'hydrafacial',
+      tag: 'Skin Treatment',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'HydraFacial',
+      image: 'https://images.unsplash.com/photo-1512290900673-700200411986?auto=format&fit=crop&w=600&q=80',
+      goals: ['Popular', 'Look Your Best'],
+      actionText: 'LEARN MORE'
     },
-    'cardiology': {
-      title: 'Cardiovascular Care',
-      specialty: 'Heart, Valve, & Circulation Profiling',
-      description: 'Computerized hemodynamic assessments and non-invasive scanning of the heart to map blood flow, track vascular elasticity, and prevent cardiovascular events.',
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80',
-      icon: <Heart className="w-5 h-5 text-rose-500" />,
-      services: [
-        'Advanced ECG & Echocardiography (Real-time ultrasound imaging of heart chambers and valves to measure exact muscle performance and pump efficiency)',
-        'Preventive Cardiovascular Screenings (Detailed vascular stiffness analysis and lipid profiling to assess overall circulatory age and detect arterial warning signs early)',
-        'Hypertension & Arrhythmia Management (Comprehensive blood pressure tracking and custom pacing plans to resolve irregular heartbeats and high pressure safely)'
-      ],
-      ctaText: 'Schedule Cardiac Exam'
+    {
+      id: 'botox-daxxify',
+      tag: 'Wrinkle Relaxers',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'Botox & Daxxify',
+      image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80',
+      goals: ['Look Your Best', 'Popular'],
+      actionText: 'LEARN MORE'
     },
-    'neurology': {
-      title: 'Neurological Services',
-      specialty: 'Nervous System & Cognitive Diagnostics',
-      description: 'In-depth testing and specialized therapy pathways for nervous system disorders, chronic migraines, balance issues, and memory care.',
-      image: neurologyImage,
-      icon: <Activity className="w-5 h-5 text-sky-400" />,
-      services: [
-        'Comprehensive Neurological Evaluations (Diagnostic assessments of reflex speeds, cognitive status, motor control, and sensory pathways to locate neural blockages)',
-        'Migraine & Chronic Headache Therapy (Identifies physical triggers and designs therapeutic plans to block neuromuscular pain signals and improve quality of life)',
-        'Cognitive & Memory Care Assessments (Advanced screenings to identify early-stage cognitive shifts and design evidence-based exercises to keep memory sharp)'
-      ],
-      ctaText: 'Request Neurological Exam'
+    {
+      id: 'weight-loss',
+      tag: 'Rx',
+      tagBg: 'bg-[#F7D6B8] text-slate-950',
+      title: 'Weight Loss & Metabolic Care',
+      image: 'https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=600&q=80',
+      goals: ['Popular', 'Energize', 'De-Stress'],
+      actionText: 'LEARN MORE'
     },
-    'orthopedics': {
-      title: 'Musculoskeletal Integrity',
-      specialty: 'Joint, Bone, & Mobility Restoration',
-      description: 'Biomechanical mobility assessments and non-invasive scanning of bone density and joint structure to reverse joint pain and restore physical freedom.',
-      image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80',
-      icon: <Bone className="w-5 h-5 text-teal-400" />,
-      services: [
-        'Joint Reconstruction & Preservation (Minimally-invasive joint health assessments and motion mapping to plan restorative rehabilitation and prevent degradation)',
-        'Sports Traumatology & Rehabilitation (Tailored mechanical recovery programs targeting ligament, tendon, and muscular strength restoration for active lifestyles)',
-        'Biomechanical Mobility Evaluations (Advanced analysis of posture, gaits, and bone mineral density to improve physical agility and protect structural longevity)'
-      ],
-      ctaText: 'Schedule Orthopedic Scan'
+    {
+      id: 'iv-drip',
+      tag: '5 Options',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'IV Drip Therapy',
+      image: 'https://images.unsplash.com/photo-1584362917165-526a968579e8?auto=format&fit=crop&w=600&q=80',
+      goals: ['Energize', 'De-Stress', 'Better Sex'],
+      actionText: 'LEARN MORE'
     }
-  };
+  ];
+
+  const filteredTreatments = allTreatments.filter(t => 
+    selectedGoal === 'Popular' ? true : t.goals.includes(selectedGoal)
+  );
 
   return (
-    <div className="space-y-28 pb-28 bg-slate-50/20">
-      {/* 1. Automated slideshow carousel */}
-      <HeroCarousel onOpenBooking={onOpenBooking} />
+    <div className="bg-[#FAF9F5] text-slate-900 font-sans-clean overflow-x-hidden">
+      
+      {/* SECTION 1: HERO & GOAL FILTERS (from input_file_4.png) */}
+      <section className="relative w-full">
+        {/* Full-bleed Hero Image Banner */}
+        <div className="relative w-full h-[520px] md:h-[620px] lg:h-[680px] overflow-hidden bg-slate-900">
+          <img
+            src={wellnessImage}
+            alt="Change the way you age"
+            referrerPolicy="no-referrer"
+            className="w-full h-full object-cover object-center opacity-90 scale-102 transition-transform duration-1000"
+          />
+          {/* Subtle gradient overlay for readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
 
-      {/* 2. Welcome & Philosophy introduction (Split modern layout with custom imagery stack) */}
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Text block */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            variants={revealVariants}
-            className="lg:col-span-6 space-y-6"
-          >
-            <span className="text-[11px] font-mono font-bold tracking-widest text-teal-600 uppercase bg-teal-50 px-3 py-1 rounded-full inline-block">
-              <EditableText id="home.intro.tagline" defaultText="Clinical Integrity & Compassion" label="Homepage Tagline" />
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold font-sans tracking-tight text-slate-900 leading-tight">
-              <EditableText id="home.intro.heading" defaultText="A Higher Standard of Outpatient Medicine & Diagnostics" label="Homepage Heading" />
-            </h2>
-            <div className="text-slate-500 font-light text-sm md:text-base leading-relaxed">
-              <EditableText id="home.intro.p1" defaultText="At Advance Health, we believe that modern medicine is not about handling numbers, but about tailoring preventative pathways. Our clinic acts as a high-performance diagnostics hub, gathering leading board-certified specialists and advanced medical scanning under one master roof in Hillcrest, KwaZulu-Natal." label="Homepage Paragraph 1" as="p" />
-            </div>
-            <div className="text-slate-500 font-light text-xs md:text-sm leading-relaxed">
-              <EditableText id="home.intro.p2" defaultText="We operate completely offline-first on local browser storage during your scheduled visits to ensure zero friction, quick triage registrations, and complete transparency in clinical care tracking." label="Homepage Paragraph 2" as="p" />
-            </div>
-
-            <div className="pt-4 grid grid-cols-2 gap-4">
-              <div className="p-4 bg-white border border-slate-100 rounded-2xl">
-                <p className="text-2xl font-bold font-mono text-teal-600">100%</p>
-                <p className="text-xs text-slate-500 mt-1 font-sans">POPIA Compliance Secure</p>
-              </div>
-              <div className="p-4 bg-white border border-slate-100 rounded-2xl">
-                <p className="text-2xl font-bold font-mono text-teal-600">24h</p>
-                <p className="text-xs text-slate-500 mt-1 font-sans">Average Lab Results Return</p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Visual block */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            variants={revealVariants}
-            className="lg:col-span-6 relative"
-          >
-            {/* Background design accents */}
-            <div className="absolute -top-6 -left-6 w-32 h-32 bg-teal-100/40 rounded-full blur-2xl -z-10" />
-            <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-teal-50 rounded-full blur-2xl -z-10" />
-
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-100 bg-white p-2">
-              <div className="rounded-2xl overflow-hidden aspect-[4/3]">
-                <img
-                  src={a1Image}
-                  alt="Putting a smile on our patients"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+          {/* Hero Content Overlay */}
+          <div className="absolute inset-0 max-w-7xl mx-auto px-6 md:px-12 flex flex-col justify-center items-start text-white">
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={revealVariants}
+              className="max-w-xl space-y-6"
+            >
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif-display font-normal tracking-tight text-white leading-[1.08]">
+                <EditableText
+                  id="home.hero.title"
+                  defaultText="Change the way you age"
+                  label="Hero Main Title"
                 />
+              </h1>
+
+              <p className="text-slate-100 font-sans-clean font-light text-sm md:text-base lg:text-lg leading-relaxed max-w-lg">
+                <EditableText
+                  id="home.hero.subtitle"
+                  defaultText="Advance Health is the first longevity-focused health clinic designed to proactively slow down aging both inside and out."
+                  label="Hero Subtitle"
+                  as="p"
+                />
+              </p>
+
+              <div className="pt-2">
+                <button
+                  onClick={onOpenBooking}
+                  className="px-8 py-4 bg-[#E2F738] hover:bg-[#d4ea2a] text-slate-950 font-bold font-sans-clean text-xs tracking-widest uppercase transition-all shadow-lg hover:shadow-xl cursor-pointer hover:scale-102 active:scale-98"
+                  id="hero-get-started-btn"
+                >
+                  GET STARTED
+                </button>
               </div>
-              
-              {/* Floating diagnostic badge */}
-              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-slate-700 shadow-xl flex items-center justify-between text-white">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-teal-500/20 text-teal-400 rounded-xl">
-                    <HeartPulse className="w-5 h-5 animate-pulse" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-mono tracking-wider text-slate-400 font-bold uppercase">PATIENT CARE</p>
-                    <p className="text-xs font-semibold text-slate-100">Putting a smile on our patients.</p>
-                  </div>
-                </div>
-                <span className="text-[9px] font-mono font-bold bg-teal-500 text-slate-950 px-2.5 py-1 rounded-full">
-                  HILLCREST HQ
-                </span>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
-      </div>
 
-
-
-      {/* 3. Interactive Diagnostics Explorer Lounge (Highly Creative Section!) */}
-      <div className="bg-slate-900 text-white py-24 relative overflow-hidden">
-        {/* Dynamic mesh backgrounds */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-teal-500/5 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-[120px] pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-6 space-y-16">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            variants={revealVariants}
-            className="text-center max-w-3xl mx-auto space-y-4"
-          >
-            <span className="px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-[10px] font-mono font-bold tracking-widest uppercase">
-              ANATOMICAL EXPLORER
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold font-sans tracking-tight leading-tight">
-              Anatomical System & Diagnostics Explorer
+        {/* SECTION 1 SUB: "Optimize your health at every age" & Filter Pills */}
+        <div className="bg-[#FAF9F5] py-16 px-6 md:px-12 border-b border-slate-200/60">
+          <div className="max-w-7xl mx-auto text-center space-y-8">
+            <h2 className="text-3xl md:text-5xl font-serif-display font-normal text-slate-900 tracking-tight">
+              Optimize your health at every age
             </h2>
-            <p className="text-slate-400 font-light text-xs md:text-sm max-w-xl mx-auto">
-              Select a clinical system below to explore our targeted diagnostic capabilities, specialized procedures, and primary care pathways.
-            </p>
-          </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
-            {/* System Selectors (Left side) */}
-            <div className="lg:col-span-5 flex flex-col justify-center gap-3">
-              {(Object.keys(anatomicalExplorerData) as Array<keyof typeof anatomicalExplorerData>).map((key) => {
-                const sys = anatomicalExplorerData[key];
-                const isActive = activeSystemId === key;
+            {/* Horizontal Filter Pill Tabs */}
+            <div className="flex items-center justify-center gap-2 md:gap-3 flex-wrap max-w-4xl mx-auto">
+              {goalTabs.map((tab) => {
+                const isActive = selectedGoal === tab.id;
                 return (
                   <button
-                    key={key}
-                    onClick={() => setActiveSystemId(key)}
-                    className={`p-4 rounded-2xl border text-left transition-all flex items-center gap-4 cursor-pointer group ${
+                    key={tab.id}
+                    onClick={() => setSelectedGoal(tab.id)}
+                    className={`px-5 py-2.5 text-xs md:text-sm font-semibold tracking-wide transition-all border cursor-pointer ${
                       isActive
-                        ? 'bg-slate-800 border-teal-500/50 text-white shadow-lg shadow-teal-500/5'
-                        : 'bg-slate-950/40 border-slate-800/80 text-slate-400 hover:bg-slate-800/40 hover:border-slate-800 hover:text-slate-200'
+                        ? 'bg-[#2B5266] text-white border-[#2B5266] shadow-sm'
+                        : 'bg-transparent text-[#2B5266] border-[#2B5266]/40 hover:border-[#2B5266] hover:bg-[#2B5266]/5'
                     }`}
                   >
-                    <div className={`p-2.5 rounded-xl transition-all ${
-                      isActive ? 'bg-teal-500/20 text-teal-400' : 'bg-slate-900 text-slate-500 group-hover:text-slate-300'
-                    }`}>
-                      {sys.icon}
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <h4 className="font-bold text-xs font-sans tracking-wider group-hover:translate-x-0.5 transition-transform duration-300 truncate">
-                        {sys.title}
-                      </h4>
-                      <p className="text-[9px] text-slate-500 font-mono font-bold uppercase mt-0.5 truncate">
-                        {sys.specialty}
-                      </p>
-                    </div>
+                    {tab.label}
                   </button>
                 );
               })}
             </div>
-
-            {/* Display Panel (Right side) */}
-            <div className="lg:col-span-7">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeSystemId}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.4 }}
-                  className="bg-slate-950/60 border border-slate-800 rounded-3xl overflow-hidden grid grid-cols-1 md:grid-cols-12 h-full min-h-[420px]"
-                >
-                  {/* Image/Visual Display */}
-                  <div className="md:col-span-5 relative bg-slate-950 flex flex-col justify-between p-6 overflow-hidden min-h-[200px] md:min-h-0 border-r border-slate-850">
-                    <div className="absolute inset-0 z-0">
-                      <img
-                        src={anatomicalExplorerData[activeSystemId].image}
-                        alt={anatomicalExplorerData[activeSystemId].title}
-                        referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover opacity-65 mix-blend-screen hover:scale-105 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent z-10" />
-                    </div>
-
-                    <div className="z-10 self-start">
-                      <span className="text-[8px] font-mono text-teal-400 bg-teal-500/10 px-2.5 py-1 rounded-full border border-teal-500/20 font-bold tracking-widest uppercase">
-                        ACTIVE SYSTEM
-                      </span>
-                    </div>
-
-                    <div className="z-10 space-y-1">
-                      <p className="text-[8px] font-mono text-slate-500">CLINICAL DISCIPLINE</p>
-                      <p className="text-xs font-bold font-sans tracking-tight text-white leading-tight">
-                        {anatomicalExplorerData[activeSystemId].title}
-                      </p>
-                      <div className="h-0.5 w-8 bg-teal-500 rounded-full" />
-                    </div>
-                  </div>
-
-                  {/* Services & Value Description */}
-                  <div className="md:col-span-7 p-8 flex flex-col justify-between bg-slate-950/40">
-                    <div className="space-y-6">
-                      <div>
-                        <span className="text-[9px] font-mono text-teal-500 uppercase tracking-widest font-bold">
-                          {anatomicalExplorerData[activeSystemId].specialty}
-                        </span>
-                        <h3 className="text-lg font-extrabold font-sans text-white tracking-tight mt-1">
-                          {anatomicalExplorerData[activeSystemId].title}
-                        </h3>
-                        <p className="text-[11px] text-slate-400 font-light mt-2 leading-relaxed">
-                          {anatomicalExplorerData[activeSystemId].description}
-                        </p>
-                      </div>
-
-                      <div className="space-y-3">
-                        <p className="text-[10px] text-slate-500 font-mono uppercase tracking-wider font-bold">
-                          Core Provided Services & Clinical Value
-                        </p>
-                        <div className="space-y-2.5">
-                          {anatomicalExplorerData[activeSystemId].services.map((svc, i) => (
-                            <div key={i} className="flex gap-3 bg-slate-900/40 p-3 rounded-xl border border-slate-800/60 hover:border-slate-700/60 transition-colors items-start">
-                              <div className="p-1 bg-teal-500/15 text-teal-400 rounded-md shrink-0 mt-0.5">
-                                <ShieldCheck className="w-4 h-4" />
-                              </div>
-                              <span className="text-xs text-slate-200 font-light leading-snug">{svc}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="pt-6">
-                      <button
-                        onClick={onOpenBooking}
-                        className="w-full md:w-auto px-6 py-3 bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs tracking-wider uppercase rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg hover:shadow-teal-600/20"
-                        id={`explorer-cta-booking-${activeSystemId}`}
-                      >
-                        <span>{anatomicalExplorerData[activeSystemId].ctaText}</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* 4. Photographic Gateway Cards (Modern Bento-Grid Style Pathways) */}
-      <div className="max-w-7xl mx-auto px-6 space-y-12">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          variants={revealVariants}
-          className="text-center max-w-2xl mx-auto space-y-3"
-        >
-          <span className="text-[10px] font-mono font-bold tracking-widest text-teal-600 uppercase">
-            EXPLORE CLINICAL GATEWAYS
-          </span>
-          <h2 className="text-3xl font-extrabold font-sans tracking-tight text-slate-900 leading-tight">
-            Seamless Professional Navigation
-          </h2>
-        </motion.div>
+      {/* SECTION 2: TREATMENTS CAROUSEL / CARDS ROW (from input_file_3.png) */}
+      <section className="bg-[#FAF9F5] py-16 md:py-24 px-6 md:px-12">
+        <div className="max-w-7xl mx-auto">
+          {/* Horizontal Grid / Scroll Container */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8">
+            {filteredTreatments.map((item) => (
+              <motion.div
+                key={item.id}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-50px' }}
+                variants={revealVariants}
+                className="flex flex-col justify-between group bg-[#FAF9F5] border border-slate-200/80 p-3 rounded-none shadow-xs hover:shadow-md transition-all"
+              >
+                {/* Image Box */}
+                <div className="space-y-4">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          variants={revealVariants}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
-        >
-          {/* Pathway 1: About */}
-          <div className="bg-white rounded-3xl border border-slate-100 overflow-hidden shadow-xs hover:shadow-xl hover:border-slate-300 transition-all flex flex-col justify-between group">
+                  {/* Badge & Title */}
+                  <div className="space-y-2 px-1">
+                    <span className={`inline-block px-2.5 py-1 text-[10px] font-sans-clean font-extrabold uppercase tracking-wider ${item.tagBg}`}>
+                      {item.tag}
+                    </span>
+
+                    <h3 className="text-xl font-serif-display font-normal text-slate-900 leading-snug min-h-[56px] flex items-center">
+                      {item.title}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Button */}
+                <div className="pt-6 px-1">
+                  <button
+                    onClick={onOpenBooking}
+                    className="w-full py-3 bg-[#B8D8E6] hover:bg-[#a2cbdc] text-slate-900 font-bold font-sans-clean text-xs tracking-wider uppercase transition-colors cursor-pointer text-center"
+                  >
+                    {item.actionText}
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 3: HOLISTIC APPROACH SPLIT SECTION (from input_file_2.png) */}
+      <section className="bg-[#F6F5F0] border-t border-b border-slate-200/80">
+        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[640px]">
+          
+          {/* Left Column: Classical 2x2 Pillars Grid */}
+          <div className="lg:col-span-7 p-8 md:p-14 lg:p-20 flex flex-col justify-center space-y-12">
             <div>
-              <div className="h-52 overflow-hidden relative">
-                <img
-                  src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80"
-                  alt="Clinical Care story"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
-                <div className="absolute top-4 left-4 p-2 bg-teal-50 text-teal-700 rounded-xl">
-                  <HeartPulse className="w-5 h-5" />
+              <h2 className="text-3xl md:text-5xl font-serif-display font-normal text-slate-900 tracking-tight leading-tight">
+                A HOLISTIC approach to aging
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 md:gap-12">
+              
+              {/* Pillar 1 */}
+              <div className="space-y-3">
+                <div className="text-slate-900 mb-4">
+                  <ClassicalUrnIcon className="w-12 h-12 stroke-[1.5]" />
+                </div>
+                <h3 className="text-2xl font-serif-display font-normal text-slate-900">
+                  Skin & Hair Health
+                </h3>
+                <p className="text-xs md:text-sm text-slate-600 font-light leading-relaxed">
+                  The most visible signs of aging appear here first.
+                </p>
+                <div className="pt-2">
+                  <button
+                    onClick={() => onNavigate('services')}
+                    className="px-5 py-2.5 border border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white font-bold font-sans-clean text-[11px] tracking-widest uppercase transition-colors cursor-pointer"
+                  >
+                    LEARN MORE
+                  </button>
                 </div>
               </div>
-              <div className="p-6 space-y-3">
-                <h3 className="text-lg font-bold text-slate-900 font-sans group-hover:text-teal-700 transition-colors">
-                  Our Healthcare Story
-                </h3>
-                <p className="text-slate-500 text-xs md:text-sm font-light leading-relaxed">
-                  Learn about our state-of-the-art facility, our historic milestone timeline, and certified clinical values.
-                </p>
-              </div>
-            </div>
-            <div className="p-6 pt-0">
-              <button
-                onClick={() => onNavigate('about')}
-                className="text-xs font-bold text-teal-600 group-hover:text-teal-700 flex items-center gap-1.5 cursor-pointer self-start"
-                id="home-to-about-btn-visual"
-              >
-                Explore Our Story <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-              </button>
-            </div>
-          </div>
 
-          {/* Pathway 2: Services */}
-          <div className="bg-white rounded-3xl border border-slate-100 overflow-hidden shadow-xs hover:shadow-xl hover:border-slate-300 transition-all flex flex-col justify-between group">
-            <div>
-              <div className="h-52 overflow-hidden relative">
-                <img
-                  src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=600&q=80"
-                  alt="Clinical Diagnostics"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
-                <div className="absolute top-4 left-4 p-2 bg-teal-50 text-teal-700 rounded-xl">
-                  <Activity className="w-5 h-5" />
+              {/* Pillar 2 */}
+              <div className="space-y-3">
+                <div className="text-slate-900 mb-4">
+                  <ClassicalColumnIcon className="w-12 h-12 stroke-[1.5]" />
+                </div>
+                <h3 className="text-2xl font-serif-display font-normal text-slate-900">
+                  Hormone Health
+                </h3>
+                <p className="text-xs md:text-sm text-slate-600 font-light leading-relaxed">
+                  Hormonal shifts affect mood, energy, sleep and more.
+                </p>
+                <div className="pt-2">
+                  <button
+                    onClick={() => onNavigate('services')}
+                    className="px-5 py-2.5 border border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white font-bold font-sans-clean text-[11px] tracking-widest uppercase transition-colors cursor-pointer"
+                  >
+                    LEARN MORE
+                  </button>
                 </div>
               </div>
-              <div className="p-6 space-y-3">
-                <h3 className="text-lg font-bold text-slate-900 font-sans group-hover:text-teal-700 transition-colors">
-                  Practice Partnerships
-                </h3>
-                <p className="text-slate-500 text-xs md:text-sm font-light leading-relaxed">
-                  We invite board-certified clinicians to join our Hillcrest & Pinetown suites. Explore co-working space specs and shared equipment benefits.
-                </p>
-              </div>
-            </div>
-            <div className="p-6 pt-0">
-              <button
-                onClick={() => onNavigate('partner')}
-                className="text-xs font-bold text-teal-600 group-hover:text-teal-700 flex items-center gap-1.5 cursor-pointer self-start"
-                id="home-to-partner-btn-visual"
-              >
-                Join Our Practice <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-              </button>
-            </div>
-          </div>
 
-          {/* Pathway 3: Professionals */}
-          <div className="bg-white rounded-3xl border border-slate-100 overflow-hidden shadow-xs hover:shadow-xl hover:border-slate-300 transition-all flex flex-col justify-between group">
-            <div>
-              <div className="h-52 overflow-hidden relative">
-                <img
-                  src={doctorsImage}
-                  alt="Medical specialists"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
-                <div className="absolute top-4 left-4 p-2 bg-teal-50 text-teal-700 rounded-xl">
-                  <Award className="w-5 h-5" />
+              {/* Pillar 3 */}
+              <div className="space-y-3">
+                <div className="text-slate-900 mb-4">
+                  <ClassicalLyreIcon className="w-12 h-12 stroke-[1.5]" />
+                </div>
+                <h3 className="text-2xl font-serif-display font-normal text-slate-900">
+                  Bone & Joint Health
+                </h3>
+                <p className="text-xs md:text-sm text-slate-600 font-light leading-relaxed">
+                  Maintain posture, joint resilience, and physical mobility.
+                </p>
+                <div className="pt-2">
+                  <button
+                    onClick={() => onNavigate('services')}
+                    className="px-5 py-2.5 border border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white font-bold font-sans-clean text-[11px] tracking-widest uppercase transition-colors cursor-pointer"
+                  >
+                    LEARN MORE
+                  </button>
                 </div>
               </div>
-              <div className="p-6 space-y-3">
-                <h3 className="text-lg font-bold text-slate-900 font-sans group-hover:text-teal-700 transition-colors">
-                  Board-Certified Team
-                </h3>
-                <p className="text-slate-500 text-xs md:text-sm font-light leading-relaxed">
-                  Review the extensive academic credentials, clinical experience, and real-time scheduling slots of our specialists.
-                </p>
-              </div>
-            </div>
-            <div className="p-6 pt-0">
-              <button
-                onClick={() => onNavigate('professionals')}
-                className="text-xs font-bold text-teal-600 group-hover:text-teal-700 flex items-center gap-1.5 cursor-pointer self-start"
-                id="home-to-professionals-btn-visual"
-              >
-                Meet Our Team <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-              </button>
-            </div>
-          </div>
-        </motion.div>
-      </div>
 
-      {/* 5. Mini Clinical Highlights banner */}
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          variants={revealVariants}
-          className="p-8 md:p-12 rounded-3xl bg-slate-900 text-white grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative overflow-hidden"
-        >
-          <div className="absolute top-0 right-0 w-80 h-80 bg-teal-500/5 rounded-full blur-3xl pointer-events-none" />
-          <div className="lg:col-span-8 space-y-4 relative z-10">
-            <span className="text-[10px] font-mono tracking-widest text-teal-400 font-bold uppercase">
-              IMMEDIATE RESERVATIONS OPEN
-            </span>
-            <h3 className="text-2xl md:text-3xl font-extrabold font-sans tracking-tight">
-              Ready to schedule a comprehensive health profiling scan?
-            </h3>
-            <p className="text-slate-400 text-xs md:text-sm font-light leading-relaxed max-w-xl">
-              Register securely inside our live portal. Choose your specialty service, matching attending clinician, and lock in an open time slot.
-            </p>
+              {/* Pillar 4 */}
+              <div className="space-y-3">
+                <div className="text-slate-900 mb-4">
+                  <ClassicalAmphoraIcon className="w-12 h-12 stroke-[1.5]" />
+                </div>
+                <h3 className="text-2xl font-serif-display font-normal text-slate-900">
+                  Brain & Metabolic
+                </h3>
+                <p className="text-xs md:text-sm text-slate-600 font-light leading-relaxed">
+                  Sharpen focus, memory pathways, and cellular vitality.
+                </p>
+                <div className="pt-2">
+                  <button
+                    onClick={() => onNavigate('services')}
+                    className="px-5 py-2.5 border border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white font-bold font-sans-clean text-[11px] tracking-widest uppercase transition-colors cursor-pointer"
+                  >
+                    LEARN MORE
+                  </button>
+                </div>
+              </div>
+
+            </div>
           </div>
-          <div className="lg:col-span-4 lg:text-right relative z-10">
-            <button
-              onClick={onOpenBooking}
-              className="w-full sm:w-auto px-8 py-4 bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs tracking-wide uppercase rounded-xl transition-all shadow-lg hover:shadow-teal-500/20 hover:-translate-y-0.5 cursor-pointer"
-              id="home-inline-booking-cta"
+
+          {/* Right Column: Full Height Visual Banner */}
+          <div className="lg:col-span-5 relative min-h-[380px] lg:min-h-full overflow-hidden bg-stone-300">
+            <img
+              src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=1000&q=80"
+              alt="Holistic Wellness & Botanical Health"
+              referrerPolicy="no-referrer"
+              className="w-full h-full object-cover object-center"
+            />
+          </div>
+
+        </div>
+      </section>
+
+      {/* SECTION 4: OUR CLINIC LOCATION HIGHLIGHT (from input_file_0.png) */}
+      <section className="w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[500px]">
+          
+          {/* Left Column: Archway / Clinic Interior Image */}
+          <div className="lg:col-span-6 relative min-h-[350px] lg:min-h-full bg-slate-900">
+            <img
+              src={lobbyImage}
+              alt="Our Advance Health Clinic Archway"
+              referrerPolicy="no-referrer"
+              className="w-full h-full object-cover object-center"
+            />
+          </div>
+
+          {/* Right Column: Warm Amber/Mustard Container */}
+          <div className="lg:col-span-6 bg-[#E89A3C] p-10 md:p-16 lg:p-24 flex flex-col justify-center text-slate-950 space-y-6">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-50px' }}
+              variants={revealVariants}
+              className="space-y-6"
             >
-              Book Appointment Now
-            </button>
-          </div>
-        </motion.div>
-      </div>
+              <h2 className="text-4xl md:text-6xl font-serif-display font-normal text-slate-950 tracking-tight leading-[1.1]">
+                <EditableText
+                  id="home.clinic.title"
+                  defaultText="Our Durban Clinic"
+                  label="Clinic Location Title"
+                />
+              </h2>
 
-      {/* 6. Trust Metrics */}
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          variants={revealVariants}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
-          <div className="p-6 rounded-2xl bg-white border border-slate-100 flex items-start gap-4">
-            <div className="p-2 bg-teal-50 rounded-xl text-teal-600 shadow-3xs shrink-0">
-              <ShieldCheck className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="font-bold text-slate-900 text-sm">POPIA Secure Care</h4>
-              <p className="text-xs text-slate-500 mt-1 font-light">Your personal charts are fully encrypted under SA law.</p>
-            </div>
-          </div>
+              <p className="text-sm md:text-base font-serif-display font-normal tracking-widest uppercase text-slate-950">
+                <EditableText
+                  id="home.clinic.address"
+                  defaultText="1296 3RD AVENUE | HILLCREST KZN"
+                  label="Clinic Address"
+                />
+              </p>
 
-          <div className="p-6 rounded-2xl bg-white border border-slate-100 flex items-start gap-4">
-            <div className="p-2 bg-teal-50 rounded-xl text-teal-600 shadow-3xs shrink-0">
-              <Calendar className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="font-bold text-slate-900 text-sm">Direct Scheduling</h4>
-              <p className="text-xs text-slate-500 mt-1 font-light">Live slots aligned with physicians.</p>
-            </div>
-          </div>
+              <p className="text-sm md:text-base font-sans-clean font-normal text-slate-900/90">
+                <EditableText
+                  id="home.clinic.hours"
+                  defaultText="Mon-Fri: 9am-6pm | Sat-Sun: Closed"
+                  label="Clinic Hours"
+                />
+              </p>
 
-          <div className="p-6 rounded-2xl bg-white border border-slate-100 flex items-start gap-4">
-            <div className="p-2 bg-teal-50 rounded-xl text-teal-600 shadow-3xs shrink-0">
-              <Award className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="font-bold text-slate-900 text-sm">Board-Certified</h4>
-              <p className="text-xs text-slate-500 mt-1 font-light">Elite medical faculty & specialists.</p>
-            </div>
+              <div className="pt-4">
+                <button
+                  onClick={() => onNavigate('contact')}
+                  className="px-8 py-3.5 bg-slate-950 hover:bg-slate-800 text-white font-bold font-sans-clean text-xs tracking-widest uppercase transition-colors cursor-pointer shadow-md"
+                >
+                  SCHEDULE A VISIT
+                </button>
+              </div>
+            </motion.div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white border border-slate-100 flex items-start gap-4">
-            <div className="p-2 bg-teal-50 rounded-xl text-teal-600 shadow-3xs shrink-0">
-              <HeartPulse className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="font-bold text-slate-900 text-sm">Patient-Centric</h4>
-              <p className="text-xs text-slate-500 mt-1 font-light">Custom wellness profiling plans.</p>
-            </div>
+        </div>
+      </section>
+
+      {/* SECTION 5: REVIEWS SECTION (from input_file_1.png) */}
+      <section className="bg-[#EAE9E5] py-20 md:py-28 px-6 md:px-12 border-t border-slate-300/80">
+        <div className="max-w-7xl mx-auto space-y-12">
+          
+          <h2 className="text-4xl md:text-6xl font-serif-display font-normal text-slate-900 tracking-tight">
+            Reviews
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+            
+            {/* Review 1 */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-50px' }}
+              variants={revealVariants}
+              className="border-t border-slate-400 pt-6 flex flex-col justify-between space-y-6 h-full"
+            >
+              <div className="space-y-4">
+                <h3 className="text-2xl md:text-3xl font-serif-display font-normal text-slate-900">
+                  Mollie C.
+                </h3>
+
+                <div className="flex items-center gap-1 text-slate-900">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-slate-900 stroke-none" />
+                  ))}
+                </div>
+
+                <p className="text-xs md:text-sm text-slate-800 font-sans-clean leading-relaxed">
+                  Such a delightful experience. The space is absolutely gorgeous and serene. My specialist made me feel completely comfortable throughout my first treatment. I felt great when I walked out and am excited to come back for a hormone panel and future skin treatments.
+                </p>
+              </div>
+
+              <div className="pt-4">
+                <GoogleLogo />
+              </div>
+            </motion.div>
+
+            {/* Review 2 */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-50px' }}
+              variants={revealVariants}
+              className="border-t border-slate-400 pt-6 flex flex-col justify-between space-y-6 h-full"
+            >
+              <div className="space-y-4">
+                <h3 className="text-2xl md:text-3xl font-serif-display font-normal text-slate-900">
+                  Stacey H.
+                </h3>
+
+                <div className="flex items-center gap-1 text-slate-900">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-slate-900 stroke-none" />
+                  ))}
+                </div>
+
+                <p className="text-xs md:text-sm text-slate-800 font-sans-clean leading-relaxed">
+                  5 stars for my first visit! Enjoyed the website design and the option to book an appointment online. The service was excellent from start to finish. Staff were very friendly and accommodating. The doctor was very thorough when explaining the process. I will definitely be back in 3-4 months!
+                </p>
+              </div>
+
+              <div className="pt-4">
+                <GoogleLogo />
+              </div>
+            </motion.div>
+
+            {/* Review 3 */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-50px' }}
+              variants={revealVariants}
+              className="border-t border-slate-400 pt-6 flex flex-col justify-between space-y-6 h-full"
+            >
+              <div className="space-y-4">
+                <h3 className="text-2xl md:text-3xl font-serif-display font-normal text-slate-900">
+                  Christina K.
+                </h3>
+
+                <div className="flex items-center gap-1 text-slate-900">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-slate-900 stroke-none" />
+                  ))}
+                </div>
+
+                <p className="text-xs md:text-sm text-slate-800 font-sans-clean leading-relaxed">
+                  Advance Health's approach to integrative health is truly one-of-a-kind. Wellness trends emerge daily & decision fatigue is real. "What's the best path for me?" has become a confusing question to answer, but Advance Health offers personalized mapping that ensures you're headed down the right path.
+                </p>
+              </div>
+
+              <div className="pt-4">
+                <GoogleLogo />
+              </div>
+            </motion.div>
+
+            {/* Review 4 */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-50px' }}
+              variants={revealVariants}
+              className="border-t border-slate-400 pt-6 flex flex-col justify-between space-y-6 h-full"
+            >
+              <div className="space-y-4">
+                <h3 className="text-2xl md:text-3xl font-serif-display font-normal text-slate-900">
+                  Tanya M.
+                </h3>
+
+                <div className="flex items-center gap-1 text-slate-900">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-slate-900 stroke-none" />
+                  ))}
+                </div>
+
+                <p className="text-xs md:text-sm text-slate-800 font-sans-clean leading-relaxed">
+                  I had a great experience here. I have tried places like this in the past that felt pushy but Advance Health was not. The clinical staff here were extremely knowledgeable and kind. The space itself was beautiful and relaxing. Highly recommend!
+                </p>
+              </div>
+
+              <div className="pt-4">
+                <GoogleLogo />
+              </div>
+            </motion.div>
+
           </div>
-        </motion.div>
-      </div>
+
+        </div>
+      </section>
+
     </div>
   );
 }

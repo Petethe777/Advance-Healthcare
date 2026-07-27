@@ -6,6 +6,7 @@ import EditableText from './EditableText';
 // Import local images
 import lobbyImage from '../assets/images/modern_hq_clinic_1785154308673.jpg';
 import wellnessImage from '../assets/images/wellness_lifestyle_1783946675009.jpg';
+import sithabileImage from '../assets/images/sithabile.png';
 
 interface HomePageProps {
   onNavigate: (pageId: string) => void;
@@ -128,7 +129,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
       tag: 'Mental Health',
       tagBg: 'bg-[#E2F738] text-slate-950',
       title: 'Individual Psychotherapy (Adolescents & Adults)',
-      image: '/Sithabile.png',
+      image: sithabileImage,
       goals: ['Clinical Psychology', 'Popular'],
       professionalId: 'prof-sithabile-mncwango',
       professionalName: 'Sithabile Mncwango',

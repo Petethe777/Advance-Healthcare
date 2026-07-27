@@ -5,6 +5,7 @@ import oceanNaidooImage from './assets/images/ocean_naidoo.png';
 import wellnessImage from './assets/images/wellness_lifestyle_1783946675009.jpg';
 import neurologyImage from './assets/images/neurology_brain_health_1782959199623.jpg';
 import pediatricianImage from './assets/images/pediatrician_caring_1782959211815.jpg';
+import sithabileImage from './assets/images/sithabile.png';
 
 export const HERO_SLIDES = [
   {
@@ -133,7 +134,7 @@ export const SERVICES: Service[] = [
       'Trauma & grief counselling',
       'Relationship & couples therapy'
     ],
-    image: '/Sithabile.png'
+    image: sithabileImage
   }
 ];
 
@@ -144,7 +145,7 @@ export const PROFESSIONALS: Professional[] = [
     role: 'Clinical Psychologist',
     specialty: 'Clinical Psychology & Psychotherapy',
     bio: 'Sithabile Mncwango is an HPCSA-registered Clinical Psychologist offering evidence-based psychotherapy and psychological assessments for adolescents, adults, and couples facing anxiety, trauma, and stress.',
-    image: '/Sithabile.png',
+    image: sithabileImage,
     education: 'M.Soc.Sci in Clinical Psychology (UKZN) | B.Soc.Sci (Hons) | PhD Candidate',
     experience: 'HPCSA PS0134503 | Practice No. 0725544',
     availability: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],

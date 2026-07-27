@@ -130,7 +130,7 @@ export default function App() {
 
   return (
     <TextEditorProvider onOpenEditModal={() => {}}>
-      <div className="min-h-screen bg-[#FAF9F5] text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-blue-900 selection:text-white flex flex-col justify-between pt-[74px]">
+      <div className="min-h-screen bg-[#FAF9F5] text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-blue-900 selection:text-white flex flex-col justify-between pt-[90px] md:pt-[110px]">
       {/* Navigation Header */}
       <Navbar
         onOpenBooking={handleOpenGeneralBooking}
@@ -161,11 +161,11 @@ export default function App() {
           {/* Col 1: Brand Info */}
           <div className="md:col-span-4 space-y-4">
             <div className="flex items-center">
-              <div className="bg-white p-2.5 rounded-xl shadow-xs inline-block">
+              <div className="bg-white p-3 md:p-4 rounded-2xl shadow-xs inline-block">
                 <img
                   src={logo}
                   alt="Advance Health & Wellness Logo"
-                  className="h-24 md:h-26 w-auto object-contain"
+                  className="h-32 md:h-44 w-auto object-contain"
                   referrerPolicy="no-referrer"
                 />
               </div>

@@ -47,8 +47,8 @@ export default function Navbar({
     <nav
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 border-b ${
         isScrolled
-          ? 'bg-[#FAF9F5]/90 backdrop-blur-md shadow-xs py-3 border-slate-200/60'
-          : 'bg-transparent py-5 border-transparent'
+          ? 'bg-[#FAF9F5]/90 backdrop-blur-md shadow-xs py-2 border-slate-200/60'
+          : 'bg-transparent py-3 md:py-4 border-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
@@ -61,7 +61,7 @@ export default function Navbar({
           <img
             src={logo}
             alt="Advance Health & Wellness Logo"
-            className="h-14 md:h-18 w-auto object-contain"
+            className="h-20 md:h-28 lg:h-32 w-auto object-contain transition-all duration-300"
             referrerPolicy="no-referrer"
           />
         </button>

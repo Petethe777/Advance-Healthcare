@@ -64,7 +64,7 @@ export default function PartnerPage() {
   const [formEmail, setFormEmail] = useState('');
   const [formPhone, setFormPhone] = useState('');
   const [formHpcsa, setFormHpcsa] = useState('');
-  const [formLocation, setFormLocation] = useState('Hillcrest Medical Centre');
+  const [formLocation, setFormLocation] = useState('32 Inanda Rd, Hillcrest');
   const [formModel, setFormModel] = useState('Full-time Suite Residency');
   const [formMessage, setFormMessage] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -268,12 +268,12 @@ export default function PartnerPage() {
                     Prime Clinical Locations
                   </h3>
                   <p className="text-xs md:text-sm text-slate-500 font-light leading-relaxed">
-                    Operate within high-end medical precincts. Our sites in **Hillcrest** (Hillcrest Medical Centre) and **Pinetown** are accessible directly via major transit nodes and cater to a premium patient demographic seeking custom care.
+                    Operate within high-end medical precincts. Our sites in **32 Inanda Rd, Hillcrest** (Belvedere Ext 1) and **Pinetown** are accessible directly via major transit nodes and cater to a premium patient demographic seeking custom care.
                   </p>
                 </div>
               </div>
               <div className="mt-8 pt-4 border-t border-slate-50 flex flex-wrap gap-2">
-                <span className="text-[9px] font-mono font-bold bg-slate-50 border border-slate-100 text-slate-600 px-2.5 py-1 rounded-full">Hillcrest Medical Centre</span>
+                <span className="text-[9px] font-mono font-bold bg-slate-50 border border-slate-100 text-slate-600 px-2.5 py-1 rounded-full">32 Inanda Rd, Hillcrest (3650)</span>
                 <span className="text-[9px] font-mono font-bold bg-slate-50 border border-slate-100 text-slate-600 px-2.5 py-1 rounded-full">Pinetown Practice Wing</span>
               </div>
             </div>
@@ -740,7 +740,7 @@ export default function PartnerPage() {
                   onChange={(e) => setFormLocation(e.target.value)}
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs bg-white focus:ring-1 focus:ring-teal-500 focus:border-teal-500"
                 >
-                  <option>Hillcrest Medical Centre</option>
+                  <option>32 Inanda Rd, Hillcrest (3650)</option>
                   <option>Pinetown Practice Wing</option>
                   <option>Shared Multi-Clinic Allocation</option>
                 </select>

@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Award, 
@@ -24,6 +24,7 @@ import wellnessImage from '../assets/images/wellness_lifestyle_1783946675009.jpg
 
 interface ProfessionalsPageProps {
   onBookProfessional: (profId: string) => void;
+  initialProfessionalId?: string | null;
 }
 
 const revealVariants = {
@@ -37,13 +38,23 @@ const revealVariants = {
 
 type ModalTab = 'bio' | 'specializations' | 'credentials' | 'rotations';
 
-export default function ProfessionalsPage({ onBookProfessional }: ProfessionalsPageProps) {
+export default function ProfessionalsPage({ onBookProfessional, initialProfessionalId }: ProfessionalsPageProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedProf, setSelectedProf] = useState<Professional | null>(null);
   const [modalTab, setModalTab] = useState<ModalTab>('bio');
   const [dragDirection, setDragDirection] = useState<'left' | 'right' | null>(null);
 
   const slideRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (initialProfessionalId) {
+      const found = PROFESSIONALS.find(p => p.id === initialProfessionalId);
+      if (found) {
+        setSelectedProf(found);
+        setModalTab('bio');
+      }
+    }
+  }, [initialProfessionalId]);
 
   const handleNext = () => {
     setActiveIndex((prev) => (prev + 1) % PROFESSIONALS.length);

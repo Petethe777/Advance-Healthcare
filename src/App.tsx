@@ -24,6 +24,7 @@ export default function App() {
   const [isBookingsPanelOpen, setIsBookingsPanelOpen] = useState(false);
   const [preSelectedProfessional, setPreSelectedProfessional] = useState<string | undefined>(undefined);
   const [preSelectedService, setPreSelectedService] = useState<string | undefined>(undefined);
+  const [selectedProfBioId, setSelectedProfBioId] = useState<string | null>(null);
   const [bookingCount, setBookingCount] = useState(0);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -58,7 +59,14 @@ export default function App() {
   }, []);
 
   const handleNavigate = (sectionId: string) => {
+    setSelectedProfBioId(null);
     setActiveSection(sectionId);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
+
+  const handleViewProfessionalBio = (professionalId: string) => {
+    setSelectedProfBioId(professionalId);
+    setActiveSection('professionals');
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
@@ -92,6 +100,8 @@ export default function App() {
           <HomePage
             onNavigate={handleNavigate}
             onOpenBooking={handleOpenGeneralBooking}
+            onOpenBookingWithProfessional={handleOpenBookingWithProfessional}
+            onViewProfessionalBio={handleViewProfessionalBio}
           />
         );
       case 'about':
@@ -99,7 +109,12 @@ export default function App() {
       case 'partner':
         return <PartnerPage />;
       case 'professionals':
-        return <ProfessionalsPage onBookProfessional={handleOpenBookingWithProfessional} />;
+        return (
+          <ProfessionalsPage
+            onBookProfessional={handleOpenBookingWithProfessional}
+            initialProfessionalId={selectedProfBioId}
+          />
+        );
       case 'faq':
         return <FAQPage onNavigate={handleNavigate} />;
       case 'contact':
@@ -109,6 +124,8 @@ export default function App() {
           <HomePage
             onNavigate={handleNavigate}
             onOpenBooking={handleOpenGeneralBooking}
+            onOpenBookingWithProfessional={handleOpenBookingWithProfessional}
+            onViewProfessionalBio={handleViewProfessionalBio}
           />
         );
     }
@@ -205,7 +222,7 @@ export default function App() {
               </div>
               <div className="flex gap-2 items-start">
                 <MapPin className="w-4 h-4 text-teal-500 shrink-0 mt-0.5" />
-                <span>Hillcrest Medical Centre, Hillcrest, KZN</span>
+                <span>32 Inanda Rd, Belvedere Ext 1, Hillcrest, 3650</span>
               </div>
             </div>
           </div>

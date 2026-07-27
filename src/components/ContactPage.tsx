@@ -68,8 +68,8 @@ export default function ContactPage() {
     {
       icon: <MapPin className="w-5 h-5 text-teal-600" />,
       label: 'Main Facility Location',
-      value: 'Hillcrest Medical Centre, 90 Old Main Road',
-      sub: 'Hillcrest, Durban, 3610, South Africa'
+      value: '32 Inanda Rd, Belvedere Ext 1',
+      sub: 'Hillcrest, 3650, South Africa'
     }
   ];
 

@@ -10,6 +10,8 @@ import wellnessImage from '../assets/images/wellness_lifestyle_1783946675009.jpg
 interface HomePageProps {
   onNavigate: (pageId: string) => void;
   onOpenBooking: () => void;
+  onOpenBookingWithProfessional?: (professionalId: string) => void;
+  onViewProfessionalBio?: (professionalId: string) => void;
 }
 
 const revealVariants = {
@@ -105,16 +107,16 @@ function GoogleLogo(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
+export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithProfessional, onViewProfessionalBio }: HomePageProps) {
   const [selectedGoal, setSelectedGoal] = useState<string>('Popular');
 
   const goalTabs = [
     { id: 'Popular', label: 'Popular' },
     { id: 'Clinical Psychology', label: 'Clinical Psychology' },
     { id: 'Sleep & Neurobiology', label: 'Sleep & Neurobiology' },
+    { id: 'Clinical Dentistry', label: 'Clinical Dentistry' },
     { id: 'Cardiology & Heart', label: 'Cardiology & Heart' },
     { id: 'Neurology & Brain', label: 'Neurology & Brain' },
-    { id: 'Clinical Dentistry', label: 'Clinical Dentistry' },
     { id: 'Orthopedics & Joints', label: 'Orthopedics & Joints' },
     { id: 'Hormones & Cellular Care', label: 'Hormones & Cellular Care' }
   ];
@@ -128,6 +130,8 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
       title: 'Individual Psychotherapy (Adolescents & Adults)',
       image: '/Sithabile.png',
       goals: ['Clinical Psychology', 'Popular'],
+      professionalId: 'prof-sithabile-mncwango',
+      professionalName: 'Sithabile Mncwango',
       actionText: 'LEARN MORE'
     },
     {
@@ -137,6 +141,8 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
       title: 'Anxiety & Stress Management',
       image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80',
       goals: ['Clinical Psychology', 'Popular'],
+      professionalId: 'prof-sithabile-mncwango',
+      professionalName: 'Sithabile Mncwango',
       actionText: 'LEARN MORE'
     },
     {
@@ -146,6 +152,8 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
       title: 'Trauma & Resilience Counselling',
       image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80',
       goals: ['Clinical Psychology'],
+      professionalId: 'prof-sithabile-mncwango',
+      professionalName: 'Sithabile Mncwango',
       actionText: 'LEARN MORE'
     },
     {
@@ -155,6 +163,8 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
       title: 'Relationship & Couples Therapy',
       image: 'https://images.unsplash.com/photo-1516585427167-9f4af9627e6c?auto=format&fit=crop&w=600&q=80',
       goals: ['Clinical Psychology'],
+      professionalId: 'prof-sithabile-mncwango',
+      professionalName: 'Sithabile Mncwango',
       actionText: 'LEARN MORE'
     },
 
@@ -166,6 +176,8 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
       title: 'Polysomnography Sleep Study',
       image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=600&q=80',
       goals: ['Sleep & Neurobiology', 'Popular'],
+      professionalId: 'prof-ocean-naidoo',
+      professionalName: 'Mr. Ocean Lesley Naidoo',
       actionText: 'LEARN MORE'
     },
     {
@@ -175,6 +187,8 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
       title: 'CPAP Titration & Sleep Care',
       image: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80',
       goals: ['Sleep & Neurobiology', 'Popular'],
+      professionalId: 'prof-ocean-naidoo',
+      professionalName: 'Mr. Ocean Lesley Naidoo',
       actionText: 'LEARN MORE'
     },
     {
@@ -184,6 +198,8 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
       title: 'Electroencephalography (EEG)',
       image: 'https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=600&q=80',
       goals: ['Sleep & Neurobiology'],
+      professionalId: 'prof-ocean-naidoo',
+      professionalName: 'Mr. Ocean Lesley Naidoo',
       actionText: 'LEARN MORE'
     },
     {
@@ -193,64 +209,8 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
       title: 'Nerve Conduction Studies',
       image: 'https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&w=600&q=80',
       goals: ['Sleep & Neurobiology'],
-      actionText: 'LEARN MORE'
-    },
-
-    // --- CARDIOLOGY & HEART (Dr. Sarah Jenkins) ---
-    {
-      id: 'ecg-echocardiography',
-      tag: 'Diagnostic ECG',
-      tagBg: 'bg-[#E2F738] text-slate-950',
-      title: 'Advanced ECG & Echocardiography',
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80',
-      goals: ['Cardiology & Heart', 'Popular'],
-      actionText: 'LEARN MORE'
-    },
-    {
-      id: 'cardiovascular-profiling',
-      tag: 'Preventive',
-      tagBg: 'bg-[#E2F738] text-slate-950',
-      title: 'Preventive Cardiovascular Profiling',
-      image: 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80',
-      goals: ['Cardiology & Heart'],
-      actionText: 'LEARN MORE'
-    },
-    {
-      id: 'hypertension-vascular',
-      tag: 'Vascular Care',
-      tagBg: 'bg-[#F7D6B8] text-slate-950',
-      title: 'Hypertension & Vascular Care',
-      image: 'https://images.unsplash.com/photo-1629909615184-74f495363b67?auto=format&fit=crop&w=600&q=80',
-      goals: ['Cardiology & Heart'],
-      actionText: 'LEARN MORE'
-    },
-
-    // --- NEUROLOGY & BRAIN (Dr. Marcus Vance) ---
-    {
-      id: 'cognitive-screening',
-      tag: 'Brain Health',
-      tagBg: 'bg-[#E2F738] text-slate-950',
-      title: 'Cognitive & Memory Assessment',
-      image: 'https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=600&q=80',
-      goals: ['Neurology & Brain', 'Popular'],
-      actionText: 'LEARN MORE'
-    },
-    {
-      id: 'migraine-headache',
-      tag: 'Therapeutics',
-      tagBg: 'bg-[#F7D6B8] text-slate-950',
-      title: 'Migraine & Chronic Headache Care',
-      image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80',
-      goals: ['Neurology & Brain'],
-      actionText: 'LEARN MORE'
-    },
-    {
-      id: 'neuro-rehab',
-      tag: 'Rehabilitation',
-      tagBg: 'bg-[#E2F738] text-slate-950',
-      title: 'Neuro-Rehabilitation & Neuropathy',
-      image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80',
-      goals: ['Neurology & Brain'],
+      professionalId: 'prof-ocean-naidoo',
+      professionalName: 'Mr. Ocean Lesley Naidoo',
       actionText: 'LEARN MORE'
     },
 
@@ -262,6 +222,8 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
       title: 'Comprehensive Dental Assessment',
       image: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80',
       goals: ['Clinical Dentistry', 'Popular'],
+      professionalId: 'prof-lesley-naidoo',
+      professionalName: 'Lesley Naidoo',
       actionText: 'LEARN MORE'
     },
     {
@@ -271,6 +233,8 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
       title: 'Preventive Oral Health & Care',
       image: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80',
       goals: ['Clinical Dentistry'],
+      professionalId: 'prof-lesley-naidoo',
+      professionalName: 'Lesley Naidoo',
       actionText: 'LEARN MORE'
     },
     {
@@ -280,10 +244,82 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
       title: 'Primary Oral Healthcare Consultation',
       image: 'https://images.unsplash.com/photo-1571772996211-2f02c9727629?auto=format&fit=crop&w=600&q=80',
       goals: ['Clinical Dentistry'],
+      professionalId: 'prof-lesley-naidoo',
+      professionalName: 'Lesley Naidoo',
       actionText: 'LEARN MORE'
     },
 
-    // --- ORTHOPEDICS & JOINTS (Dr. Keith Sterling) ---
+    // --- CARDIOLOGY & HEART ---
+    {
+      id: 'ecg-echocardiography',
+      tag: 'Diagnostic ECG',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'Advanced ECG & Echocardiography',
+      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80',
+      goals: ['Cardiology & Heart', 'Popular'],
+      professionalId: 'prof-ocean-naidoo',
+      professionalName: 'Mr. Ocean Lesley Naidoo',
+      actionText: 'LEARN MORE'
+    },
+    {
+      id: 'cardiovascular-profiling',
+      tag: 'Preventive',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'Preventive Cardiovascular Profiling',
+      image: 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80',
+      goals: ['Cardiology & Heart'],
+      professionalId: 'prof-ocean-naidoo',
+      professionalName: 'Mr. Ocean Lesley Naidoo',
+      actionText: 'LEARN MORE'
+    },
+    {
+      id: 'hypertension-vascular',
+      tag: 'Vascular Care',
+      tagBg: 'bg-[#F7D6B8] text-slate-950',
+      title: 'Hypertension & Vascular Care',
+      image: 'https://images.unsplash.com/photo-1629909615184-74f495363b67?auto=format&fit=crop&w=600&q=80',
+      goals: ['Cardiology & Heart'],
+      professionalId: 'prof-ocean-naidoo',
+      professionalName: 'Mr. Ocean Lesley Naidoo',
+      actionText: 'LEARN MORE'
+    },
+
+    // --- NEUROLOGY & BRAIN ---
+    {
+      id: 'cognitive-screening',
+      tag: 'Brain Health',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'Cognitive & Memory Assessment',
+      image: 'https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=600&q=80',
+      goals: ['Neurology & Brain', 'Popular'],
+      professionalId: 'prof-ocean-naidoo',
+      professionalName: 'Mr. Ocean Lesley Naidoo',
+      actionText: 'LEARN MORE'
+    },
+    {
+      id: 'migraine-headache',
+      tag: 'Therapeutics',
+      tagBg: 'bg-[#F7D6B8] text-slate-950',
+      title: 'Migraine & Chronic Headache Care',
+      image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80',
+      goals: ['Neurology & Brain'],
+      professionalId: 'prof-ocean-naidoo',
+      professionalName: 'Mr. Ocean Lesley Naidoo',
+      actionText: 'LEARN MORE'
+    },
+    {
+      id: 'neuro-rehab',
+      tag: 'Rehabilitation',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'Neuro-Rehabilitation & Neuropathy',
+      image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80',
+      goals: ['Neurology & Brain'],
+      professionalId: 'prof-ocean-naidoo',
+      professionalName: 'Mr. Ocean Lesley Naidoo',
+      actionText: 'LEARN MORE'
+    },
+
+    // --- ORTHOPEDICS & JOINTS ---
     {
       id: 'joint-reconstruction',
       tag: 'Orthopedics',
@@ -291,6 +327,8 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
       title: 'Joint Reconstruction & Restoration',
       image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80',
       goals: ['Orthopedics & Joints', 'Popular'],
+      professionalId: 'prof-lesley-naidoo',
+      professionalName: 'Lesley Naidoo',
       actionText: 'LEARN MORE'
     },
     {
@@ -300,6 +338,8 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
       title: 'Sports Injury Restoration',
       image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80',
       goals: ['Orthopedics & Joints'],
+      professionalId: 'prof-lesley-naidoo',
+      professionalName: 'Lesley Naidoo',
       actionText: 'LEARN MORE'
     },
     {
@@ -309,6 +349,8 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
       title: 'Rehabilitative Motion Therapy',
       image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80',
       goals: ['Orthopedics & Joints'],
+      professionalId: 'prof-lesley-naidoo',
+      professionalName: 'Lesley Naidoo',
       actionText: 'LEARN MORE'
     },
 
@@ -320,6 +362,8 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
       title: 'Hormone Optimization & TRT',
       image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80',
       goals: ['Hormones & Cellular Care', 'Popular'],
+      professionalId: 'prof-ocean-naidoo',
+      professionalName: 'Mr. Ocean Lesley Naidoo',
       actionText: 'LEARN MORE'
     },
     {
@@ -329,6 +373,8 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
       title: 'High-Dose Cellular NAD+ Drip',
       image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80',
       goals: ['Hormones & Cellular Care'],
+      professionalId: 'prof-ocean-naidoo',
+      professionalName: 'Mr. Ocean Lesley Naidoo',
       actionText: 'LEARN MORE'
     },
     {
@@ -338,6 +384,8 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
       title: 'Clinical Cellular Collagen Therapy',
       image: 'https://images.unsplash.com/photo-1512290900673-700200411986?auto=format&fit=crop&w=600&q=80',
       goals: ['Hormones & Cellular Care'],
+      professionalId: 'prof-sithabile-mncwango',
+      professionalName: 'Sithabile Mncwango',
       actionText: 'LEARN MORE'
     }
   ];
@@ -475,10 +523,17 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
                 </div>
 
                 {/* Button */}
-                <div className="pt-4">
+                <div className="pt-4 space-y-2">
                   <button
-                    onClick={onOpenBooking}
-                    className="w-full py-3 bg-[#B5D5E8] hover:bg-[#a0c7dd] text-slate-900 font-bold font-sans-clean text-xs tracking-wider uppercase transition-colors cursor-pointer text-center"
+                    onClick={() => {
+                      if (item.professionalId && onViewProfessionalBio) {
+                        onViewProfessionalBio(item.professionalId);
+                      } else {
+                        onNavigate('professionals');
+                      }
+                    }}
+                    className="w-full py-3 bg-[#B5D5E8] hover:bg-[#a0c7dd] text-slate-900 font-bold font-sans-clean text-xs tracking-wider uppercase transition-colors cursor-pointer text-center shadow-xs"
+                    id={`treatment-btn-${item.id}`}
                   >
                     {item.actionText}
                   </button>
@@ -637,7 +692,7 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
               <p className="text-sm md:text-base font-serif-display font-normal tracking-widest uppercase text-slate-950">
                 <EditableText
                   id="home.clinic.address"
-                  defaultText="1296 3RD AVENUE | HILLCREST KZN"
+                  defaultText="32 INANDA RD, BELVEDERE EXT 1 | HILLCREST, 3650"
                   label="Clinic Address"
                 />
               </p>

@@ -5,7 +5,7 @@ import oceanNaidooImage from './assets/images/ocean_naidoo.png';
 import wellnessImage from './assets/images/wellness_lifestyle_1783946675009.jpg';
 import neurologyImage from './assets/images/neurology_brain_health_1782959199623.jpg';
 import pediatricianImage from './assets/images/pediatrician_caring_1782959211815.jpg';
-import sithabileImage from './assets/images/sithabile.png';
+import sithabileImage from './assets/images/Sithabile.png';
 
 export const HERO_SLIDES = [
   {

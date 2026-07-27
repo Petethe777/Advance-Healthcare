@@ -6,7 +6,7 @@ import EditableText from './EditableText';
 // Import local images
 import lobbyImage from '../assets/images/modern_hq_clinic_1785154308673.jpg';
 import wellnessImage from '../assets/images/wellness_lifestyle_1783946675009.jpg';
-import sithabileImage from '../assets/images/sithabile.png';
+import sithabileImage from '../assets/images/Sithabile.png';
 
 interface HomePageProps {
   onNavigate: (pageId: string) => void;

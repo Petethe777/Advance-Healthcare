@@ -130,7 +130,7 @@ export default function App() {
 
   return (
     <TextEditorProvider onOpenEditModal={() => {}}>
-      <div className="min-h-screen bg-[#FAF9F5] text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-blue-900 selection:text-white flex flex-col justify-between pt-[90px] md:pt-[110px]">
+      <div className="min-h-screen bg-[#FAF9F5] text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-blue-900 selection:text-white flex flex-col justify-between pt-[110px] md:pt-[130px]">
       {/* Navigation Header */}
       <Navbar
         onOpenBooking={handleOpenGeneralBooking}
@@ -161,11 +161,11 @@ export default function App() {
           {/* Col 1: Brand Info */}
           <div className="md:col-span-4 space-y-4">
             <div className="flex items-center">
-              <div className="bg-white p-3 md:p-4 rounded-2xl shadow-xs inline-block">
+              <div className="bg-white p-3 md:p-5 rounded-2xl shadow-xs inline-block">
                 <img
                   src={logo}
                   alt="Advance Health & Wellness Logo"
-                  className="h-32 md:h-44 w-auto object-contain"
+                  className="h-36 md:h-52 lg:h-60 w-auto object-contain"
                   referrerPolicy="no-referrer"
                 />
               </div>
@@ -240,6 +240,15 @@ export default function App() {
 
         <div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-slate-800/80 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4 font-sans">
           <p>© {new Date().getFullYear()} Advance Health & Wellness. All rights reserved.</p>
+          <a
+            href="https://wa.me/27731595846"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-emerald-400 transition-colors inline-flex items-center gap-1.5 font-medium text-slate-400 hover:underline"
+            id="footer-developer-link"
+          >
+            Developed by Peter
+          </a>
           <p className="font-mono text-[10px]">DESIGNED WITH COMPASSIONATE CARE &bull; POPIA & HPCSA COMPLIANT</p>
         </div>
       </footer>

@@ -61,7 +61,9 @@ export default function Navbar({
           <img
             src={logo}
             alt="Advance Health & Wellness Logo"
-            className="h-20 md:h-28 lg:h-32 w-auto object-contain transition-all duration-300"
+            className={`w-auto object-contain transition-all duration-300 ${
+              isScrolled ? 'h-24 md:h-32 lg:h-36' : 'h-28 md:h-40 lg:h-48'
+            }`}
             referrerPolicy="no-referrer"
           />
         </button>

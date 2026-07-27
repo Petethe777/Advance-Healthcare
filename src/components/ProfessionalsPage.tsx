@@ -127,171 +127,105 @@ export default function ProfessionalsPage({ onBookProfessional }: ProfessionalsP
         </div>
       </div>
 
-      {/* 2. Swiper / Carousel Section */}
-      <div className="max-w-7xl mx-auto px-6 space-y-12">
-        <div className="text-center max-w-xl mx-auto space-y-3">
-          <h2 className="text-2xl md:text-3xl font-extrabold font-sans tracking-tight text-slate-900">
-            Swipe to Explore Specialists
-          </h2>
-          <p className="text-slate-500 text-xs md:text-sm font-light">
-            Swipe left or right, or use the navigation controls. Click <strong>"View Full Profile"</strong> to open their interactive medical record and complete academic credentials.
-          </p>
+      {/* 2. Professionals Grid (Matching user screenshot layout) */}
+      <section className="bg-[#FAF9F5] py-12 md:py-16 px-6 md:px-12 border-b border-slate-200/60">
+        <div className="max-w-7xl mx-auto space-y-10">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <span className="text-xs font-sans-clean font-extrabold uppercase tracking-widest text-slate-500 bg-slate-200/60 px-3 py-1 rounded-full">
+              Clinical Team & Expertise
+            </span>
+            <h2 className="text-3xl md:text-4xl font-serif-display font-normal text-slate-900 tracking-tight">
+              Our Medical Professionals & Clinical Focus
+            </h2>
+            <p className="text-slate-600 text-xs md:text-sm font-light leading-relaxed">
+              Explore our multidisciplinary team of board-certified specialists, clinical leaders, and researchers dedicated to your health journey.
+            </p>
+          </div>
+
+          {/* 3-Column Grid matching active professionals layout */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 items-start">
+            {PROFESSIONALS.map((prof) => {
+              // Custom title & sublabel matching screenshot aesthetic
+              const customData = {
+                'prof-sithabile-mncwango': {
+                  title: 'Clinical Psychology',
+                  subLabel: "SITHABILE'S SPECIALTY",
+                  description: "HPCSA-registered Clinical Psychologist offering collaborative, evidence-based psychotherapy, psychological assessments, stress management, trauma counselling, and couples therapy."
+                },
+                'prof-ocean-naidoo': {
+                  title: 'Sleep & Neurobiology',
+                  subLabel: "OCEAN'S SPECIALTY",
+                  description: "Qualified at the Bloemfontein Sleep Laboratory, Ocean leads Neurowave in diagnosing complex sleep disorders, nerve conduction health, Polysomnography studies, and CPAP titration across South Africa."
+                },
+                'prof-lesley-naidoo': {
+                  title: 'Public Health & Dentistry',
+                  subLabel: "LESLEY'S SPECIALTY",
+                  description: "With a distinguished background in clinical dentistry, public health policy, and national health agendas, Lesley serves as a Presidential Health Summit delegate focused on primary healthcare transformation."
+                }
+              }[prof.id] || {
+                title: prof.specialty,
+                subLabel: `${prof.name.split(' ')[0].toUpperCase()}'S SPECIALTY`,
+                description: prof.bio
+              };
+
+              return (
+                <motion.div
+                  key={prof.id}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: '-50px' }}
+                  variants={revealVariants}
+                  className="flex flex-col justify-between group bg-transparent p-0 transition-all"
+                >
+                  <div className="space-y-4">
+                    {/* B&W Portrait Photo Frame matching screenshot */}
+                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#ECECEC] shadow-xs group-hover:shadow-md transition-all">
+                      <img
+                        src={prof.image}
+                        alt={prof.name}
+                        referrerPolicy="no-referrer"
+                        className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-105"
+                      />
+                    </div>
+
+                    {/* Divider Line & Title Box */}
+                    <div className="border-t border-slate-300/80 pt-4 space-y-1.5">
+                      <h3 className="text-2xl md:text-3xl font-serif-display font-normal text-slate-900 leading-tight min-h-[64px] flex items-start">
+                        {customData.title}
+                      </h3>
+
+                      <p className="text-[11px] font-sans-clean font-extrabold text-slate-700 uppercase tracking-widest">
+                        {customData.subLabel}
+                      </p>
+
+                      <p className="text-xs md:text-sm text-slate-600 font-light leading-relaxed pt-2">
+                        {customData.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Button Row matching screenshot styling */}
+                  <div className="pt-6 space-y-2">
+                    <button
+                      onClick={() => openModal(prof)}
+                      className="w-full py-3 bg-[#B5D5E8] hover:bg-[#a0c7dd] text-slate-900 font-bold font-sans-clean text-xs tracking-wider uppercase transition-colors cursor-pointer text-center"
+                    >
+                      VIEW PROFILE
+                    </button>
+
+                    <button
+                      onClick={() => onBookProfessional(prof.id)}
+                      className="w-full py-2 bg-transparent hover:bg-slate-200/50 text-slate-700 font-bold font-sans-clean text-[11px] tracking-wider uppercase transition-colors cursor-pointer text-center border border-slate-300"
+                    >
+                      BOOK CONSULTATION
+                    </button>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
-
-        {/* Carousel Slider Outer Wrapper - Mobile First focus */}
-        <div className="relative max-w-xl md:max-w-2xl mx-auto px-4">
-          
-          {/* Navigation Arrows - Left Arrow (Visible on md screens, hidden on small screens) */}
-          <button
-            onClick={handlePrev}
-            className="absolute -left-12 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white border border-slate-200 shadow-md flex items-center justify-center text-slate-700 hover:text-blue-900 hover:border-blue-900 hover:shadow-lg transition-all active:scale-90 hidden md:flex cursor-pointer"
-            aria-label="Previous specialist"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-
-          {/* Sliding Track Component */}
-          <div className="relative overflow-visible" ref={slideRef}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeIndex}
-                drag="x"
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.4}
-                onDragEnd={handleDragEnd}
-                initial={{ opacity: 0, x: 80 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -80 }}
-                transition={{ duration: 0.35, ease: 'easeInOut' }}
-                className="w-full bg-[#FAF9F5] rounded-[2.5rem] border border-slate-200/80 p-6 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 space-y-6 relative select-none cursor-grab active:cursor-grabbing"
-              >
-                {/* Visual Top Decorative Accent Bar */}
-                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-teal-500 via-indigo-500 to-emerald-500 rounded-t-[2.5rem]" />
-
-                {/* Profile Center Image & Badges */}
-                <div className="flex flex-col items-center text-center space-y-4">
-                  {/* Circle Portrait Frame */}
-                  <div className="relative">
-                    <div className="absolute inset-0 rounded-full bg-teal-500/5 blur-lg scale-110 pointer-events-none" />
-                    <div className="w-28 h-28 md:w-32 md:h-32 rounded-full p-1 bg-gradient-to-tr from-teal-500 to-indigo-500 shadow-md">
-                      <div className="w-full h-full rounded-full overflow-hidden bg-white">
-                        <img
-                          src={activeProf.image}
-                          alt={activeProf.name}
-                          referrerPolicy="no-referrer"
-                          className="w-full h-full object-cover pointer-events-none"
-                        />
-                      </div>
-                    </div>
-                    {/* Active Pulsing Badge */}
-                    <span className="absolute bottom-1 right-1 flex h-3.5 w-3.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white"></span>
-                    </span>
-                  </div>
-
-                  {/* Specialist Titles */}
-                  <div className="space-y-1">
-                    <h3 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight font-sans">
-                      {activeProf.name}
-                    </h3>
-                    <p className="text-xs font-mono font-bold text-blue-900 uppercase tracking-widest">
-                      {activeProf.role}
-                    </p>
-                    <span className="inline-block text-[10px] font-mono font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-full uppercase tracking-wider mt-1.5">
-                      {activeProf.specialty}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Summary Box */}
-                <div className="bg-slate-50/50 rounded-2xl border border-slate-100 p-4 text-center">
-                  <p className="text-slate-600 text-xs md:text-sm leading-relaxed font-light">
-                    {activeProf.bio}
-                  </p>
-                </div>
-
-                {/* Info Pills Section */}
-                <div className="grid grid-cols-2 gap-3 text-left">
-                  <div className="p-3 bg-white border border-slate-100 rounded-xl flex items-start gap-2">
-                    <GraduationCap className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
-                    <div>
-                      <span className="text-[8px] font-mono font-bold uppercase text-slate-400 block">Training</span>
-                      <span className="text-[10px] font-bold text-slate-700 leading-tight block truncate max-w-[100px] sm:max-w-xs">{activeProf.education}</span>
-                    </div>
-                  </div>
-                  <div className="p-3 bg-white border border-slate-100 rounded-xl flex items-start gap-2">
-                    <Clock className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
-                    <div>
-                      <span className="text-[8px] font-mono font-bold uppercase text-slate-400 block">Clinic Hours</span>
-                      <span className="text-[10px] font-bold text-slate-700 leading-tight block truncate max-w-[100px] sm:max-w-xs">{activeProf.experience}</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Direct Action Row */}
-                <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row gap-3">
-                  <button
-                    onClick={() => openModal(activeProf)}
-                    className="flex-1 py-2 px-3 rounded-lg border border-blue-900 hover:bg-blue-50 text-blue-900 font-extrabold text-[11px] uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-3xs"
-                  >
-                    <Info className="w-4 h-4" />
-                    <span>View Full Profile</span>
-                  </button>
-
-                  <button
-                    onClick={() => onBookProfessional(activeProf.id)}
-                    className="flex-1 py-2 px-3 rounded-lg bg-slate-900 hover:bg-blue-900 text-white font-extrabold text-[11px] uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer hover:shadow-md hover:shadow-blue-900/20 active:scale-98"
-                  >
-                    <CalendarCheck className="w-4 h-4" />
-                    <span>Schedule Consultation</span>
-                  </button>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Navigation Arrows - Right Arrow (Visible on md screens, hidden on small screens) */}
-          <button
-            onClick={handleNext}
-            className="absolute -right-12 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white border border-slate-200 shadow-md flex items-center justify-center text-slate-700 hover:text-blue-900 hover:border-blue-900 hover:shadow-lg transition-all active:scale-90 hidden md:flex cursor-pointer"
-            aria-label="Next specialist"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-
-          {/* Mobile navigation controls below the slider */}
-          <div className="flex md:hidden items-center justify-between mt-4">
-            <button
-              onClick={handlePrev}
-              className="px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-xl text-xs font-bold flex items-center gap-1 cursor-pointer"
-            >
-              <ChevronLeft className="w-4 h-4" /> Prev
-            </button>
-            <button
-              onClick={handleNext}
-              className="px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-xl text-xs font-bold flex items-center gap-1 cursor-pointer"
-            >
-              Next <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          {/* Slide Indicator Dots */}
-          <div className="flex justify-center items-center gap-2 mt-6">
-            {PROFESSIONALS.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setActiveIndex(idx)}
-                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                  activeIndex === idx ? 'w-8 bg-blue-900' : 'w-2.5 bg-slate-200 hover:bg-slate-350'
-                }`}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
-            ))}
-          </div>
-
-        </div>
-      </div>
+      </section>
 
       {/* 3. Assurance banner */}
       <div className="max-w-7xl mx-auto px-6">

@@ -110,63 +110,240 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
 
   const goalTabs = [
     { id: 'Popular', label: 'Popular' },
-    { id: 'Look Your Best', label: 'Look Your Best' },
-    { id: 'Energize', label: 'Energize' },
-    { id: 'De-Stress', label: 'De-Stress' },
-    { id: 'Think Clearer', label: 'Think Clearer' },
-    { id: 'Better Sex', label: 'Better Sex' }
+    { id: 'Clinical Psychology', label: 'Clinical Psychology' },
+    { id: 'Sleep & Neurobiology', label: 'Sleep & Neurobiology' },
+    { id: 'Cardiology & Heart', label: 'Cardiology & Heart' },
+    { id: 'Neurology & Brain', label: 'Neurology & Brain' },
+    { id: 'Clinical Dentistry', label: 'Clinical Dentistry' },
+    { id: 'Orthopedics & Joints', label: 'Orthopedics & Joints' },
+    { id: 'Hormones & Cellular Care', label: 'Hormones & Cellular Care' }
   ];
 
   const allTreatments = [
+    // --- CLINICAL PSYCHOLOGY (Sithabile Mncwango) ---
     {
-      id: 'aging-assessment',
-      tag: 'Start Here',
+      id: 'individual-psychotherapy',
+      tag: 'Mental Health',
       tagBg: 'bg-[#E2F738] text-slate-950',
-      title: 'Aging Wellness Assessment',
-      image: wellnessImage,
-      goals: ['Popular', 'Energize', 'Think Clearer'],
+      title: 'Individual Psychotherapy (Adolescents & Adults)',
+      image: '/Sithabile.png',
+      goals: ['Clinical Psychology', 'Popular'],
       actionText: 'LEARN MORE'
     },
     {
-      id: 'hydrafacial',
-      tag: 'Skin Treatment',
-      tagBg: 'bg-[#E2F738] text-slate-950',
-      title: 'HydraFacial',
-      image: 'https://images.unsplash.com/photo-1512290900673-700200411986?auto=format&fit=crop&w=600&q=80',
-      goals: ['Popular', 'Look Your Best'],
-      actionText: 'LEARN MORE'
-    },
-    {
-      id: 'botox-daxxify',
-      tag: 'Wrinkle Relaxers',
-      tagBg: 'bg-[#E2F738] text-slate-950',
-      title: 'Botox & Daxxify',
-      image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80',
-      goals: ['Look Your Best', 'Popular'],
-      actionText: 'LEARN MORE'
-    },
-    {
-      id: 'weight-loss',
-      tag: 'Rx',
+      id: 'stress-anxiety-management',
+      tag: 'Psychology Care',
       tagBg: 'bg-[#F7D6B8] text-slate-950',
-      title: 'Weight Loss & Metabolic Care',
-      image: 'https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=600&q=80',
-      goals: ['Popular', 'Energize', 'De-Stress'],
+      title: 'Anxiety & Stress Management',
+      image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80',
+      goals: ['Clinical Psychology', 'Popular'],
       actionText: 'LEARN MORE'
     },
     {
-      id: 'iv-drip',
-      tag: '5 Options',
+      id: 'trauma-grief-counselling',
+      tag: 'Psychology Care',
       tagBg: 'bg-[#E2F738] text-slate-950',
-      title: 'IV Drip Therapy',
-      image: 'https://images.unsplash.com/photo-1584362917165-526a968579e8?auto=format&fit=crop&w=600&q=80',
-      goals: ['Energize', 'De-Stress', 'Better Sex'],
+      title: 'Trauma & Resilience Counselling',
+      image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80',
+      goals: ['Clinical Psychology'],
+      actionText: 'LEARN MORE'
+    },
+    {
+      id: 'couples-relationship-therapy',
+      tag: 'Couples Care',
+      tagBg: 'bg-[#F7D6B8] text-slate-950',
+      title: 'Relationship & Couples Therapy',
+      image: 'https://images.unsplash.com/photo-1516585427167-9f4af9627e6c?auto=format&fit=crop&w=600&q=80',
+      goals: ['Clinical Psychology'],
+      actionText: 'LEARN MORE'
+    },
+
+    // --- SLEEP & NEUROBIOLOGY (Mr. Ocean Lesley Naidoo) ---
+    {
+      id: 'polysomnography',
+      tag: 'Sleep Science',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'Polysomnography Sleep Study',
+      image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=600&q=80',
+      goals: ['Sleep & Neurobiology', 'Popular'],
+      actionText: 'LEARN MORE'
+    },
+    {
+      id: 'cpap-titration',
+      tag: 'Respiratory Care',
+      tagBg: 'bg-[#F7D6B8] text-slate-950',
+      title: 'CPAP Titration & Sleep Care',
+      image: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80',
+      goals: ['Sleep & Neurobiology', 'Popular'],
+      actionText: 'LEARN MORE'
+    },
+    {
+      id: 'eeg-diagnostics',
+      tag: 'Neuro-Diagnostics',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'Electroencephalography (EEG)',
+      image: 'https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=600&q=80',
+      goals: ['Sleep & Neurobiology'],
+      actionText: 'LEARN MORE'
+    },
+    {
+      id: 'nerve-conduction',
+      tag: 'Nerve Study',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'Nerve Conduction Studies',
+      image: 'https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&w=600&q=80',
+      goals: ['Sleep & Neurobiology'],
+      actionText: 'LEARN MORE'
+    },
+
+    // --- CARDIOLOGY & HEART (Dr. Sarah Jenkins) ---
+    {
+      id: 'ecg-echocardiography',
+      tag: 'Diagnostic ECG',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'Advanced ECG & Echocardiography',
+      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80',
+      goals: ['Cardiology & Heart', 'Popular'],
+      actionText: 'LEARN MORE'
+    },
+    {
+      id: 'cardiovascular-profiling',
+      tag: 'Preventive',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'Preventive Cardiovascular Profiling',
+      image: 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80',
+      goals: ['Cardiology & Heart'],
+      actionText: 'LEARN MORE'
+    },
+    {
+      id: 'hypertension-vascular',
+      tag: 'Vascular Care',
+      tagBg: 'bg-[#F7D6B8] text-slate-950',
+      title: 'Hypertension & Vascular Care',
+      image: 'https://images.unsplash.com/photo-1629909615184-74f495363b67?auto=format&fit=crop&w=600&q=80',
+      goals: ['Cardiology & Heart'],
+      actionText: 'LEARN MORE'
+    },
+
+    // --- NEUROLOGY & BRAIN (Dr. Marcus Vance) ---
+    {
+      id: 'cognitive-screening',
+      tag: 'Brain Health',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'Cognitive & Memory Assessment',
+      image: 'https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=600&q=80',
+      goals: ['Neurology & Brain', 'Popular'],
+      actionText: 'LEARN MORE'
+    },
+    {
+      id: 'migraine-headache',
+      tag: 'Therapeutics',
+      tagBg: 'bg-[#F7D6B8] text-slate-950',
+      title: 'Migraine & Chronic Headache Care',
+      image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80',
+      goals: ['Neurology & Brain'],
+      actionText: 'LEARN MORE'
+    },
+    {
+      id: 'neuro-rehab',
+      tag: 'Rehabilitation',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'Neuro-Rehabilitation & Neuropathy',
+      image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80',
+      goals: ['Neurology & Brain'],
+      actionText: 'LEARN MORE'
+    },
+
+    // --- CLINICAL DENTISTRY (Lesley Naidoo) ---
+    {
+      id: 'dental-therapy',
+      tag: 'Clinical Dentistry',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'Comprehensive Dental Assessment',
+      image: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80',
+      goals: ['Clinical Dentistry', 'Popular'],
+      actionText: 'LEARN MORE'
+    },
+    {
+      id: 'preventive-oral',
+      tag: 'Oral Hygiene',
+      tagBg: 'bg-[#F7D6B8] text-slate-950',
+      title: 'Preventive Oral Health & Care',
+      image: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80',
+      goals: ['Clinical Dentistry'],
+      actionText: 'LEARN MORE'
+    },
+    {
+      id: 'public-health-dental',
+      tag: 'Primary Care',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'Primary Oral Healthcare Consultation',
+      image: 'https://images.unsplash.com/photo-1571772996211-2f02c9727629?auto=format&fit=crop&w=600&q=80',
+      goals: ['Clinical Dentistry'],
+      actionText: 'LEARN MORE'
+    },
+
+    // --- ORTHOPEDICS & JOINTS (Dr. Keith Sterling) ---
+    {
+      id: 'joint-reconstruction',
+      tag: 'Orthopedics',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'Joint Reconstruction & Restoration',
+      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80',
+      goals: ['Orthopedics & Joints', 'Popular'],
+      actionText: 'LEARN MORE'
+    },
+    {
+      id: 'sports-traumatology',
+      tag: 'Sports Med',
+      tagBg: 'bg-[#F7D6B8] text-slate-950',
+      title: 'Sports Injury Restoration',
+      image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80',
+      goals: ['Orthopedics & Joints'],
+      actionText: 'LEARN MORE'
+    },
+    {
+      id: 'rehabilitative-motion',
+      tag: 'Rehabilitation',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'Rehabilitative Motion Therapy',
+      image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80',
+      goals: ['Orthopedics & Joints'],
+      actionText: 'LEARN MORE'
+    },
+
+    // --- HORMONES & CELLULAR CARE ---
+    {
+      id: 'hormone-trt',
+      tag: 'Hormone Care',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'Hormone Optimization & TRT',
+      image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80',
+      goals: ['Hormones & Cellular Care', 'Popular'],
+      actionText: 'LEARN MORE'
+    },
+    {
+      id: 'cellular-nad-drip',
+      tag: 'IV Drip Therapy',
+      tagBg: 'bg-[#E2F738] text-slate-950',
+      title: 'High-Dose Cellular NAD+ Drip',
+      image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80',
+      goals: ['Hormones & Cellular Care'],
+      actionText: 'LEARN MORE'
+    },
+    {
+      id: 'clinical-dermatology',
+      tag: 'Skin Renewal',
+      tagBg: 'bg-[#F7D6B8] text-slate-950',
+      title: 'Clinical Cellular Collagen Therapy',
+      image: 'https://images.unsplash.com/photo-1512290900673-700200411986?auto=format&fit=crop&w=600&q=80',
+      goals: ['Hormones & Cellular Care'],
       actionText: 'LEARN MORE'
     }
   ];
 
   const filteredTreatments = allTreatments.filter(t => 
-    selectedGoal === 'Popular' ? true : t.goals.includes(selectedGoal)
+    selectedGoal === 'Popular' ? t.goals.includes('Popular') : t.goals.includes(selectedGoal)
   );
 
   return (
@@ -201,14 +378,13 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
                 />
               </h1>
 
-              <p className="text-slate-100 font-sans-clean font-light text-sm md:text-base lg:text-lg leading-relaxed max-w-lg">
-                <EditableText
-                  id="home.hero.subtitle"
-                  defaultText="Advance Health is the first longevity-focused health clinic designed to proactively slow down aging both inside and out."
-                  label="Hero Subtitle"
-                  as="p"
-                />
-              </p>
+              <EditableText
+                id="home.hero.subtitle"
+                defaultText="Advance Health is the first longevity-focused health clinic designed to proactively slow down aging both inside and out."
+                label="Hero Subtitle"
+                as="p"
+                className="text-slate-100 font-sans-clean font-light text-sm md:text-base lg:text-lg leading-relaxed max-w-lg"
+              />
 
               <div className="pt-2">
                 <button
@@ -253,11 +429,17 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
         </div>
       </section>
 
-      {/* SECTION 2: TREATMENTS CAROUSEL / CARDS ROW (from input_file_3.png) */}
-      <section className="bg-[#FAF9F5] py-16 md:py-24 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto">
-          {/* Horizontal Grid / Scroll Container */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8">
+      {/* SECTION 2: TREATMENTS CAROUSEL / CARDS ROW (from user screenshots) */}
+      <section className="bg-[#FAF9F5] py-12 md:py-16 px-6 md:px-12">
+        <div className="w-full mx-auto">
+          {/* Dynamic Grid matching card count (3 cols for Energize, 4 cols for Look Your Best & Better Sex, 5 cols for De-Stress) */}
+          <div className={`grid gap-6 md:gap-8 ${
+            filteredTreatments.length === 3 
+              ? 'grid-cols-1 sm:grid-cols-3 max-w-5xl mx-auto' 
+              : filteredTreatments.length === 4 
+              ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto' 
+              : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 max-w-7xl mx-auto'
+          }`}>
             {filteredTreatments.map((item) => (
               <motion.div
                 key={item.id}
@@ -265,11 +447,11 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
                 whileInView="visible"
                 viewport={{ once: true, margin: '-50px' }}
                 variants={revealVariants}
-                className="flex flex-col justify-between group bg-[#FAF9F5] border border-slate-200/80 p-3 rounded-none shadow-xs hover:shadow-md transition-all"
+                className="flex flex-col justify-between group bg-transparent p-0 transition-all"
               >
-                {/* Image Box */}
-                <div className="space-y-4">
-                  <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                {/* Image & Title Box */}
+                <div className="space-y-3">
+                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#ECECEC] shadow-xs">
                     <img
                       src={item.image}
                       alt={item.title}
@@ -279,22 +461,24 @@ export default function HomePage({ onNavigate, onOpenBooking }: HomePageProps) {
                   </div>
 
                   {/* Badge & Title */}
-                  <div className="space-y-2 px-1">
-                    <span className={`inline-block px-2.5 py-1 text-[10px] font-sans-clean font-extrabold uppercase tracking-wider ${item.tagBg}`}>
-                      {item.tag}
-                    </span>
+                  <div className="space-y-2">
+                    <div>
+                      <span className={`inline-block px-2.5 py-1 text-[10px] font-sans-clean font-extrabold uppercase tracking-wider ${item.tagBg}`}>
+                        {item.tag}
+                      </span>
+                    </div>
 
-                    <h3 className="text-xl font-serif-display font-normal text-slate-900 leading-snug min-h-[56px] flex items-center">
+                    <h3 className="text-xl md:text-2xl font-serif-display font-normal text-slate-900 leading-snug min-h-[52px] flex items-start">
                       {item.title}
                     </h3>
                   </div>
                 </div>
 
                 {/* Button */}
-                <div className="pt-6 px-1">
+                <div className="pt-4">
                   <button
                     onClick={onOpenBooking}
-                    className="w-full py-3 bg-[#B8D8E6] hover:bg-[#a2cbdc] text-slate-900 font-bold font-sans-clean text-xs tracking-wider uppercase transition-colors cursor-pointer text-center"
+                    className="w-full py-3 bg-[#B5D5E8] hover:bg-[#a0c7dd] text-slate-900 font-bold font-sans-clean text-xs tracking-wider uppercase transition-colors cursor-pointer text-center"
                   >
                     {item.actionText}
                   </button>

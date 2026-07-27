@@ -121,10 +121,57 @@ export const SERVICES: Service[] = [
       'Anti-inflammatory peptide infusions'
     ],
     image: 'https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'service-psychology',
+    title: 'Clinical Psychology & Psychotherapy',
+    description: 'Evidence-based individual psychotherapy, psychological assessments, trauma counseling, and couples therapy delivered in a compassionate, confidential environment.',
+    iconName: 'User',
+    features: [
+      'Individual psychotherapy for adolescents & adults',
+      'Anxiety, depression, & stress management',
+      'Trauma & grief counselling',
+      'Relationship & couples therapy'
+    ],
+    image: '/Sithabile.png'
   }
 ];
 
 export const PROFESSIONALS: Professional[] = [
+  {
+    id: 'prof-sithabile-mncwango',
+    name: 'Sithabile Mncwango',
+    role: 'Clinical Psychologist',
+    specialty: 'Clinical Psychology & Psychotherapy',
+    bio: 'Sithabile Mncwango is an HPCSA-registered Clinical Psychologist offering evidence-based psychotherapy and psychological assessments for adolescents, adults, and couples facing anxiety, trauma, and stress.',
+    image: '/Sithabile.png',
+    education: 'M.Soc.Sci in Clinical Psychology (UKZN) | B.Soc.Sci (Hons) | PhD Candidate',
+    experience: 'HPCSA PS0134503 | Practice No. 0725544',
+    availability: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    coreSpecializations: [
+      'Anxiety & Stress Disorders',
+      'Trauma & Resilience',
+      'Depression & Wellbeing',
+      'Couples & Family Therapy',
+      'Burnout & Healthcare Mental Health'
+    ],
+    degreesAndCredentials: [
+      'Master of Social Science in Clinical Psychology (UKZN)',
+      'Bachelor of Social Science Honours (UKZN)',
+      'Bachelor of Social Science (UKZN)',
+      'PhD Candidate (University of KwaZulu-Natal)',
+      'Registered Clinical Psychologist — HPCSA (PS0134503)',
+      'Practice Number: 0725544'
+    ],
+    rotations: [
+      'Individual Psychotherapy (Adolescents & Adults)',
+      'Psychological Assessments & Diagnostics',
+      'Trauma & Grief Counselling',
+      'Relationship & Couples Therapy',
+      'Corporate & Healthcare Professional Burnout Workshops'
+    ],
+    extendedBio: 'Sithabile Mncwango is a Clinical Psychologist registered with the Health Professions Council of South Africa (HPCSA). She holds a Master of Social Science in Clinical Psychology and is currently completing her PhD at the University of KwaZulu-Natal, researching stress and psychological help-seeking in the South African public healthcare sector.\n\nShe provides psychological assessment and evidence-based therapy to adolescents and adults facing anxiety, depression, trauma, stress, and adjustment challenges, with particular interests in stress management, trauma, resilience, and mental health promotion. Her therapeutic approach is collaborative, compassionate, and client-centred.\n\nMessage to Patients:\n"Thank you for considering me as part of your mental health journey. Seeking support is a courageous first step, and I am committed to providing a safe, compassionate, and confidential space where we can work together towards your goals. My aim is to help you develop the insight, skills, and resilience needed to improve your wellbeing and lead a more fulfilling life."'
+  },
   {
     id: 'prof-ocean-naidoo',
     name: 'Mr. Ocean Lesley Naidoo',
@@ -175,57 +222,6 @@ export const PROFESSIONALS: Professional[] = [
       'Primary Healthcare Transformation & Disease Burden Reduction Lead'
     ],
     extendedBio: 'Demonstrates a strong foundation in clinical dentistry alongside extensive expertise in strategic leadership, policy development, and team empowerment. Renowned for advancing national and continental health agendas through collaborative policy development, including direct involvement in the Presidential Health Summit (2019–2023) and shaping the pillars of Universal Healthcare - the National Health Insurance (NHI). Committed to primary healthcare transformation, disease burden reduction, and equitable access to care across South South Africa, Africa, and the global health community.'
-  },
-  {
-    id: 'prof-jenkins',
-    name: 'Dr. Sarah Jenkins',
-    role: 'Chief Medical Director & Senior Cardiologist',
-    specialty: 'Cardiology',
-    bio: 'Dr. Jenkins has spent over 15 years pioneering non-invasive cardiac diagnostic procedures. She believes that the foundation of great cardiovascular health lies in combining clinical precision with active, health-centered lifestyle modifications.',
-    image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80',
-    education: 'MBChB — University of Cape Town (UCT) Faculty of Health Sciences',
-    experience: '16+ Years Clinical Practice',
-    availability: ['Monday', 'Wednesday', 'Friday'],
-    coreSpecializations: ['Preventive Cardiology', 'Vascular Medicine', 'Echocardiography'],
-    degreesAndCredentials: [
-      'MBChB (UCT Faculty of Health Sciences)',
-      'Board Certified in Clinical Cardiology',
-      'Fellow of the South African Heart Association'
-    ]
-  },
-  {
-    id: 'prof-vance',
-    name: 'Dr. Marcus Vance',
-    role: 'Attending Neurologist & Brain Specialist',
-    specialty: 'Neurology',
-    bio: 'Dr. Vance focuses on neuropathology and cognitive rehabilitation. He employs a patient-first ethos, dedicating his expertise to treating neurological challenges while maximizing quality of life for every single patient.',
-    image: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80',
-    education: 'MBChB — University of the Witwatersrand (Wits) School of Clinical Medicine',
-    experience: '12 Years Clinical Practice',
-    availability: ['Tuesday', 'Thursday', 'Friday'],
-    coreSpecializations: ['Neuropathology', 'Cognitive Rehabilitation', 'Memory Disorders'],
-    degreesAndCredentials: [
-      'MBChB (Wits School of Clinical Medicine)',
-      'Specialist Neurologist Board Certification (HPCSA)',
-      'Neuro-Rehabilitation Lead'
-    ]
-  },
-  {
-    id: 'prof-sterling',
-    name: 'Dr. Keith Sterling',
-    role: 'Senior Orthopedic Specialist',
-    specialty: 'Orthopedics',
-    bio: 'Dr. Sterling is a highly skilled specialist in joint reconstruction and active sports injury restoration. He is dedicated to helping patients recover full physical motion, regardless of their current athletic tier.',
-    image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80',
-    education: 'MBChB — University of KwaZulu-Natal (UKZN) Nelson R. Mandela School of Medicine',
-    experience: '14+ Years Clinical Practice',
-    availability: ['Wednesday', 'Thursday', 'Friday'],
-    coreSpecializations: ['Joint Reconstruction', 'Sports Traumatology', 'Rehabilitative Orthopedics'],
-    degreesAndCredentials: [
-      'MBChB (UKZN Nelson R. Mandela School of Medicine)',
-      'Fellow of the College of Orthopaedic Surgeons of South Africa',
-      'Advanced Sports Medicine Specialist'
-    ]
   }
 ];
 

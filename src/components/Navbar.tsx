@@ -32,7 +32,6 @@ export default function Navbar({
   const navLinks = [
     { name: 'Home', id: 'home' },
     { name: 'About', id: 'about' },
-    { name: 'Partner.', id: 'partner' },
     { name: 'Professionals', id: 'professionals' },
     { name: 'FAQ', id: 'faq' },
     { name: 'Contact', id: 'contact' },

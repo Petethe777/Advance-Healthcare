@@ -4,7 +4,6 @@ import { ArrowUp, HeartPulse, Heart, Phone, Mail, MapPin } from 'lucide-react';
 import Navbar from './components/Navbar';
 import HomePage from './components/HomePage';
 import AboutPage from './components/AboutPage';
-import PartnerPage from './components/PartnerPage';
 import ProfessionalsPage from './components/ProfessionalsPage';
 import FAQPage from './components/FAQPage';
 import ContactPage from './components/ContactPage';
@@ -103,8 +102,6 @@ export default function App() {
         );
       case 'about':
         return <AboutPage />;
-      case 'partner':
-        return <PartnerPage />;
       case 'professionals':
         return (
           <ProfessionalsPage
@@ -182,23 +179,23 @@ export default function App() {
           {/* Col 2: Navigation map */}
           <div className="md:col-span-3 space-y-4">
             <h4 className="text-white text-xs font-mono font-bold uppercase tracking-wider">
-              Partnership Options
+              Quick Navigation
             </h4>
             <div className="grid grid-cols-1 gap-2 text-xs text-slate-400">
-              <button onClick={() => handleNavigate('partner')} className="text-left hover:text-white transition-colors cursor-pointer">
-                &bull; Specialist Consultation Suites
+              <button onClick={() => handleNavigate('home')} className="text-left hover:text-white transition-colors cursor-pointer">
+                &bull; Home
               </button>
-              <button onClick={() => handleNavigate('partner')} className="text-left hover:text-white transition-colors cursor-pointer">
-                &bull; High-Spec Sleep & EEG Labs
+              <button onClick={() => handleNavigate('about')} className="text-left hover:text-white transition-colors cursor-pointer">
+                &bull; About Us
               </button>
-              <button onClick={() => handleNavigate('partner')} className="text-left hover:text-white transition-colors cursor-pointer">
-                &bull; Clinical Dental Operatories
+              <button onClick={() => handleNavigate('professionals')} className="text-left hover:text-white transition-colors cursor-pointer">
+                &bull; Our Professionals
               </button>
-              <button onClick={() => handleNavigate('partner')} className="text-left hover:text-white transition-colors cursor-pointer">
-                &bull; Diagnostic Support & Billing
+              <button onClick={() => handleNavigate('faq')} className="text-left hover:text-white transition-colors cursor-pointer">
+                &bull; FAQs & Info
               </button>
-              <button onClick={() => handleNavigate('partner')} className="text-left hover:text-white transition-colors cursor-pointer">
-                &bull; HPCSA Partner Registration
+              <button onClick={() => handleNavigate('contact')} className="text-left hover:text-white transition-colors cursor-pointer">
+                &bull; Contact Us
               </button>
             </div>
           </div>

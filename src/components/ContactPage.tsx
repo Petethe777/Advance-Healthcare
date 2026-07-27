@@ -95,7 +95,7 @@ export default function ContactPage() {
               Reach Out to Our Care Coordination Team
             </h1>
             <p className="text-slate-500 font-light text-sm md:text-base leading-relaxed">
-              Need scheduling coordination, specialized testing directions, or have general patient support questions? Drop us a message below or call us directly.
+              Need scheduling coordination, specialised testing directions, or have general patient support questions? Drop us a message below or call us directly.
             </p>
           </motion.div>
         </div>
@@ -150,7 +150,7 @@ export default function ContactPage() {
               </div>
               <div className="pt-2 p-3 bg-white rounded-xl border border-slate-100 text-[10px] text-slate-500 leading-relaxed flex items-center gap-2 shadow-3xs">
                 <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Need Emergency Medical Assistance? Call 112 or Netcare 911 at 082 911, or head to the nearest South African Emergency Center immediately.</span>
+                <span>Need Emergency Medical Assistance? Call 112 or Netcare 911 at 082 911, or head to the nearest South African Emergency Centre immediately.</span>
               </div>
             </div>
           </motion.div>

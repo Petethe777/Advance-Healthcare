@@ -53,7 +53,7 @@ export default function AboutPage() {
     },
     { 
       title: 'Preventive healthcare', 
-      desc: 'Tailoring customized cardiovascular, metabolic, and systemic plans.',
+      desc: 'Tailoring customised cardiovascular, metabolic, and systemic plans.',
       color: 'cyan',
       markerPos: 'left-[-16px] top-[80%] -translate-y-1/2',
       badgeColor: 'bg-cyan-500',
@@ -150,7 +150,7 @@ export default function AboutPage() {
               Our Vision & Mission
             </h1>
             <p className="text-slate-200 font-light text-sm md:text-base md:text-lg leading-relaxed max-w-2xl">
-              We are dedicated to pioneering proactive medicine and customized healthcare solutions for optimal longevity and wellbeing.
+              We are dedicated to pioneering proactive medicine and customised healthcare solutions for optimal longevity and wellbeing.
             </p>
           </motion.div>
         </div>
@@ -231,7 +231,7 @@ export default function AboutPage() {
             className="max-w-3xl space-y-4 font-sans"
           >
             <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 leading-tight">
-              Advance HealthCare promotes proactive medicine & wellbeing
+              Advance Health & Wellness promotes proactive medicine & wellbeing
             </h2>
             <p className="text-slate-500 font-light text-sm">
               Our clinical and lifestyle guidelines are designed around holistic optimization. Hover over our focal priorities or the surrounding marker points to explore how they map directly to healthy, vibrant longevity.

@@ -60,7 +60,7 @@ export default function Navbar({
         >
           <img
             src={logo}
-            alt="Advance Health Logo"
+            alt="Advance Health & Wellness Logo"
             className="h-14 md:h-18 w-auto object-contain"
             referrerPolicy="no-referrer"
           />

@@ -183,7 +183,7 @@ export default function PartnerPage() {
             className="lg:col-span-7 space-y-6"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold font-sans tracking-tight leading-[1.08]">
-              Elevate Your Private Practice with <span className="text-blue-300">Advance Health.</span>
+              Elevate Your Private Practice with <span className="text-blue-300">Advance Health & Wellness.</span>
             </h1>
             <p className="text-slate-300 font-light text-sm md:text-base leading-relaxed max-w-2xl">
               We empower medical specialists with world-class facilities, clinical technology, automated front-desks, and a dynamic multi-specialty internal referral network. Join a community focusing strictly on evidence-based diagnostics, longevity, and superior patient outcomes.
@@ -265,16 +265,16 @@ export default function PartnerPage() {
                 </div>
                 <div className="space-y-2">
                   <h3 className="text-lg font-extrabold text-slate-900 tracking-tight">
-                    Prime Clinical Locations
+                    Prime Clinical Location
                   </h3>
                   <p className="text-xs md:text-sm text-slate-500 font-light leading-relaxed">
-                    Operate within high-end medical precincts. Our sites in **32 Inanda Rd, Hillcrest** (Belvedere Ext 1) and **Pinetown** are accessible directly via major transit nodes and cater to a premium patient demographic seeking custom care.
+                    Operate within high-end medical precincts. Our flagship site at **32 Inanda Rd, Belvedere Ext 1, Hillcrest (3650)** is accessible directly via major transit nodes and caters to a premium patient demographic seeking custom care.
                   </p>
                 </div>
               </div>
               <div className="mt-8 pt-4 border-t border-slate-50 flex flex-wrap gap-2">
                 <span className="text-[9px] font-mono font-bold bg-slate-50 border border-slate-100 text-slate-600 px-2.5 py-1 rounded-full">32 Inanda Rd, Hillcrest (3650)</span>
-                <span className="text-[9px] font-mono font-bold bg-slate-50 border border-slate-100 text-slate-600 px-2.5 py-1 rounded-full">Pinetown Practice Wing</span>
+                <span className="text-[9px] font-mono font-bold bg-slate-50 border border-slate-100 text-slate-600 px-2.5 py-1 rounded-full">Belvedere Ext 1 Suites</span>
               </div>
             </div>
 
@@ -289,7 +289,7 @@ export default function PartnerPage() {
                     State-of-the-Art Diagnostic Infrastructure
                   </h3>
                   <p className="text-xs md:text-sm text-slate-500 font-light leading-relaxed">
-                    Gain direct access to specialized clinical equipment without heavy upfront capital. Partnering clinicians utilize advanced sleep-science hardware (such as full Polysomnography & CPAP titration rigs), modern clinical dental operatory chairs, high-spec functional EEG wave-scanning, and computerized hemodynamic cardiac equipment.
+                    Gain direct access to specialised clinical equipment without heavy upfront capital. Partnering clinicians utilize advanced sleep-science hardware (such as full Polysomnography & CPAP titration rigs), modern clinical dental operatory chairs, high-spec functional EEG wave-scanning, and computerized hemodynamic cardiac equipment.
                   </p>
                 </div>
               </div>
@@ -359,7 +359,7 @@ export default function PartnerPage() {
                   Estimate Your Partnership Potential
                 </h2>
                 <p className="text-slate-400 font-light text-xs md:text-sm">
-                  Adjust the sliders and choose clinical preferences to view estimated monthly gross, net earnings, and administrative time savings inside the Advance Health ecosystem.
+                  Adjust the sliders and choose clinical preferences to view estimated monthly gross, net earnings, and administrative time savings inside the Advance Health & Wellness ecosystem.
                 </p>
               </div>
 
@@ -631,7 +631,7 @@ export default function PartnerPage() {
               Practice Partnership Inquiry
             </h2>
             <p className="text-slate-500 text-xs md:text-sm font-light leading-relaxed">
-              Ready to take the next step? Fill out the form below to submit your credentials to our clinical board. Our administration panel will verify your HPCSA status and schedule a physical walkthrough of our Hillcrest/Pinetown suites.
+              Ready to take the next step? Fill out the form below to submit your credentials to our clinical board. Our administration panel will verify your HPCSA status and schedule a physical walkthrough of our Hillcrest suites.
             </p>
           </div>
 
@@ -741,7 +741,6 @@ export default function PartnerPage() {
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs bg-white focus:ring-1 focus:ring-teal-500 focus:border-teal-500"
                 >
                   <option>32 Inanda Rd, Hillcrest (3650)</option>
-                  <option>Pinetown Practice Wing</option>
                   <option>Shared Multi-Clinic Allocation</option>
                 </select>
               </div>
@@ -799,7 +798,7 @@ export default function PartnerPage() {
           <div className="bg-white border border-slate-150 rounded-[2rem] p-6 space-y-4 shadow-xs">
             <h4 className="text-xs font-bold text-slate-850 uppercase font-mono tracking-wider">Board Verification Protocol</h4>
             <p className="text-[11px] text-slate-500 leading-relaxed font-light">
-              Advance Health is bound by strict protocols outlined by the **Health Professions Council of South Africa (HPCSA)** and **POPIA** guidelines. All clinical applications go through:
+              Advance Health & Wellness is bound by strict protocols outlined by the **Health Professions Council of South Africa (HPCSA)** and **POPIA** guidelines. All clinical applications go through:
             </p>
             <ul className="space-y-2 text-[10px] text-slate-600 font-mono">
               <li className="flex items-start gap-1.5">

@@ -4,7 +4,7 @@ import { Star } from 'lucide-react';
 import EditableText from './EditableText';
 
 // Import local images
-import lobbyImage from '../assets/images/medical_center_lobby_1782959169482.jpg';
+import lobbyImage from '../assets/images/modern_hq_clinic_1785154308673.jpg';
 import wellnessImage from '../assets/images/wellness_lifestyle_1783946675009.jpg';
 
 interface HomePageProps {
@@ -428,7 +428,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
 
               <EditableText
                 id="home.hero.subtitle"
-                defaultText="Advance Health is the first longevity-focused health clinic designed to proactively slow down aging both inside and out."
+                defaultText="Advance Health & Wellness is the first longevity-focused health clinic designed to proactively slow down aging both inside and out."
                 label="Hero Subtitle"
                 as="p"
                 className="text-slate-100 font-sans-clean font-light text-sm md:text-base lg:text-lg leading-relaxed max-w-lg"
@@ -666,7 +666,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
           <div className="lg:col-span-6 relative min-h-[350px] lg:min-h-full bg-slate-900">
             <img
               src={lobbyImage}
-              alt="Our Advance Health Clinic Archway"
+              alt="Our Advance Health & Wellness Headquarters in Hillcrest"
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover object-center"
             />
@@ -684,7 +684,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
               <h2 className="text-4xl md:text-6xl font-serif-display font-normal text-slate-950 tracking-tight leading-[1.1]">
                 <EditableText
                   id="home.clinic.title"
-                  defaultText="Our Durban Clinic"
+                  defaultText="Our Hillcrest Clinic"
                   label="Clinic Location Title"
                 />
               </h2>
@@ -807,7 +807,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
                 </div>
 
                 <p className="text-xs md:text-sm text-slate-800 font-sans-clean leading-relaxed">
-                  Advance Health's approach to integrative health is truly one-of-a-kind. Wellness trends emerge daily & decision fatigue is real. "What's the best path for me?" has become a confusing question to answer, but Advance Health offers personalized mapping that ensures you're headed down the right path.
+                  Advance Health & Wellness's approach to integrative health is truly one-of-a-kind. Wellness trends emerge daily & decision fatigue is real. "What's the best path for me?" has become a confusing question to answer, but Advance Health & Wellness offers personalised mapping that ensures you're headed down the right path.
                 </p>
               </div>
 
@@ -836,7 +836,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
                 </div>
 
                 <p className="text-xs md:text-sm text-slate-800 font-sans-clean leading-relaxed">
-                  I had a great experience here. I have tried places like this in the past that felt pushy but Advance Health was not. The clinical staff here were extremely knowledgeable and kind. The space itself was beautiful and relaxing. Highly recommend!
+                  I had a great experience here. I have tried places like this in the past that felt pushy but Advance Health & Wellness was not. The clinical staff here were extremely knowledgeable and kind. The space itself was beautiful and relaxing. Highly recommend!
                 </p>
               </div>
 

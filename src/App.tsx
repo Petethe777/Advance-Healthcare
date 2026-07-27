@@ -13,13 +13,10 @@ import BookedAppointments from './components/BookedAppointments';
 import { Booking } from './types';
 import logo from './assets/images/advance_logo.png';
 import { TextEditorProvider } from './context/TextEditorContext';
-import TextEditModal from './components/TextEditModal';
-import TextEditorController from './components/TextEditorController';
 import EditableText from './components/EditableText';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
-  const [editingField, setEditingField] = useState<{ id: string; label: string; value: string } | null>(null);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [isBookingsPanelOpen, setIsBookingsPanelOpen] = useState(false);
   const [preSelectedProfessional, setPreSelectedProfessional] = useState<string | undefined>(undefined);
@@ -132,7 +129,7 @@ export default function App() {
   };
 
   return (
-    <TextEditorProvider onOpenEditModal={(id, label, value) => setEditingField({ id, label, value })}>
+    <TextEditorProvider onOpenEditModal={() => {}}>
       <div className="min-h-screen bg-[#FAF9F5] text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-blue-900 selection:text-white flex flex-col justify-between pt-[74px]">
       {/* Navigation Header */}
       <Navbar
@@ -167,14 +164,14 @@ export default function App() {
               <div className="bg-white p-2.5 rounded-xl shadow-xs inline-block">
                 <img
                   src={logo}
-                  alt="Advance Health Logo"
+                  alt="Advance Health & Wellness Logo"
                   className="h-24 md:h-26 w-auto object-contain"
                   referrerPolicy="no-referrer"
                 />
               </div>
             </div>
             <div className="text-slate-400 text-xs md:text-sm font-light leading-relaxed font-sans">
-              <EditableText id="footer.brand_desc" defaultText="Empowering individuals with clinical, specialized diagnostics and compassionate outpatient medicine. Registered healthcare specialists dedicated to customized preventive therapeutics." label="Footer Brand Description" as="p" />
+              <EditableText id="footer.brand_desc" defaultText="Empowering individuals with clinical, specialised diagnostics and compassionate outpatient medicine at Advance Health & Wellness. Registered healthcare specialists dedicated to customised preventive therapeutics." label="Footer Brand Description" as="p" />
             </div>
             <div className="flex items-center gap-2 text-[11px] text-teal-400 font-mono">
               <Heart className="w-4 h-4 animate-pulse text-rose-500" />
@@ -242,7 +239,7 @@ export default function App() {
         </div>
 
         <div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-slate-800/80 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4 font-sans">
-          <p>© {new Date().getFullYear()} Advance Health. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Advance Health & Wellness. All rights reserved.</p>
           <p className="font-mono text-[10px]">DESIGNED WITH COMPASSIONATE CARE &bull; POPIA & HPCSA COMPLIANT</p>
         </div>
       </footer>
@@ -275,18 +272,6 @@ export default function App() {
           <ArrowUp className="w-5 h-5" />
         </button>
       )}
-
-      {/* Real-time Text Edit Modal */}
-      <TextEditModal
-        isOpen={editingField !== null}
-        onClose={() => setEditingField(null)}
-        fieldId={editingField?.id || ''}
-        fieldLabel={editingField?.label || ''}
-        initialValue={editingField?.value || ''}
-      />
-
-      {/* Live Text Editor Controller Bar and History Panel */}
-      <TextEditorController />
     </div>
     </TextEditorProvider>
   );

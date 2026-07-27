@@ -1,5 +1,5 @@
 import { Professional, Service, FAQItem } from './types';
-import lobbyImage from './assets/images/medical_center_lobby_1782959169482.jpg';
+import lobbyImage from './assets/images/modern_hq_clinic_1785154308673.jpg';
 import drNaidooImage from './assets/images/dr_naidoo.png';
 import oceanNaidooImage from './assets/images/ocean_naidoo.png';
 import wellnessImage from './assets/images/wellness_lifestyle_1783946675009.jpg';
@@ -10,9 +10,9 @@ export const HERO_SLIDES = [
   {
     id: 'slide-1',
     image: lobbyImage,
-    title: 'Advance Healthcare, Designed for You',
-    subtitle: 'Leading-edge clinical medicine delivered with personal, compassionate care at Advance Health.',
-    tagline: 'STATE-OF-THE-ART CLINIC'
+    title: 'Advance Health & Wellness, Designed for You',
+    subtitle: 'Leading-edge clinical medicine delivered with personal, compassionate care at Advance Health & Wellness.',
+    tagline: 'STATE-OF-THE-ART CLINIC IN HILLCREST'
   },
   {
     id: 'slide-2',
@@ -47,7 +47,7 @@ export const SERVICES: Service[] = [
   {
     id: 'service-neurology',
     title: 'Neurology & Brain Health',
-    description: 'Specialized diagnostic tracking and medical intervention for brain, spine, and nervous system health, centered around long-term functionality.',
+    description: 'Specialised diagnostic tracking and medical intervention for brain, spine, and nervous system health, centered around long-term functionality.',
     iconName: 'Activity',
     features: [
       'Comprehensive neurological evaluations',
@@ -59,7 +59,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'service-pediatrics',
-    title: 'Pediatrics & Neonatal Care',
+    title: 'Paediatrics & Neonatal Care',
     description: 'Gentle, attentive healthcare services tracking child development from infancy through adolescence, emphasizing developmental health.',
     iconName: 'Baby',
     features: [
@@ -79,7 +79,7 @@ export const SERVICES: Service[] = [
       'Annual wellness physical exams',
       'Chronic disease therapy management',
       'On-site basic laboratory diagnostics',
-      'Lifestyle & nutritional counseling'
+      'Lifestyle & nutritional counselling'
     ],
     image: 'https://images.unsplash.com/photo-1629909615184-74f495363b67?auto=format&fit=crop&w=800&q=80'
   },
@@ -125,7 +125,7 @@ export const SERVICES: Service[] = [
   {
     id: 'service-psychology',
     title: 'Clinical Psychology & Psychotherapy',
-    description: 'Evidence-based individual psychotherapy, psychological assessments, trauma counseling, and couples therapy delivered in a compassionate, confidential environment.',
+    description: 'Evidence-based individual psychotherapy, psychological assessments, trauma counselling, and couples therapy delivered in a compassionate, confidential environment.',
     iconName: 'User',
     features: [
       'Individual psychotherapy for adolescents & adults',
@@ -235,7 +235,7 @@ export const FAQS: FAQItem[] = [
   {
     id: 'faq-2',
     question: 'What health insurance networks do you accept?',
-    answer: 'Advance Health is currently credentialed with most major South African medical aids, including Discovery Health, Bonitas, Momentum, Medshield, Fedhealth, and GEMS (Government Employees Medical Scheme). Please verify benefits with your specific plan option beforehand.',
+    answer: 'Advance Health & Wellness is currently credentialed with most major South African medical aids, including Discovery Health, Bonitas, Momentum, Medshield, Fedhealth, and GEMS (Government Employees Medical Scheme). Please verify benefits with your specific plan option beforehand.',
     category: 'Billing'
   },
   {

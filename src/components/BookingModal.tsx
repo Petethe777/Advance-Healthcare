@@ -547,7 +547,7 @@ export default function BookingModal({
                     Appointment Confirmed!
                   </h4>
                   <p className="text-sm text-slate-500 max-w-sm mx-auto">
-                    Your appointment has been registered in the Advance Health portal. A confirmation email has been sent.
+                    Your appointment has been registered in the Advance Health & Wellness portal. A confirmation email has been sent.
                   </p>
                 </div>
 

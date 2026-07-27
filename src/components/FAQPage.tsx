@@ -95,7 +95,7 @@ export default function FAQPage({ onNavigate }: FAQPageProps) {
                 Still have clinical questions?
               </h5>
               <p className="text-xs text-slate-500 leading-relaxed font-light">
-                Our support team is available Mon-Fri 8:00 AM - 5:00 PM for specialized support.
+                Our support team is available Mon-Fri 8:00 AM - 5:00 PM for specialised support.
               </p>
               <button
                 onClick={() => onNavigate('contact')}

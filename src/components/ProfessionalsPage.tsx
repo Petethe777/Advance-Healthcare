@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { PROFESSIONALS } from '../data';
 import { Professional } from '../types';
+import EditableText from './EditableText';
 
 // Import generated wellness lifestyle image
 import wellnessImage from '../assets/images/wellness_lifestyle_1783946675009.jpg';
@@ -106,10 +107,10 @@ export default function ProfessionalsPage({ onBookProfessional, initialProfessio
             className="lg:col-span-6 space-y-4"
           >
             <h1 className="text-3xl md:text-5xl font-extrabold font-sans tracking-tight text-slate-900 leading-[1.1]">
-              Highly Accomplished Medical Professionals Dedicated to Your Care
+              <EditableText id="prof.header.title" defaultText="Highly Accomplished Medical Professionals Dedicated to Your Care" label="Professionals Page Title" multiline />
             </h1>
             <p className="text-slate-500 font-light text-sm md:text-base leading-relaxed">
-              Our clinical leaders maintain active board certifications, academic residencies, and over a decade of proactive medicine experience.
+              <EditableText id="prof.header.subtitle" defaultText="Our clinical leaders maintain active board certifications, academic residencies, and over a decade of proactive medicine experience." label="Professionals Page Subtitle" multiline />
             </p>
           </motion.div>
 
@@ -131,7 +132,7 @@ export default function ProfessionalsPage({ onBookProfessional, initialProfessio
                 />
               </div>
               <div className="absolute top-4 right-4 bg-blue-900/90 text-white font-mono text-[9px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-md">
-                Hillcrest KZN Faculty
+                <EditableText id="prof.badge" defaultText="Hillcrest KZN Faculty" label="Faculty Badge" />
               </div>
             </div>
           </motion.div>
@@ -143,13 +144,13 @@ export default function ProfessionalsPage({ onBookProfessional, initialProfessio
         <div className="max-w-7xl mx-auto space-y-10">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <span className="text-xs font-sans-clean font-extrabold uppercase tracking-widest text-slate-500 bg-slate-200/60 px-3 py-1 rounded-full">
-              Clinical Team & Expertise
+              <EditableText id="prof.grid.tag" defaultText="Clinical Team & Expertise" label="Team Badge" />
             </span>
             <h2 className="text-3xl md:text-4xl font-serif-display font-normal text-slate-900 tracking-tight">
-              Our Medical Professionals & Clinical Focus
+              <EditableText id="prof.grid.title" defaultText="Our Medical Professionals & Clinical Focus" label="Grid Title" />
             </h2>
             <p className="text-slate-600 text-xs md:text-sm font-light leading-relaxed">
-              Explore our multidisciplinary team of board-certified specialists, clinical leaders, and researchers dedicated to your health journey.
+              <EditableText id="prof.grid.subtitle" defaultText="Explore our multidisciplinary team of board-certified specialists, clinical leaders, and researchers dedicated to your health journey." label="Grid Subtitle" multiline />
             </p>
           </div>
 
@@ -202,15 +203,15 @@ export default function ProfessionalsPage({ onBookProfessional, initialProfessio
                     {/* Divider Line & Title Box */}
                     <div className="border-t border-slate-300/80 pt-4 space-y-1.5">
                       <h3 className="text-2xl md:text-3xl font-serif-display font-normal text-slate-900 leading-tight min-h-[64px] flex items-start">
-                        {customData.title}
+                        <EditableText id={`prof.card.title.${prof.id}`} defaultText={customData.title} label={`Title: ${prof.name}`} />
                       </h3>
 
                       <p className="text-[11px] font-sans-clean font-extrabold text-slate-700 uppercase tracking-widest">
-                        {customData.subLabel}
+                        <EditableText id={`prof.card.sub.${prof.id}`} defaultText={customData.subLabel} label={`Specialty Label: ${prof.name}`} />
                       </p>
 
                       <p className="text-xs md:text-sm text-slate-600 font-light leading-relaxed pt-2">
-                        {customData.description}
+                        <EditableText id={`prof.card.desc.${prof.id}`} defaultText={customData.description} label={`Description: ${prof.name}`} multiline />
                       </p>
                     </div>
                   </div>
@@ -221,14 +222,14 @@ export default function ProfessionalsPage({ onBookProfessional, initialProfessio
                       onClick={() => openModal(prof)}
                       className="w-full py-3 bg-[#B5D5E8] hover:bg-[#a0c7dd] text-slate-900 font-bold font-sans-clean text-xs tracking-wider uppercase transition-colors cursor-pointer text-center"
                     >
-                      VIEW PROFILE
+                      <EditableText id={`prof.btn.view.${prof.id}`} defaultText="VIEW PROFILE" label="View Profile Button" />
                     </button>
 
                     <button
                       onClick={() => onBookProfessional(prof.id)}
                       className="w-full py-2 bg-transparent hover:bg-slate-200/50 text-slate-700 font-bold font-sans-clean text-[11px] tracking-wider uppercase transition-colors cursor-pointer text-center border border-slate-300"
                     >
-                      BOOK CONSULTATION
+                      <EditableText id={`prof.btn.book.${prof.id}`} defaultText="BOOK CONSULTATION" label="Book Consultation Button" />
                     </button>
                   </div>
                 </motion.div>

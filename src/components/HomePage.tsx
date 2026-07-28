@@ -452,7 +452,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
         <div className="bg-[#FAF9F5] py-16 px-6 md:px-12 border-b border-slate-200/60">
           <div className="max-w-7xl mx-auto text-center space-y-8">
             <h2 className="text-3xl md:text-5xl font-serif-display font-normal text-slate-900 tracking-tight">
-              Optimize your health at every age
+              <EditableText id="home.section1.subtitle" defaultText="Optimize your health at every age" label="Optimize Health Section Title" />
             </h2>
 
             {/* Horizontal Filter Pill Tabs */}
@@ -469,7 +469,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
                         : 'bg-transparent text-[#2B5266] border-[#2B5266]/40 hover:border-[#2B5266] hover:bg-[#2B5266]/5'
                     }`}
                   >
-                    {tab.label}
+                    <EditableText id={`home.goaltab.${tab.id}`} defaultText={tab.label} label={`Goal Tab: ${tab.label}`} />
                   </button>
                 );
               })}
@@ -513,12 +513,12 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
                   <div className="space-y-2">
                     <div>
                       <span className={`inline-block px-2.5 py-1 text-[10px] font-sans-clean font-extrabold uppercase tracking-wider ${item.tagBg}`}>
-                        {item.tag}
+                        <EditableText id={`treatment.tag.${item.id}`} defaultText={item.tag} label={`Tag: ${item.tag}`} />
                       </span>
                     </div>
 
                     <h3 className="text-xl md:text-2xl font-serif-display font-normal text-slate-900 leading-snug min-h-[52px] flex items-start">
-                      {item.title}
+                      <EditableText id={`treatment.title.${item.id}`} defaultText={item.title} label={`Treatment Title: ${item.title}`} />
                     </h3>
                   </div>
                 </div>
@@ -536,7 +536,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
                     className="w-full py-3 bg-[#B5D5E8] hover:bg-[#a0c7dd] text-slate-900 font-bold font-sans-clean text-xs tracking-wider uppercase transition-colors cursor-pointer text-center shadow-xs"
                     id={`treatment-btn-${item.id}`}
                   >
-                    {item.actionText}
+                    <EditableText id={`treatment.btn.${item.id}`} defaultText={item.actionText} label={`Action Button: ${item.actionText}`} />
                   </button>
                 </div>
               </motion.div>
@@ -553,7 +553,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
           <div className="lg:col-span-7 p-8 md:p-14 lg:p-20 flex flex-col justify-center space-y-12">
             <div>
               <h2 className="text-3xl md:text-5xl font-serif-display font-normal text-slate-900 tracking-tight leading-tight">
-                A HOLISTIC approach to aging
+                <EditableText id="home.holistic.title" defaultText="A HOLISTIC approach to aging" label="Holistic Section Title" />
               </h2>
             </div>
 
@@ -565,17 +565,17 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
                   <ClassicalUrnIcon className="w-12 h-12 stroke-[1.5]" />
                 </div>
                 <h3 className="text-2xl font-serif-display font-normal text-slate-900">
-                  Skin & Hair Health
+                  <EditableText id="home.pillar1.title" defaultText="Skin & Hair Health" label="Pillar 1 Title" />
                 </h3>
                 <p className="text-xs md:text-sm text-slate-600 font-light leading-relaxed">
-                  The most visible signs of aging appear here first.
+                  <EditableText id="home.pillar1.desc" defaultText="The most visible signs of aging appear here first." label="Pillar 1 Description" multiline />
                 </p>
                 <div className="pt-2">
                   <button
                     onClick={() => onNavigate('services')}
                     className="px-5 py-2.5 border border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white font-bold font-sans-clean text-[11px] tracking-widest uppercase transition-colors cursor-pointer"
                   >
-                    LEARN MORE
+                    <EditableText id="home.pillar1.btn" defaultText="LEARN MORE" label="Pillar 1 Button" />
                   </button>
                 </div>
               </div>
@@ -586,17 +586,17 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
                   <ClassicalColumnIcon className="w-12 h-12 stroke-[1.5]" />
                 </div>
                 <h3 className="text-2xl font-serif-display font-normal text-slate-900">
-                  Hormone Health
+                  <EditableText id="home.pillar2.title" defaultText="Hormone Health" label="Pillar 2 Title" />
                 </h3>
                 <p className="text-xs md:text-sm text-slate-600 font-light leading-relaxed">
-                  Hormonal shifts affect mood, energy, sleep and more.
+                  <EditableText id="home.pillar2.desc" defaultText="Hormonal shifts affect mood, energy, sleep and more." label="Pillar 2 Description" multiline />
                 </p>
                 <div className="pt-2">
                   <button
                     onClick={() => onNavigate('services')}
                     className="px-5 py-2.5 border border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white font-bold font-sans-clean text-[11px] tracking-widest uppercase transition-colors cursor-pointer"
                   >
-                    LEARN MORE
+                    <EditableText id="home.pillar2.btn" defaultText="LEARN MORE" label="Pillar 2 Button" />
                   </button>
                 </div>
               </div>
@@ -607,17 +607,17 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
                   <ClassicalLyreIcon className="w-12 h-12 stroke-[1.5]" />
                 </div>
                 <h3 className="text-2xl font-serif-display font-normal text-slate-900">
-                  Bone & Joint Health
+                  <EditableText id="home.pillar3.title" defaultText="Bone & Joint Health" label="Pillar 3 Title" />
                 </h3>
                 <p className="text-xs md:text-sm text-slate-600 font-light leading-relaxed">
-                  Maintain posture, joint resilience, and physical mobility.
+                  <EditableText id="home.pillar3.desc" defaultText="Maintain posture, joint resilience, and physical mobility." label="Pillar 3 Description" multiline />
                 </p>
                 <div className="pt-2">
                   <button
                     onClick={() => onNavigate('services')}
                     className="px-5 py-2.5 border border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white font-bold font-sans-clean text-[11px] tracking-widest uppercase transition-colors cursor-pointer"
                   >
-                    LEARN MORE
+                    <EditableText id="home.pillar3.btn" defaultText="LEARN MORE" label="Pillar 3 Button" />
                   </button>
                 </div>
               </div>
@@ -628,17 +628,17 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
                   <ClassicalAmphoraIcon className="w-12 h-12 stroke-[1.5]" />
                 </div>
                 <h3 className="text-2xl font-serif-display font-normal text-slate-900">
-                  Brain & Metabolic
+                  <EditableText id="home.pillar4.title" defaultText="Brain & Metabolic" label="Pillar 4 Title" />
                 </h3>
                 <p className="text-xs md:text-sm text-slate-600 font-light leading-relaxed">
-                  Sharpen focus, memory pathways, and cellular vitality.
+                  <EditableText id="home.pillar4.desc" defaultText="Sharpen focus, memory pathways, and cellular vitality." label="Pillar 4 Description" multiline />
                 </p>
                 <div className="pt-2">
                   <button
                     onClick={() => onNavigate('services')}
                     className="px-5 py-2.5 border border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white font-bold font-sans-clean text-[11px] tracking-widest uppercase transition-colors cursor-pointer"
                   >
-                    LEARN MORE
+                    <EditableText id="home.pillar4.btn" defaultText="LEARN MORE" label="Pillar 4 Button" />
                   </button>
                 </div>
               </div>
@@ -711,7 +711,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
                   onClick={() => onNavigate('contact')}
                   className="px-8 py-3.5 bg-slate-950 hover:bg-slate-800 text-white font-bold font-sans-clean text-xs tracking-widest uppercase transition-colors cursor-pointer shadow-md"
                 >
-                  SCHEDULE A VISIT
+                  <EditableText id="home.clinic.btn" defaultText="SCHEDULE A VISIT" label="Schedule Visit Button" />
                 </button>
               </div>
             </motion.div>
@@ -725,7 +725,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
         <div className="max-w-7xl mx-auto space-y-12">
           
           <h2 className="text-4xl md:text-6xl font-serif-display font-normal text-slate-900 tracking-tight">
-            Reviews
+            <EditableText id="home.reviews.title" defaultText="Reviews" label="Reviews Title" />
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
@@ -740,7 +740,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
             >
               <div className="space-y-4">
                 <h3 className="text-2xl md:text-3xl font-serif-display font-normal text-slate-900">
-                  Mollie C.
+                  <EditableText id="home.review1.author" defaultText="Mollie C." label="Review 1 Author" />
                 </h3>
 
                 <div className="flex items-center gap-1 text-slate-900">
@@ -750,7 +750,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
                 </div>
 
                 <p className="text-xs md:text-sm text-slate-800 font-sans-clean leading-relaxed">
-                  Such a delightful experience. The space is absolutely gorgeous and serene. My specialist made me feel completely comfortable throughout my first treatment. I felt great when I walked out and am excited to come back for a hormone panel and future skin treatments.
+                  <EditableText id="home.review1.text" defaultText="Such a delightful experience. The space is absolutely gorgeous and serene. My specialist made me feel completely comfortable throughout my first treatment. I felt great when I walked out and am excited to come back for a hormone panel and future skin treatments." label="Review 1 Text" multiline />
                 </p>
               </div>
 
@@ -769,7 +769,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
             >
               <div className="space-y-4">
                 <h3 className="text-2xl md:text-3xl font-serif-display font-normal text-slate-900">
-                  Stacey H.
+                  <EditableText id="home.review2.author" defaultText="Stacey H." label="Review 2 Author" />
                 </h3>
 
                 <div className="flex items-center gap-1 text-slate-900">
@@ -779,7 +779,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
                 </div>
 
                 <p className="text-xs md:text-sm text-slate-800 font-sans-clean leading-relaxed">
-                  5 stars for my first visit! Enjoyed the website design and the option to book an appointment online. The service was excellent from start to finish. Staff were very friendly and accommodating. The doctor was very thorough when explaining the process. I will definitely be back in 3-4 months!
+                  <EditableText id="home.review2.text" defaultText="5 stars for my first visit! Enjoyed the website design and the option to book an appointment online. The service was excellent from start to finish. Staff were very friendly and accommodating. The doctor was very thorough when explaining the process. I will definitely be back in 3-4 months!" label="Review 2 Text" multiline />
                 </p>
               </div>
 
@@ -798,7 +798,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
             >
               <div className="space-y-4">
                 <h3 className="text-2xl md:text-3xl font-serif-display font-normal text-slate-900">
-                  Christina K.
+                  <EditableText id="home.review3.author" defaultText="Christina K." label="Review 3 Author" />
                 </h3>
 
                 <div className="flex items-center gap-1 text-slate-900">
@@ -808,7 +808,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
                 </div>
 
                 <p className="text-xs md:text-sm text-slate-800 font-sans-clean leading-relaxed">
-                  Advance Health & Wellness's approach to integrative health is truly one-of-a-kind. Wellness trends emerge daily & decision fatigue is real. "What's the best path for me?" has become a confusing question to answer, but Advance Health & Wellness offers personalised mapping that ensures you're headed down the right path.
+                  <EditableText id="home.review3.text" defaultText="Advance Health & Wellness's approach to integrative health is truly one-of-a-kind. Wellness trends emerge daily & decision fatigue is real. 'What's the best path for me?' has become a confusing question to answer, but Advance Health & Wellness offers personalised mapping that ensures you're headed down the right path." label="Review 3 Text" multiline />
                 </p>
               </div>
 
@@ -827,7 +827,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
             >
               <div className="space-y-4">
                 <h3 className="text-2xl md:text-3xl font-serif-display font-normal text-slate-900">
-                  Tanya M.
+                  <EditableText id="home.review4.author" defaultText="Tanya M." label="Review 4 Author" />
                 </h3>
 
                 <div className="flex items-center gap-1 text-slate-900">
@@ -837,7 +837,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenBookingWithP
                 </div>
 
                 <p className="text-xs md:text-sm text-slate-800 font-sans-clean leading-relaxed">
-                  I had a great experience here. I have tried places like this in the past that felt pushy but Advance Health & Wellness was not. The clinical staff here were extremely knowledgeable and kind. The space itself was beautiful and relaxing. Highly recommend!
+                  <EditableText id="home.review4.text" defaultText="I had a great experience here. I have tried places like this in the past that felt pushy but Advance Health & Wellness was not. The clinical staff here were extremely knowledgeable and kind. The space itself was beautiful and relaxing. Highly recommend!" label="Review 4 Text" multiline />
                 </p>
               </div>
 

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { ChevronDown, HelpCircle, MessageSquare } from 'lucide-react';
 import { FAQS } from '../data';
+import EditableText from './EditableText';
 
 interface FAQPageProps {
   onNavigate: (pageId: string) => void;
@@ -43,10 +44,10 @@ export default function FAQPage({ onNavigate }: FAQPageProps) {
             className="max-w-3xl space-y-4"
           >
             <h1 className="text-4xl md:text-5xl font-extrabold font-sans tracking-tight text-slate-900 leading-[1.1]">
-              Frequently Asked Clinic Inquiries
+              <EditableText id="faq.header.title" defaultText="Frequently Asked Clinic Inquiries" label="FAQ Title" />
             </h1>
             <p className="text-slate-500 font-light text-sm md:text-base leading-relaxed">
-              Quickly resolve inquiries regarding billing credentials, specialist scheduling parameters, and diagnostic timelines.
+              <EditableText id="faq.header.subtitle" defaultText="Quickly resolve inquiries regarding billing credentials, specialist scheduling parameters, and diagnostic timelines." label="FAQ Subtitle" multiline />
             </p>
           </motion.div>
         </div>
@@ -64,7 +65,7 @@ export default function FAQPage({ onNavigate }: FAQPageProps) {
           >
             <div className="p-5 rounded-2xl bg-[#FAF9F5] border border-slate-200/80 shadow-2xs">
               <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-4">
-                FAQ Categories
+                <EditableText id="faq.cat.header" defaultText="FAQ Categories" label="FAQ Categories Label" />
               </h4>
               <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0 scrollbar-none">
                 {categories.map((cat) => (
@@ -81,7 +82,7 @@ export default function FAQPage({ onNavigate }: FAQPageProps) {
                     }`}
                     id={`faq-page-category-btn-${cat}`}
                   >
-                    {cat}
+                    <EditableText id={`faq.cat.${cat}`} defaultText={cat} label={`FAQ Category: ${cat}`} />
                   </button>
                 ))}
               </div>
@@ -92,17 +93,18 @@ export default function FAQPage({ onNavigate }: FAQPageProps) {
                 <HelpCircle className="w-5 h-5" />
               </div>
               <h5 className="font-semibold text-slate-900 text-sm font-sans">
-                Still have clinical questions?
+                <EditableText id="faq.support.title" defaultText="Still have clinical questions?" label="Support Title" />
               </h5>
               <p className="text-xs text-slate-500 leading-relaxed font-light">
-                Our support team is available Mon-Fri 8:00 AM - 5:00 PM for specialised support.
+                <EditableText id="faq.support.subtitle" defaultText="Our support team is available Mon-Fri 8:00 AM - 5:00 PM for specialised support." label="Support Subtitle" multiline />
               </p>
               <button
                 onClick={() => onNavigate('contact')}
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-900 hover:text-blue-950 transition-colors cursor-pointer"
                 id="faq-speak-to-nurse-btn"
               >
-                <MessageSquare className="w-3.5 h-3.5" /> Speak to a Nurse &rarr;
+                <MessageSquare className="w-3.5 h-3.5" />
+                <EditableText id="faq.support.btn" defaultText="Speak to a Nurse →" label="Speak to Nurse Button" />
               </button>
             </div>
 
@@ -148,7 +150,7 @@ export default function FAQPage({ onNavigate }: FAQPageProps) {
                     id={`faq-page-toggle-btn-${faq.id}`}
                   >
                     <span className="font-semibold text-slate-900 text-sm md:text-base font-sans tracking-tight">
-                      {faq.question}
+                      <EditableText id={`faq.q.${faq.id}`} defaultText={faq.question} label={`FAQ Question: ${faq.id}`} />
                     </span>
                     <span className={`p-1 rounded-full bg-slate-50 border border-slate-100/50 transition-transform ${
                       isExpanded ? 'rotate-180 text-teal-600 bg-teal-50' : 'text-slate-400'
@@ -164,7 +166,7 @@ export default function FAQPage({ onNavigate }: FAQPageProps) {
                     }`}
                   >
                     <div className="p-5 text-slate-500 font-light text-xs md:text-sm leading-relaxed">
-                      {faq.answer}
+                      <EditableText id={`faq.a.${faq.id}`} defaultText={faq.answer} label={`FAQ Answer: ${faq.id}`} multiline />
                     </div>
                   </div>
                 </div>

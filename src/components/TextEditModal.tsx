@@ -1,46 +1,56 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Save, User, MapPin } from 'lucide-react';
-import { useTextEditor } from '../context/TextEditorContext';
+import { useTextEdit } from '../context/TextEditContext';
 
 interface TextEditModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  fieldId: string;
-  fieldLabel: string;
-  initialValue: string;
+  isOpen?: boolean;
+  onClose?: () => void;
+  fieldId?: string;
+  fieldLabel?: string;
+  initialValue?: string;
 }
 
 export default function TextEditModal({
-  isOpen,
-  onClose,
-  fieldId,
-  fieldLabel,
-  initialValue
-}: TextEditModalProps) {
-  const { updateText, editorName, setEditorName } = useTextEditor();
-  const [textValue, setTextValue] = useState(initialValue);
-  const [authorName, setAuthorName] = useState(editorName);
+  isOpen: propIsOpen,
+  onClose: propOnClose,
+  fieldId: propFieldId,
+  fieldLabel: propFieldLabel,
+  initialValue: propInitialValue
+}: TextEditModalProps = {}) {
+  const { 
+    saveEdit, 
+    author, 
+    setAuthor, 
+    activeModalField, 
+    closeEditModal 
+  } = useTextEdit();
 
-  // Sync state when modal inputs change or modal is opened
+  const isModalOpen = propIsOpen !== undefined ? propIsOpen : Boolean(activeModalField);
+  const handleClose = propOnClose || closeEditModal;
+  const currentFieldId = propFieldId || activeModalField?.id || '';
+  const currentFieldLabel = propFieldLabel || activeModalField?.label || '';
+  const currentInitialVal = propInitialValue !== undefined ? propInitialValue : (activeModalField?.value || '');
+
+  const [textValue, setTextValue] = useState(currentInitialVal);
+  const [authorName, setAuthorName] = useState(author);
+
   useEffect(() => {
-    if (isOpen) {
-      setTextValue(initialValue);
-      setAuthorName(editorName);
+    if (isModalOpen) {
+      setTextValue(currentInitialVal);
+      setAuthorName(author);
     }
-  }, [isOpen, initialValue, editorName]);
+  }, [isModalOpen, currentInitialVal, author]);
 
-  if (!isOpen) return null;
+  if (!isModalOpen) return null;
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Update the author name in context/localStorage
-    const trimmedAuthor = authorName.trim() || 'Anonymous Editor';
-    setEditorName(trimmedAuthor);
+    const trimmedAuthor = authorName.trim() || 'Admin Editor';
+    setAuthor(trimmedAuthor);
     
-    // Save the new value to Firestore
-    await updateText(fieldId, fieldLabel, textValue, initialValue);
-    onClose();
+    await saveEdit(currentFieldId, textValue, currentFieldLabel, currentInitialVal);
+    handleClose();
   };
 
   return (
@@ -51,8 +61,8 @@ export default function TextEditModal({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          onClick={onClose}
-          className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs"
+          onClick={handleClose}
+          className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs"
         />
 
         {/* Modal content */}
@@ -61,23 +71,23 @@ export default function TextEditModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 10 }}
           transition={{ duration: 0.2 }}
-          className="bg-white border border-slate-150 rounded-[2rem] w-full max-w-xl shadow-2xl relative z-10 overflow-hidden"
+          className="bg-white border border-slate-200 rounded-3xl w-full max-w-xl shadow-2xl relative z-10 overflow-hidden font-sans"
         >
           {/* Header */}
           <div className="bg-slate-900 text-white p-6 relative">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(20,184,166,0.15),transparent_50%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.15),transparent_50%)]" />
             <button
-              onClick={onClose}
-              className="absolute top-5 right-5 text-slate-400 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors"
+              onClick={handleClose}
+              className="absolute top-5 right-5 text-slate-400 hover:text-white p-1.5 rounded-full hover:bg-white/10 transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
             <div className="relative">
-              <span className="text-[10px] font-mono text-teal-400 tracking-widest uppercase font-bold">
-                Advance Health Live Editor
+              <span className="text-[10px] font-mono text-emerald-400 tracking-widest uppercase font-bold">
+                Live Content Editor
               </span>
               <h3 className="text-lg font-bold font-sans mt-1">
-                Editing: <span className="text-teal-300 font-medium">{fieldLabel}</span>
+                Editing: <span className="text-emerald-300 font-medium">{currentFieldLabel}</span>
               </h3>
             </div>
           </div>
@@ -85,26 +95,27 @@ export default function TextEditModal({
           {/* Form Body */}
           <form onSubmit={handleSave} className="p-6 space-y-5">
             <div className="space-y-1.5">
-              <label className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block">
+              <label className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block font-bold">
                 Text Content
               </label>
               <textarea
                 value={textValue}
                 onChange={(e) => setTextValue(e.target.value)}
-                className="w-full min-h-[140px] px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all font-sans leading-relaxed"
+                className="w-full min-h-[140px] px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all font-sans leading-relaxed"
                 placeholder="Enter text value..."
+                autoFocus
               />
             </div>
 
             {/* Editor Identity */}
-            <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div className="space-y-1">
-                <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                  <User className="w-3.5 h-3.5 text-teal-600" />
+            <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="space-y-0.5">
+                <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider flex items-center gap-1 font-bold">
+                  <User className="w-3.5 h-3.5 text-emerald-600" />
                   Your Editor Identity
                 </span>
-                <p className="text-xs text-slate-400 leading-normal">
-                  Helps identify who made edits (e.g. "Miami", "Durban").
+                <p className="text-xs text-slate-500 leading-normal">
+                  Identifies who modified this copy in the audit history.
                 </p>
               </div>
               <div className="relative shrink-0 md:w-48">
@@ -113,8 +124,8 @@ export default function TextEditModal({
                   type="text"
                   value={authorName}
                   onChange={(e) => setAuthorName(e.target.value)}
-                  className="w-full pl-9 pr-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-medium text-slate-700 focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500 transition-all"
-                  placeholder="e.g. Miami Client"
+                  className="w-full pl-9 pr-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition-all"
+                  placeholder="e.g. Peter"
                   required
                 />
               </div>
@@ -124,14 +135,14 @@ export default function TextEditModal({
             <div className="flex justify-end gap-3 pt-2">
               <button
                 type="button"
-                onClick={onClose}
+                onClick={handleClose}
                 className="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-5 py-2.5 bg-blue-900 hover:bg-blue-950 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md hover:shadow-blue-900/15 transition-all flex items-center gap-1.5 cursor-pointer"
+                className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md hover:shadow-emerald-600/20 transition-all flex items-center gap-1.5 cursor-pointer"
               >
                 <Save className="w-3.5 h-3.5" />
                 <span>Save Live Edit</span>

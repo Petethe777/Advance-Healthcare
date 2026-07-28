@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Compass, Sparkles, Eye, CheckCircle2 } from 'lucide-react';
+import EditableText from './EditableText';
 import healthyLivingImg from '../assets/images/healthy_living.png';
 import aboutSlideOne from '../assets/images/about_slide_one_1783085827590.jpg';
 import aboutSlideThree from '../assets/images/about_slide_three_1783085841227.jpg';
@@ -147,10 +148,10 @@ export default function AboutPage() {
             className="max-w-3xl space-y-4"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold font-sans tracking-tight text-white leading-[1.1]">
-              Our Vision & Mission
+              <EditableText id="about.header.title" defaultText="Our Vision & Mission" label="About Page Header Title" />
             </h1>
             <p className="text-slate-200 font-light text-sm md:text-base md:text-lg leading-relaxed max-w-2xl">
-              We are dedicated to pioneering proactive medicine and customised healthcare solutions for optimal longevity and wellbeing.
+              <EditableText id="about.header.subtitle" defaultText="We are dedicated to pioneering proactive medicine and customised healthcare solutions for optimal longevity and wellbeing." label="About Page Header Subtitle" multiline />
             </p>
           </motion.div>
         </div>
@@ -169,7 +170,7 @@ export default function AboutPage() {
           >
             
             <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 leading-tight">
-              Building a fortress around your health through lifestyle and clinical foresight.
+              <EditableText id="about.vision.title" defaultText="Building a fortress around your health through lifestyle and clinical foresight." label="Vision Main Title" multiline />
             </h2>
 
             {/* Innovation callout box */}
@@ -178,15 +179,17 @@ export default function AboutPage() {
                 <Sparkles className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="text-sm font-bold text-slate-900">Innovation</h4>
+                <h4 className="text-sm font-bold text-slate-900">
+                  <EditableText id="about.innovation.title" defaultText="Innovation" label="Innovation Title" />
+                </h4>
                 <p className="text-xs text-slate-500 font-light mt-1">
-                  Constantly evolving our practice with the latest medical technologies to provide innovative healthcare solutions.
+                  <EditableText id="about.innovation.desc" defaultText="Constantly evolving our practice with the latest medical technologies to provide innovative healthcare solutions." label="Innovation Description" multiline />
                 </p>
               </div>
             </div>
 
             <p className="text-slate-500 font-light text-xs md:text-sm leading-relaxed">
-              Our vision is to provide innovative healthcare solutions that empower individuals and communities to achieve optimal wellbeing and longevity, improving quality of life through a people-centred medical and wellness approach.
+              <EditableText id="about.vision.desc" defaultText="Our vision is to provide innovative healthcare solutions that empower individuals and communities to achieve optimal wellbeing and longevity, improving quality of life through a people-centred medical and wellness approach." label="Vision Paragraph" multiline />
             </p>
           </motion.div>
 

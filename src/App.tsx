@@ -11,7 +11,9 @@ import BookingModal from './components/BookingModal';
 import BookedAppointments from './components/BookedAppointments';
 import { Booking } from './types';
 import logo from './assets/images/advance_logo.png';
-import { TextEditorProvider } from './context/TextEditorContext';
+import { TextEditProvider } from './context/TextEditContext';
+import EditorControlPanel from './components/EditorControlPanel';
+import TextEditModal from './components/TextEditModal';
 import EditableText from './components/EditableText';
 
 export default function App() {
@@ -126,7 +128,7 @@ export default function App() {
   };
 
   return (
-    <TextEditorProvider onOpenEditModal={() => {}}>
+    <TextEditProvider>
       <div className="min-h-screen bg-[#FAF9F5] text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-blue-900 selection:text-white flex flex-col justify-between pt-[110px] md:pt-[130px]">
       {/* Navigation Header */}
       <Navbar
@@ -278,7 +280,13 @@ export default function App() {
           <ArrowUp className="w-5 h-5" />
         </button>
       )}
+
+      {/* Floating Lower-Left Real-time Live CMS Control Panel */}
+      <EditorControlPanel />
+
+      {/* Popover / Modal Editor for Rich or Multi-line Text */}
+      <TextEditModal />
     </div>
-    </TextEditorProvider>
+    </TextEditProvider>
   );
 }

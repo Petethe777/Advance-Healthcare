@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, ShieldCheck } from 'lucide-react';
+import EditableText from './EditableText';
 
 const revealVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -92,10 +93,10 @@ export default function ContactPage() {
             className="max-w-3xl space-y-4"
           >
             <h1 className="text-4xl md:text-5xl font-extrabold font-sans tracking-tight text-slate-900 leading-[1.1]">
-              Reach Out to Our Care Coordination Team
+              <EditableText id="contact.header.title" defaultText="Reach Out to Our Care Coordination Team" label="Contact Title" />
             </h1>
             <p className="text-slate-500 font-light text-sm md:text-base leading-relaxed">
-              Need scheduling coordination, specialised testing directions, or have general patient support questions? Drop us a message below or call us directly.
+              <EditableText id="contact.header.subtitle" defaultText="Need scheduling coordination, specialised testing directions, or have general patient support questions? Drop us a message below or call us directly." label="Contact Subtitle" multiline />
             </p>
           </motion.div>
         </div>
@@ -164,7 +165,7 @@ export default function ContactPage() {
             className="lg:col-span-7 bg-[#FAF9F5] p-6 md:p-8 rounded-3xl border border-slate-200/80 relative h-fit shadow-2xs"
           >
             <h3 className="text-base font-bold text-slate-900 mb-6 font-sans">
-              Send a Secure General Inquiry
+              <EditableText id="contact.form.title" defaultText="Send a Secure General Inquiry" label="Form Title" />
             </h3>
 
             {isSuccess && (
@@ -267,7 +268,7 @@ export default function ContactPage() {
                   id="contact-page-submit-btn"
                 >
                   <Send className="w-3.5 h-3.5" />
-                  <span>Send Secure Message</span>
+                  <EditableText id="contact.form.submit" defaultText="Send Secure Message" label="Submit Button" />
                 </button>
               </div>
             </form>

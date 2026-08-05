@@ -9,7 +9,7 @@ service cloud.firestore {
 
     // Helper functions
     function isValidId(id) {
-      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-\\.]+$');
+      return id is string && id.size() <= 256 && id.matches('^[a-zA-Z0-9_\\-\\.:]+$');
     }
 
     function incoming() {
@@ -21,9 +21,9 @@ service cloud.firestore {
       return data.keys().hasAll(['value', 'fieldLabel', 'lastUpdated'])
         && data.keys().size() == 3
         && data.value is string
-        && data.value.size() <= 10000
+        && data.value.size() <= 20000
         && data.fieldLabel is string
-        && data.fieldLabel.size() <= 100;
+        && data.fieldLabel.size() <= 1000;
     }
 
     // Validation for EditHistoryItem
@@ -31,29 +31,29 @@ service cloud.firestore {
       return data.keys().hasAll(['fieldId', 'fieldLabel', 'oldValue', 'newValue', 'author', 'timestamp'])
         && data.keys().size() == 6
         && data.fieldId is string
-        && data.fieldId.size() <= 100
+        && data.fieldId.size() <= 256
         && data.fieldLabel is string
-        && data.fieldLabel.size() <= 100
+        && data.fieldLabel.size() <= 1000
         && data.oldValue is string
-        && data.oldValue.size() <= 10000
+        && data.oldValue.size() <= 20000
         && data.newValue is string
-        && data.newValue.size() <= 10000
+        && data.newValue.size() <= 20000
         && data.author is string
-        && data.author.size() <= 100;
+        && data.author.size() <= 200;
     }
 
     // Rules for text_overrides collection
     match /text_overrides/{overrideId} {
       allow read: if true;
       allow create, update: if isValidId(overrideId) && isValidTextOverride(incoming());
-      allow delete: if false;
+      allow delete: if true;
     }
 
     // Rules for edit_history collection
     match /edit_history/{historyId} {
       allow read: if true;
       allow create: if isValidId(historyId) && isValidEditHistoryItem(incoming());
-      allow update, delete: if false;
+      allow update, delete: if true;
     }
   }
 }

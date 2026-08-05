@@ -20,7 +20,11 @@ import {
   Clock,
   Layers
 } from 'lucide-react';
-import { useTextEdit } from '../context/TextEditContext';
+import { 
+  useTextEdit, 
+  formatRelativeTime, 
+  formatFullDateTime 
+} from '../context/TextEditContext';
 
 export default function EditorControlPanel() {
   const { 
@@ -42,6 +46,7 @@ export default function EditorControlPanel() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'edits' | 'history' | 'export'>('edits');
   const [searchQuery, setSearchQuery] = useState('');
+  const [historySearchQuery, setHistorySearchQuery] = useState('');
   const [copiedFormat, setCopiedFormat] = useState<'json' | 'ts' | null>(null);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
   const [editingAuthor, setEditingAuthor] = useState(author);
@@ -83,20 +88,17 @@ export default function EditorControlPanel() {
     val.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const formatTimeAgo = (ts: any) => {
-    if (!ts) return 'Just now';
-    try {
-      const date = ts.toDate ? ts.toDate() : new Date(ts);
-      const diffSecs = Math.floor((Date.now() - date.getTime()) / 1000);
-      if (diffSecs < 10) return 'Just now';
-      if (diffSecs < 60) return `${diffSecs}s ago`;
-      if (diffSecs < 3600) return `${Math.floor(diffSecs / 60)}m ago`;
-      if (diffSecs < 86400) return `${Math.floor(diffSecs / 3600)}h ago`;
-      return `${Math.floor(diffSecs / 86400)}d ago`;
-    } catch {
-      return 'Recently';
-    }
-  };
+  const filteredHistory = history.filter((log) => {
+    if (!historySearchQuery.trim()) return true;
+    const q = historySearchQuery.toLowerCase();
+    return (
+      (log.fieldLabel && log.fieldLabel.toLowerCase().includes(q)) ||
+      (log.fieldId && log.fieldId.toLowerCase().includes(q)) ||
+      (log.oldValue && log.oldValue.toLowerCase().includes(q)) ||
+      (log.newValue && log.newValue.toLowerCase().includes(q)) ||
+      (log.author && log.author.toLowerCase().includes(q))
+    );
+  });
 
   return (
     <>
@@ -321,37 +323,65 @@ export default function EditorControlPanel() {
 
             {/* Tab 2: Audit History */}
             {activeTab === 'history' && (
-              <div className="p-4 space-y-2.5 flex-1 overflow-y-auto min-h-[220px] max-h-[340px]">
+              <div className="p-4 space-y-3 flex-1 overflow-y-auto min-h-[220px] max-h-[380px]">
+                {history.length > 0 && (
+                  <div className="relative">
+                    <Search className="w-3.5 h-3.5 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <input
+                      type="text"
+                      value={historySearchQuery}
+                      onChange={(e) => setHistorySearchQuery(e.target.value)}
+                      placeholder="Search history logs by label, text, or author..."
+                      className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500/50"
+                    />
+                  </div>
+                )}
+
                 {history.length === 0 ? (
                   <div className="text-center py-8 text-slate-500 text-xs space-y-1">
                     <History className="w-8 h-8 mx-auto opacity-30 text-slate-400" />
                     <p>No audit trail logs recorded yet.</p>
                   </div>
+                ) : filteredHistory.length === 0 ? (
+                  <div className="text-center py-8 text-slate-500 text-xs space-y-1">
+                    <Search className="w-8 h-8 mx-auto opacity-30 text-slate-400" />
+                    <p>No matching history entries found for "{historySearchQuery}".</p>
+                  </div>
                 ) : (
-                  history.map((log) => (
-                    <div key={log.id} className="bg-slate-950 p-3 rounded-2xl border border-slate-800/80 space-y-1 text-xs">
-                      <div className="flex items-center justify-between text-[10px] text-slate-400">
-                        <span className="font-mono text-emerald-400 font-bold">{log.fieldLabel || log.fieldId}</span>
-                        <span className="flex items-center gap-1 text-slate-500">
-                          <Clock className="w-3 h-3" />
-                          {formatTimeAgo(log.timestamp)}
-                        </span>
+                  <div className="space-y-2.5 max-h-[300px] overflow-y-auto pr-1">
+                    {filteredHistory.map((log) => (
+                      <div key={log.id} className="bg-slate-950 p-3 rounded-2xl border border-slate-800/80 space-y-1.5 text-xs">
+                        <div className="flex items-center justify-between text-[10px] text-slate-400">
+                          <span className="font-mono text-emerald-400 font-bold truncate max-w-[180px]" title={log.fieldLabel || log.fieldId}>
+                            {log.fieldLabel || log.fieldId}
+                          </span>
+                          <span className="flex items-center gap-1 text-slate-400 font-sans" title={formatFullDateTime(log.timestamp)}>
+                            <Clock className="w-3 h-3 text-emerald-500" />
+                            {formatRelativeTime(log.timestamp)}
+                          </span>
+                        </div>
+                        <div className="text-slate-200 font-medium bg-slate-900/60 p-2 rounded-xl border border-slate-800/40 space-y-1">
+                          {log.oldValue && (
+                            <div className="text-[11px] text-slate-500 line-through truncate" title={`Original: ${log.oldValue}`}>
+                              "{log.oldValue}"
+                            </div>
+                          )}
+                          <div className="text-[11px] text-emerald-300 font-medium" title={`New: ${log.newValue}`}>
+                            "{log.newValue}"
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-between text-[10px] text-slate-400 pt-1 border-t border-slate-900">
+                          <span>By: <strong className="text-slate-200">{log.author || 'Admin Editor'}</strong></span>
+                          <button
+                            onClick={() => saveEdit(log.fieldId, log.oldValue, log.fieldLabel, log.newValue)}
+                            className="text-emerald-400 hover:text-emerald-300 hover:underline flex items-center gap-1 cursor-pointer font-bold"
+                          >
+                            <RotateCcw className="w-3 h-3" /> Restore Previous
+                          </button>
+                        </div>
                       </div>
-                      <div className="text-slate-200 font-medium">
-                        <span className="text-slate-500 line-through mr-1.5 font-normal">"{log.oldValue}"</span>
-                        <span className="text-emerald-300">"{log.newValue}"</span>
-                      </div>
-                      <div className="flex items-center justify-between text-[10px] text-slate-500 pt-1 border-t border-slate-900">
-                        <span>By: <strong className="text-slate-300">{log.author}</strong></span>
-                        <button
-                          onClick={() => saveEdit(log.fieldId, log.oldValue, log.fieldLabel, log.newValue)}
-                          className="text-emerald-400 hover:underline flex items-center gap-1 cursor-pointer"
-                        >
-                          <RotateCcw className="w-3 h-3" /> Restore Previous
-                        </button>
-                      </div>
-                    </div>
-                  ))
+                    ))}
+                  </div>
                 )}
               </div>
             )}

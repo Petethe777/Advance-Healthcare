@@ -13,9 +13,14 @@ import {
   Globe, 
   Check, 
   ChevronRight,
-  Database
+  Database,
+  Search
 } from 'lucide-react';
-import { useTextEditor } from '../context/TextEditorContext';
+import { 
+  useTextEditor, 
+  formatRelativeTime, 
+  formatFullDateTime 
+} from '../context/TextEditContext';
 import { EditHistoryItem } from '../types';
 
 export default function TextEditorController() {
@@ -31,34 +36,19 @@ export default function TextEditorController() {
 
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [restoringId, setRestoringId] = useState<string | null>(null);
+  const [historySearchQuery, setHistorySearchQuery] = useState('');
 
-  // Simple relative time formatter
-  const formatRelativeTime = (timestamp: any): string => {
-    if (!timestamp) return 'Just now';
-    
-    try {
-      // Handle Firestore Timestamp or standard Date
-      const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
-      const now = new Date();
-      const diffMs = now.getTime() - date.getTime();
-      
-      if (isNaN(date.getTime())) return 'Recently';
-
-      const diffSecs = Math.floor(diffMs / 1000);
-      const diffMins = Math.floor(diffSecs / 60);
-      const diffHours = Math.floor(diffMins / 60);
-      const diffDays = Math.floor(diffHours / 24);
-
-      if (diffSecs < 10) return 'Just now';
-      if (diffSecs < 60) return `${diffSecs}s ago`;
-      if (diffMins < 60) return `${diffMins}m ago`;
-      if (diffHours < 24) return `${diffHours}h ago`;
-      if (diffDays === 1) return 'Yesterday';
-      return `${diffDays}d ago`;
-    } catch (e) {
-      return 'Recently';
-    }
-  };
+  const filteredHistory = history.filter((item) => {
+    if (!historySearchQuery.trim()) return true;
+    const q = historySearchQuery.toLowerCase();
+    return (
+      (item.fieldLabel && item.fieldLabel.toLowerCase().includes(q)) ||
+      (item.fieldId && item.fieldId.toLowerCase().includes(q)) ||
+      (item.oldValue && item.oldValue.toLowerCase().includes(q)) ||
+      (item.newValue && item.newValue.toLowerCase().includes(q)) ||
+      (item.author && item.author.toLowerCase().includes(q))
+    );
+  });
 
   const handleRestore = async (item: EditHistoryItem) => {
     setRestoringId(item.id);
@@ -213,6 +203,19 @@ export default function TextEditorController() {
 
                 {/* List Container */}
                 <div className="flex-grow overflow-y-auto p-6 space-y-4">
+                  {history.length > 0 && (
+                    <div className="relative">
+                      <Search className="w-3.5 h-3.5 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                      <input
+                        type="text"
+                        value={historySearchQuery}
+                        onChange={(e) => setHistorySearchQuery(e.target.value)}
+                        placeholder="Search audit trail logs..."
+                        className="w-full bg-slate-900 border border-slate-800 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-violet-500/50"
+                      />
+                    </div>
+                  )}
+
                   {history.length === 0 ? (
                     <div className="h-full flex flex-col items-center justify-center text-center space-y-4 py-16">
                       <div className="p-4 bg-slate-900 border border-slate-850 rounded-2xl text-slate-500">
@@ -225,8 +228,13 @@ export default function TextEditorController() {
                         </p>
                       </div>
                     </div>
+                  ) : filteredHistory.length === 0 ? (
+                    <div className="text-center py-12 text-slate-500 text-xs space-y-2">
+                      <Search className="w-8 h-8 mx-auto opacity-30 text-slate-400" />
+                      <p>No matching history entries found for "{historySearchQuery}".</p>
+                    </div>
                   ) : (
-                    history.map((item) => {
+                    filteredHistory.map((item) => {
                       const isRestoring = restoringId === item.id;
                       // Check if current value of this override matches item's newValue
                       // (If it does, it's the currently active value)
@@ -254,8 +262,11 @@ export default function TextEditorController() {
                                 </span>
                               )}
                             </div>
-                            <span className="text-[9px] text-slate-500 font-mono flex items-center gap-1 shrink-0">
-                              <Clock className="w-3 h-3 text-slate-500" />
+                            <span 
+                              className="text-[9px] text-slate-400 font-mono flex items-center gap-1 shrink-0" 
+                              title={formatFullDateTime(item.timestamp)}
+                            >
+                              <Clock className="w-3 h-3 text-violet-400" />
                               {formatRelativeTime(item.timestamp)}
                             </span>
                           </div>

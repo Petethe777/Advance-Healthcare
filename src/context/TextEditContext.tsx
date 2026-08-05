@@ -58,6 +58,56 @@ const TextEditContext = createContext<TextEditContextType | undefined>(undefined
 
 const LOCAL_STORAGE_KEY_EDITS = 'advance_health_live_edits_cache';
 const LOCAL_STORAGE_KEY_AUTHOR = 'advance_health_live_editor_author';
+const LOCAL_STORAGE_KEY_HISTORY = 'advance_health_live_history_cache';
+
+export const parseFirestoreDate = (ts: any): Date => {
+  if (!ts) return new Date();
+  if (typeof ts.toDate === 'function') return ts.toDate();
+  if (typeof ts.toMillis === 'function') return new Date(ts.toMillis());
+  if (ts instanceof Date) return ts;
+  if (typeof ts === 'number') return new Date(ts);
+  if (typeof ts === 'string') {
+    const d = new Date(ts);
+    if (!isNaN(d.getTime())) return d;
+  }
+  if (typeof ts === 'object' && typeof ts.seconds === 'number') {
+    return new Date(ts.seconds * 1000);
+  }
+  return new Date();
+};
+
+export const formatFullDateTime = (ts: any): string => {
+  const date = parseFirestoreDate(ts);
+  return date.toLocaleString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true
+  });
+};
+
+export const formatRelativeTime = (ts: any): string => {
+  if (!ts) return 'Just now';
+  const date = parseFirestoreDate(ts);
+  const now = new Date();
+  const diffMs = now.getTime() - date.getTime();
+  if (isNaN(diffMs) || diffMs < 0) return 'Just now';
+  
+  const diffSecs = Math.floor(diffMs / 1000);
+  const diffMins = Math.floor(diffSecs / 60);
+  const diffHours = Math.floor(diffMins / 60);
+  const diffDays = Math.floor(diffHours / 24);
+
+  if (diffSecs < 10) return 'Just now';
+  if (diffSecs < 60) return `${diffSecs}s ago`;
+  if (diffMins < 60) return `${diffMins}m ago`;
+  if (diffHours < 24) return `${diffHours}h ago`;
+  if (diffDays === 1) return `Yesterday at ${date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}`;
+  if (diffDays < 7) return `${diffDays}d ago (${date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })})`;
+  return formatFullDateTime(ts);
+};
 
 export function useTextEdit(): TextEditContextType {
   const context = useContext(TextEditContext);
@@ -86,7 +136,14 @@ export function TextEditProvider({ children, onOpenEditModal }: TextEditProvider
     }
   });
 
-  const [history, setHistory] = useState<EditHistoryRecord[]>([]);
+  const [history, setHistory] = useState<EditHistoryRecord[]>(() => {
+    try {
+      const cached = localStorage.getItem(LOCAL_STORAGE_KEY_HISTORY);
+      return cached ? JSON.parse(cached) : [];
+    } catch {
+      return [];
+    }
+  });
   const [author, setAuthorState] = useState<string>(() => {
     return localStorage.getItem(LOCAL_STORAGE_KEY_AUTHOR) || 'Admin Editor';
   });
@@ -136,23 +193,33 @@ export function TextEditProvider({ children, onOpenEditModal }: TextEditProvider
     let unsubscribe = () => {};
     try {
       const historyCol = collection(db, 'edit_history');
-      const q = query(historyCol, orderBy('timestamp', 'desc'), limit(100));
       
-      unsubscribe = onSnapshot(q, (snapshot) => {
+      unsubscribe = onSnapshot(historyCol, (snapshot) => {
         const logs: EditHistoryRecord[] = [];
         snapshot.forEach((docSnap) => {
           const data = docSnap.data();
-          logs.push({
-            id: docSnap.id,
-            fieldId: data.fieldId || docSnap.id,
-            fieldLabel: data.fieldLabel || data.fieldId || 'Content Item',
-            oldValue: data.oldValue || '',
-            newValue: data.newValue || '',
-            timestamp: data.timestamp,
-            author: data.author || 'Anonymous',
-          });
+          if (data) {
+            logs.push({
+              id: docSnap.id,
+              fieldId: data.fieldId || docSnap.id,
+              fieldLabel: data.fieldLabel || data.fieldId || 'Content Item',
+              oldValue: data.oldValue || '',
+              newValue: data.newValue || '',
+              timestamp: data.timestamp,
+              author: data.author || 'Anonymous',
+            });
+          }
         });
+
+        // Client-side sort by timestamp descending (newest first)
+        logs.sort((a, b) => parseFirestoreDate(b.timestamp).getTime() - parseFirestoreDate(a.timestamp).getTime());
+
         setHistory(logs);
+        try {
+          localStorage.setItem(LOCAL_STORAGE_KEY_HISTORY, JSON.stringify(logs));
+        } catch (e) {
+          console.warn('LocalStorage save history failed', e);
+        }
       }, (error) => {
         console.warn('Firestore offline/fallback mode for edit_history:', error.message);
       });
@@ -165,7 +232,8 @@ export function TextEditProvider({ children, onOpenEditModal }: TextEditProvider
 
   // Primary function: saveEdit
   const saveEdit = async (id: string, text: string, label?: string, oldValue?: string) => {
-    const fieldLabel = label || id;
+    const rawLabel = label || id;
+    const fieldLabel = rawLabel.length > 500 ? rawLabel.slice(0, 500) : rawLabel;
     const currentOldValue = oldValue !== undefined ? oldValue : (edits[id] || '');
     if (text === currentOldValue) return;
 
@@ -198,7 +266,7 @@ export function TextEditProvider({ children, onOpenEditModal }: TextEditProvider
         fieldLabel: fieldLabel,
         oldValue: currentOldValue,
         newValue: text,
-        author: author,
+        author: author || 'Admin Editor',
         timestamp: serverTimestamp()
       });
     } catch (err) {
